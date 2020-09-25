@@ -92,45 +92,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
-      <Project>{01df3cb0-2213-42f3-bb8e-0c3bc330de7a}</Project>
-      <Name>SonarAnalyzer.VisualBasic</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
-      <!-- https://github.com/dotnet/sdk/issues/433 -->
-      <AdditionalProperties>TargetFramework=net46</AdditionalProperties>
-    </ProjectReference>
-    <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
-      <Project>{39ccd086-a7f8-42a0-b402-3c9bd9eb4825}</Project>
-      <Name>SonarAnalyzer.CSharp</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
-      <!-- https://github.com/dotnet/sdk/issues/433 -->
-      <AdditionalProperties>TargetFramework=net46</AdditionalProperties>
-    </ProjectReference>
-    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj">
-      <Project>{d1ae804f-ae78-4883-b3d6-9e3c4026def6}</Project>
-      <Name>SonarAnalyzer.Common</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
-      <!-- https://github.com/dotnet/sdk/issues/433 -->
-      <AdditionalProperties>TargetFramework=net46</AdditionalProperties>
-    </ProjectReference>
-    <ProjectReference Include="..\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj">
-      <Project>{F766F556-CB91-408A-9149-EB963DE1B817}</Project>
-      <Name>SonarAnalyzer.CFG</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup</IncludeOutputGroupsInVSIXLocalOnly>
-      <!-- https://github.com/dotnet/sdk/issues/433 -->
-      <AdditionalProperties>TargetFramework=net46</AdditionalProperties>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.VisualStudio.SDK.Analyzers.15.8.36\analyzers\cs\Microsoft.VisualStudio.SDK.Analyzers.dll" />
     <Analyzer Include="..\..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.192\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll" />
   </ItemGroup>
@@ -142,16 +103,6 @@
   <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true'" BeforeTargets="CopyBinaries">
     <Message Importance="high" Text="Signing analyzer assemblies from $(OutputPath)" />
     <Exec WorkingDirectory="$(OutputPath)" Command="&quot;$(SIGNTOOL_PATH)&quot; sign /fd SHA256 /f $(PFX_PATH) /p $(PFX_PASSWORD) /tr http://sha256timestamp.ws.symantec.com/sha256/timestamp SonarAnalyzer*.dll" />
-  </Target>
-  <Target Name="CopyBinaries" AfterTargets="Build">
-    <ItemGroup>
-      <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.dll" />
-      <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.CFG.dll" />
-      <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.CSharp.dll" />
-      <BinariesToCopy Include="$(OutputPath)\SonarAnalyzer.VisualBasic.dll" />
-      <BinariesToCopy Include="$(OutputPath)\Google.Protobuf.dll" />
-    </ItemGroup>
-    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>
   <Target Name="CleanBinaries" AfterTargets="Clean">
     <RemoveDir Directories="$(BinariesFolder)" />
