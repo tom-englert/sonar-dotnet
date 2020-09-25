@@ -31,5 +31,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void RoslynCFGComparer_Simple() =>
             Verifier.VerifyAnalyzer(@"TestCases\RoslynCFGComparer\Simple.cs", new RoslynCFGComparer());
+
+        //FIXME: Nested
+        //FIXME: Loops
+        //FIXME: Arrow functions with switch expression
+        //FIXME: try/catch statements
+        //FIXME: pattern matching
+        //FIXME: ??=
+        //FIXME: ??
+        //FIXME: ?:
     }
 }

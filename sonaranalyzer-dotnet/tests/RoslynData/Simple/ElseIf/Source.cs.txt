@@ -1,0 +1,11 @@
+public string ElseIf(int value)
+    {
+        if (value == 0)
+            return "Zero";
+        else if (value == 1)
+            return "One";
+        else if (value == 2)
+            return "Two";
+        else
+            return "Something else";
+    }

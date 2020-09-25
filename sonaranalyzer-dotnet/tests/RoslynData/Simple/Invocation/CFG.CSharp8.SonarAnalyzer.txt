@@ -1,0 +1,5 @@
+digraph "SonarAnalyzer.Invocation" {
+0 [shape=record label="{SIMPLE|IdentifierNameSyntax: arg|MemberAccessExpressionSyntax: arg.ToString|InvocationExpressionSyntax: arg.ToString()|VariableDeclaratorSyntax: value = arg.ToString()|IdentifierNameSyntax: Console|MemberAccessExpressionSyntax: Console.WriteLine|IdentifierNameSyntax: value|InvocationExpressionSyntax: Console.WriteLine(value)}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}

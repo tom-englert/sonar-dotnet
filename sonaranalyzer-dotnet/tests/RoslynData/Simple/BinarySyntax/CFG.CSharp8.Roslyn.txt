@@ -1,0 +1,7 @@
+digraph "Roslyn.BinarySyntax" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# LocalReferenceOperation / VariableDeclaratorSyntax: value = \"Lorem\" + \"Ipsum\" + \"Dolor\" + \"Samet\"|4# LiteralOperation / LiteralExpressionSyntax: \"Lorem\"|4# LiteralOperation / LiteralExpressionSyntax: \"Ipsum\"|3# BinaryOperation / BinaryExpressionSyntax: \"Lorem\" + \"Ipsum\"|3# LiteralOperation / LiteralExpressionSyntax: \"Dolor\"|2# BinaryOperation / BinaryExpressionSyntax: \"Lorem\" + \"Ipsum\" + \"Dolor\"|2# LiteralOperation / LiteralExpressionSyntax: \"Samet\"|1# BinaryOperation / BinaryExpressionSyntax: \"Lorem\" + \"Ipsum\" + \"Dolor\" + \"Samet\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: value = \"Lorem\" + \"Ipsum\" + \"Dolor\" + \"Samet\"|##########|3# LocalReferenceOperation / IdentifierNameSyntax: value|2# ArgumentOperation / ArgumentSyntax: value|1# InvocationOperation / InvocationExpressionSyntax: Console.WriteLine(value)|0# ExpressionStatementOperation / ExpressionStatementSyntax: Console.WriteLine(value);|##########}"]
+0 -> 1
+2 [shape=record label="{EXIT #2}"]
+1 -> 2
+}

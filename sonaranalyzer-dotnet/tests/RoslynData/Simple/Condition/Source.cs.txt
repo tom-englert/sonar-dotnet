@@ -1,0 +1,13 @@
+public string Condition(bool condition)
+    {
+        string value = "Init";
+        if (condition)
+        {
+            value = "True";
+        }
+        else
+        {
+            value = "False";
+        }
+        return value;
+    }

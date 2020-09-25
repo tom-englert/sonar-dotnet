@@ -16,7 +16,7 @@ public class Sample
 
     public string Condition(bool condition)
     {
-        string value;
+        string value = "Init";
         if (condition)
         {
             value = "True";
@@ -26,5 +26,17 @@ public class Sample
             value = "False";
         }
         return value;
+    }
+
+    public string ElseIf(int value)
+    {
+        if (value == 0)
+            return "Zero";
+        else if (value == 1)
+            return "One";
+        else if (value == 2)
+            return "Two";
+        else
+            return "Something else";
     }
 }
