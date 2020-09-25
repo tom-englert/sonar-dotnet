@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -133,7 +133,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                     header += ":" + terminatorType;
                 }
-                this.writer.WriteNode(this.blockId.Get(block), header, block.Instructions.Select(i => i.ToString()).ToArray());
+                this.writer.WriteNode(this.blockId.Get(block), header, block.Instructions.Select(x =>$"{x.GetType().Name}: {x}").ToArray());
             }
 
             private void WriteEdges(Block block, Func<Block, string> getLabel)

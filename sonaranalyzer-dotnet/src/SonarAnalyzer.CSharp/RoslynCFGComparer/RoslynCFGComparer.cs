@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
@@ -58,8 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var languageVersion = c.Compilation.GetLanguageVersion().ToString();
             var root = Path.GetFullPath(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @$"\..\..\..\..\RoslynData\{sourceFileName}\{method.Identifier.ValueText}\");
             Directory.CreateDirectory(root);
-            File.WriteAllText(root + "Source.cs", method.ToString());
-            if(CSharpControlFlowGraph.TryGet(method.Body, c.SemanticModel, out var cfg))
+            File.WriteAllText(root + "Source.cs.txt", method.ToString());
+            if (CSharpControlFlowGraph.TryGet(method.Body, c.SemanticModel, out var cfg))
             {
                 File.WriteAllText(root + $"CFG.{languageVersion}.SonarAnalyzer.txt", CfgSerializer.Serialize("SonarAnalyzer." + method.Identifier.ValueText, cfg));
             }
@@ -98,75 +99,50 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void Visit(BasicBlock block)
             {
-                //if (block is BinaryBranchBlock binaryBranchBlock)
-                //{
-                //    WriteNode(block, binaryBranchBlock.BranchingNode);
-                //    // Add labels to the binary branch block successors
-                //    getLabel = b =>
-                //    {
-                //        if (b == binaryBranchBlock.TrueSuccessorBlock)
-                //        {
-                //            return bool.TrueString;
-                //        }
-                //        else if (b == binaryBranchBlock.FalseSuccessorBlock)
-                //        {
-                //            return bool.FalseString;
-                //        }
-                //        return string.Empty;
-                //    };
-                //}
-                //else if (block is BranchBlock branchBlock)
-                //{
-                //    WriteNode(block, branchBlock.BranchingNode);
-                //}
-                //else if (block is ExitBlock exitBlock)
-                //{
-                //    WriteNode(block);
-                //}
-                //else if (block is ForeachCollectionProducerBlock foreachBlock)
-                //{
-                //    WriteNode(foreachBlock, foreachBlock.ForeachNode);
-                //}
-                //else if (block is ForInitializerBlock forBlock)
-                //{
-                //    WriteNode(forBlock, forBlock.ForNode);
-                //}
-                //else if (block is JumpBlock jumpBlock)
-                //{
-                //    WriteNode(jumpBlock, jumpBlock.JumpNode);
-                //}
-                //else if (block is LockBlock lockBlock)
-                //{
-                //    WriteNode(lockBlock, lockBlock.LockNode);
-                //}
-                //else if (block is UsingEndBlock usingBlock)
-                //{
-                //    WriteNode(usingBlock, usingBlock.UsingStatement);
-                //}
-                //else
-                {
-                    WriteNode(block);
-                }
+                WriteNode(block);
                 WriteEdges(block);
             }
 
             private void WriteNode(BasicBlock block, SyntaxNode terminator = null)
             {
-                var header = block.GetType().Name.SplitCamelCaseToWords().First().ToUpperInvariant();
+                var header = block.Kind.ToString().ToUpperInvariant();
                 if (terminator != null)
                 {
                     // shorten the text
                     var terminatorType = terminator.Kind().ToString().Replace("Syntax", string.Empty);
                     header += ":" + terminatorType;
                 }
-                writer.WriteNode(block.Ordinal.ToString(), header, block.Operations.Select(i => i.ToString()).ToArray());
+                header += " #" + block.Ordinal;
+                writer.WriteNode(block.Ordinal.ToString(), header, block.Operations.SelectMany(Serialize).Concat(SerializeBranchValue(block.BranchValue)).ToArray());
+            }
+
+            private IEnumerable<string> SerializeBranchValue(IOperation operation) =>
+                operation == null
+                    ? Enumerable.Empty<string>()
+                    : new[] { "## BranchValue ##" }.Concat(Serialize(operation));
+
+            private IEnumerable<string> Serialize(IOperation operation) => Serialize(0, operation).Concat(new[] { new string('#', 10) });
+
+            private IEnumerable<string> Serialize(int level, IOperation operation)
+            {
+                var ret = new List<string>();
+                ret.AddRange(operation.Children.SelectMany(x => Serialize(level + 1, x)));
+                ret.Add($"{level}# {operation.GetType().Name} / {operation.Syntax.GetType().Name}: {operation.Syntax}");
+                return ret;
             }
 
             private void WriteEdges(BasicBlock block)
             {
                 foreach (var predecessor in block.Predecessors)
                 {
-                    writer.WriteEdge(predecessor.Source.Ordinal.ToString(), block.Ordinal.ToString(), predecessor.Source.ConditionKind.ToString());
+                    var label = "";
+                    if (predecessor.Source.ConditionKind != ControlFlowConditionKind.None)
+                    {
+                        label = predecessor == predecessor.Source.ConditionalSuccessor
+                            ? predecessor.Source.ConditionKind.ToString()
+                            : "Else";
+                    }
+                    writer.WriteEdge(predecessor.Source.Ordinal.ToString(), block.Ordinal.ToString(), label);
                 }
             }
         }
