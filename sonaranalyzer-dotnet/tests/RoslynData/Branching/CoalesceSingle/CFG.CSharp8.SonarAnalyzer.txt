@@ -1,0 +1,10 @@
+digraph "SonarAnalyzer.CoalesceSingle" {
+0 [shape=record label="{BINARY:CoalesceExpression|IdentifierNameSyntax: a}"]
+0 -> 1 [label="True"]
+0 -> 2 [label="False"]
+1 [shape=record label="{SIMPLE|IdentifierNameSyntax: b}"]
+1 -> 2
+2 [shape=record label="{SIMPLE|VariableDeclaratorSyntax: c = a ?? b}"]
+2 -> 3
+3 [shape=record label="{EXIT}"]
+}

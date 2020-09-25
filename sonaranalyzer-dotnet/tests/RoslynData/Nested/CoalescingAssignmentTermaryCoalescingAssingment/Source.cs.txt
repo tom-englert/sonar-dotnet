@@ -1,0 +1,4 @@
+public void CoalescingAssignmentTermaryCoalescingAssingment(bool condition, string first, string second, string ternaryTrue, string ternaryFalse)
+    {
+        first ??= second ??= (condition ? ternaryTrue : ternaryFalse);
+    }

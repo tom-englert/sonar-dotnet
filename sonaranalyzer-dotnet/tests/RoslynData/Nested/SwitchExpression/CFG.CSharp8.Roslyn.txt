@@ -1,0 +1,47 @@
+digraph "Roslyn.SwitchExpression" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# ParameterReferenceOperation / IdentifierNameSyntax: a|0# FlowCaptureOperation / IdentifierNameSyntax: a|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|2# LiteralOperation / LiteralExpressionSyntax: 0|1# ConstantPatternOperation / ConstantPatternSyntax: 0|0# IsPatternOperation / SwitchExpressionArmSyntax: 0 =\> \"Zero\"|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|1# LiteralOperation / LiteralExpressionSyntax: \"Zero\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"Zero\"|##########}"]
+1 -> 2 [label="Else"]
+3 [shape=record label="{BLOCK #3|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|2# LiteralOperation / LiteralExpressionSyntax: 1|1# ConstantPatternOperation / ConstantPatternSyntax: 1|0# IsPatternOperation / SwitchExpressionArmSyntax: 1 =\> \"One\"|##########}"]
+1 -> 3 [label="WhenFalse"]
+4 [shape=record label="{BLOCK #4|1# LiteralOperation / LiteralExpressionSyntax: \"One\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"One\"|##########}"]
+3 -> 4 [label="Else"]
+5 [shape=record label="{BLOCK #5|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|2# LiteralOperation / LiteralExpressionSyntax: 2|1# ConstantPatternOperation / ConstantPatternSyntax: 2|0# IsPatternOperation / SwitchExpressionArmSyntax: 2 =\> b switch \{ 0 =\> \"Two bIsZero\", 1 =\> \"Two bIsOne\", _ =\> \"Two bIsMore\" \}|##########}"]
+3 -> 5 [label="WhenFalse"]
+6 [shape=record label="{BLOCK #6|1# ParameterReferenceOperation / IdentifierNameSyntax: b|0# FlowCaptureOperation / IdentifierNameSyntax: b|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: b|2# LiteralOperation / LiteralExpressionSyntax: 0|1# ConstantPatternOperation / ConstantPatternSyntax: 0|0# IsPatternOperation / SwitchExpressionArmSyntax: 0 =\> \"Two bIsZero\"|##########}"]
+5 -> 6 [label="Else"]
+7 [shape=record label="{BLOCK #7|1# LiteralOperation / LiteralExpressionSyntax: \"Two bIsZero\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"Two bIsZero\"|##########}"]
+6 -> 7 [label="Else"]
+8 [shape=record label="{BLOCK #8|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: b|2# LiteralOperation / LiteralExpressionSyntax: 1|1# ConstantPatternOperation / ConstantPatternSyntax: 1|0# IsPatternOperation / SwitchExpressionArmSyntax: 1 =\> \"Two bIsOne\"|##########}"]
+6 -> 8 [label="WhenFalse"]
+9 [shape=record label="{BLOCK #9|1# LiteralOperation / LiteralExpressionSyntax: \"Two bIsOne\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"Two bIsOne\"|##########}"]
+8 -> 9 [label="Else"]
+10 [shape=record label="{BLOCK #10|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: b|1# DiscardPatternOperation / DiscardPatternSyntax: _|0# IsPatternOperation / SwitchExpressionArmSyntax: _ =\> \"Two bIsMore\"|##########}"]
+8 -> 10 [label="WhenFalse"]
+11 [shape=record label="{BLOCK #11|1# LiteralOperation / LiteralExpressionSyntax: \"Two bIsMore\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"Two bIsMore\"|##########}"]
+10 -> 11 [label="Else"]
+12 [shape=record label="{BLOCK #12|## BranchValue ##|0# ObjectCreationOperation / SwitchExpressionSyntax: b switch \{ 0 =\> \"Two bIsZero\", 1 =\> \"Two bIsOne\", _ =\> \"Two bIsMore\" \}|##########}"]
+10 -> 12 [label="WhenFalse"]
+13 [shape=record label="{BLOCK #13|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|2# LiteralOperation / LiteralExpressionSyntax: 3|1# ConstantPatternOperation / ConstantPatternSyntax: 3|0# IsPatternOperation / SwitchExpressionArmSyntax: 3 =\> \"Three\"|##########}"]
+5 -> 13 [label="WhenFalse"]
+14 [shape=record label="{BLOCK #14|1# LiteralOperation / LiteralExpressionSyntax: \"Three\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"Three\"|##########}"]
+13 -> 14 [label="Else"]
+15 [shape=record label="{BLOCK #15|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|1# DiscardPatternOperation / DiscardPatternSyntax: _|0# IsPatternOperation / SwitchExpressionArmSyntax: _ =\> null|##########}"]
+13 -> 15 [label="WhenFalse"]
+16 [shape=record label="{BLOCK #16|2# LiteralOperation / LiteralExpressionSyntax: null|1# ConversionOperation / LiteralExpressionSyntax: null|0# FlowCaptureOperation / LiteralExpressionSyntax: null|##########}"]
+15 -> 16 [label="Else"]
+17 [shape=record label="{BLOCK #17|## BranchValue ##|0# ObjectCreationOperation / SwitchExpressionSyntax: a switch\n        \{\n            0 =\> \"Zero\",\n            1 =\> \"One\",\n            2 =\> b switch \{ 0 =\> \"Two bIsZero\", 1 =\> \"Two bIsOne\", _ =\> \"Two bIsMore\" \},\n            3 =\> \"Three\",\n            _ =\> null\n        \}|##########}"]
+15 -> 17 [label="WhenFalse"]
+18 [shape=record label="{BLOCK #18|1# LocalReferenceOperation / VariableDeclaratorSyntax: ret = a switch\n        \{\n            0 =\> \"Zero\",\n            1 =\> \"One\",\n            2 =\> b switch \{ 0 =\> \"Two bIsZero\", 1 =\> \"Two bIsOne\", _ =\> \"Two bIsMore\" \},\n            3 =\> \"Three\",\n            _ =\> null\n        \}|1# FlowCaptureReferenceOperation / SwitchExpressionSyntax: a switch\n        \{\n            0 =\> \"Zero\",\n            1 =\> \"One\",\n            2 =\> b switch \{ 0 =\> \"Two bIsZero\", 1 =\> \"Two bIsOne\", _ =\> \"Two bIsMore\" \},\n            3 =\> \"Three\",\n            _ =\> null\n        \}|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: ret = a switch\n        \{\n            0 =\> \"Zero\",\n            1 =\> \"One\",\n            2 =\> b switch \{ 0 =\> \"Two bIsZero\", 1 =\> \"Two bIsOne\", _ =\> \"Two bIsMore\" \},\n            3 =\> \"Three\",\n            _ =\> null\n        \}|##########}"]
+2 -> 18
+4 -> 18
+7 -> 18
+9 -> 18
+11 -> 18
+14 -> 18
+16 -> 18
+19 [shape=record label="{EXIT #19}"]
+18 -> 19
+}

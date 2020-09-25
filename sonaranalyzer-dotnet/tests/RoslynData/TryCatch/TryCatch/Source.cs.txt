@@ -1,0 +1,13 @@
+public void TryCatch()
+    {
+        try
+        {
+            A();
+            B();
+            C();
+        }
+        catch (Exception ex)
+        {
+            Handle(ex);
+        }
+    }

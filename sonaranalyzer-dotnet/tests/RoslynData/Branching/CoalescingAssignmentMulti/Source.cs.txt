@@ -1,0 +1,4 @@
+public void CoalescingAssignmentMulti(string a, string b, string c, string d)
+    {
+        a ??= b ??= c ??= d;
+    }

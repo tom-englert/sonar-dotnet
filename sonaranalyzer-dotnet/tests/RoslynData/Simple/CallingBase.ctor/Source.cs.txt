@@ -1,0 +1,4 @@
+public CallingBase() : base(40 + 2)
+    {
+        var lorem = "Ipsum";
+    }

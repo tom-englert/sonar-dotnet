@@ -1,0 +1,8 @@
+digraph "SonarAnalyzer.TryCatchRethrow" {
+0 [shape=record label="{BRANCH:TryStatement|IdentifierNameSyntax: A|InvocationExpressionSyntax: A()|IdentifierNameSyntax: B|InvocationExpressionSyntax: B()|IdentifierNameSyntax: C|InvocationExpressionSyntax: C()}"]
+0 -> 1
+0 -> 2
+1 [shape=record label="{JUMP:ThrowStatement|IdentifierNameSyntax: Handle|IdentifierNameSyntax: ex|InvocationExpressionSyntax: Handle(ex)}"]
+1 -> 2
+2 [shape=record label="{EXIT}"]
+}

@@ -1,0 +1,9 @@
+public string SwitchExpressionNoDefault(int value)
+    {
+        return value switch
+        {
+            0 => "Zero",
+            1 => "One",
+            2 => "Two",
+        };
+    }

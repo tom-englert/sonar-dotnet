@@ -1,0 +1,13 @@
+public void TryFinally()
+    {
+        try
+        {
+            A();
+            B();
+            C();
+        }
+        finally
+        {
+            F();
+        }
+    }

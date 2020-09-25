@@ -1,0 +1,18 @@
+public void If(bool outer, bool inner)
+    {
+        if (outer)
+        {
+            if (inner)
+            {
+                var a = "Outer && Inner";
+            }
+            else
+            {
+                var a = "Outer && !Inner";
+            }
+        }
+        else
+        {
+            var a = "!Outer";
+        }
+    }

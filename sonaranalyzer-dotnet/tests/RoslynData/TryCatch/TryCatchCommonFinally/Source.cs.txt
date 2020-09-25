@@ -1,0 +1,17 @@
+public void TryCatchCommonFinally()
+    {
+        try
+        {
+            A();
+            B();
+            C();
+        }
+        catch (Exception ex)
+        {
+            Handle(ex);
+        }
+        finally
+        {
+            F();
+        }
+    }

@@ -1,0 +1,17 @@
+public void TryCatchSpecificFinally()
+    {
+        try
+        {
+            A();
+            B();
+            C();
+        }
+        catch (ArgumentException ex)
+        {
+            Handle(ex);
+        }
+        finally
+        {
+            F();
+        }
+    }

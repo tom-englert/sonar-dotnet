@@ -1,0 +1,12 @@
+digraph "Roslyn.CoalescingAssignmentSingle" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# ParameterReferenceOperation / IdentifierNameSyntax: a|0# FlowCaptureOperation / IdentifierNameSyntax: a|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|0# FlowCaptureOperation / IdentifierNameSyntax: a|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|0# IsNullOperation / IdentifierNameSyntax: a|##########}"]
+1 -> 2
+3 [shape=record label="{BLOCK #3|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|1# ParameterReferenceOperation / IdentifierNameSyntax: b|0# SimpleAssignmentOperation / AssignmentExpressionSyntax: a ??= b|##########}"]
+2 -> 3 [label="WhenTrue"]
+4 [shape=record label="{EXIT #4}"]
+2 -> 4 [label="Else"]
+3 -> 4
+}

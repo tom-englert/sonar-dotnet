@@ -1,0 +1,24 @@
+digraph "Roslyn.SwitchStatementBreakNoDefault" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# LocalReferenceOperation / VariableDeclaratorSyntax: ret = \"default\"|1# LiteralOperation / LiteralExpressionSyntax: \"default\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: ret = \"default\"|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|1# ParameterReferenceOperation / IdentifierNameSyntax: value|0# FlowCaptureOperation / IdentifierNameSyntax: value|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 0|0# BinaryOperation / LiteralExpressionSyntax: 0|##########}"]
+1 -> 2
+3 [shape=record label="{BLOCK #3|2# LocalReferenceOperation / IdentifierNameSyntax: ret|2# LiteralOperation / LiteralExpressionSyntax: \"Zero\"|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: ret = \"Zero\"|0# ExpressionStatementOperation / ExpressionStatementSyntax: ret = \"Zero\";|##########}"]
+2 -> 3 [label="Else"]
+4 [shape=record label="{BLOCK #4|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 1|0# BinaryOperation / LiteralExpressionSyntax: 1|##########}"]
+2 -> 4 [label="WhenFalse"]
+5 [shape=record label="{BLOCK #5|2# LocalReferenceOperation / IdentifierNameSyntax: ret|2# LiteralOperation / LiteralExpressionSyntax: \"One\"|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: ret = \"One\"|0# ExpressionStatementOperation / ExpressionStatementSyntax: ret = \"One\";|##########}"]
+4 -> 5 [label="Else"]
+6 [shape=record label="{BLOCK #6|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 2|0# BinaryOperation / LiteralExpressionSyntax: 2|##########}"]
+4 -> 6 [label="WhenFalse"]
+7 [shape=record label="{BLOCK #7|2# LocalReferenceOperation / IdentifierNameSyntax: ret|2# LiteralOperation / LiteralExpressionSyntax: \"Two\"|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: ret = \"Two\"|0# ExpressionStatementOperation / ExpressionStatementSyntax: ret = \"Two\";|##########}"]
+6 -> 7 [label="Else"]
+8 [shape=record label="{BLOCK #8|## BranchValue ##|0# LocalReferenceOperation / IdentifierNameSyntax: ret|##########}"]
+3 -> 8
+5 -> 8
+6 -> 8 [label="WhenFalse"]
+7 -> 8
+9 [shape=record label="{EXIT #9}"]
+8 -> 9
+}

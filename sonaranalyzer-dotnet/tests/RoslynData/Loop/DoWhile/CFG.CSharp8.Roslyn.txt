@@ -1,0 +1,10 @@
+digraph "Roslyn.DoWhile" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# LocalReferenceOperation / VariableDeclaratorSyntax: value = null|2# LiteralOperation / LiteralExpressionSyntax: null|1# ConversionOperation / LiteralExpressionSyntax: null|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: value = null|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|2# LocalReferenceOperation / IdentifierNameSyntax: value|2# LiteralOperation / LiteralExpressionSyntax: \"Value\"|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: value = \"Value\"|0# ExpressionStatementOperation / ExpressionStatementSyntax: value = \"Value\";|##########|## BranchValue ##|1# LocalReferenceOperation / IdentifierNameSyntax: value|2# LiteralOperation / LiteralExpressionSyntax: null|1# ConversionOperation / LiteralExpressionSyntax: null|0# BinaryOperation / BinaryExpressionSyntax: value == null|##########}"]
+1 -> 2
+2 -> 2 [label="WhenTrue"]
+3 [shape=record label="{EXIT #3}"]
+2 -> 3 [label="Else"]
+}

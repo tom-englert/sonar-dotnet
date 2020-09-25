@@ -1,0 +1,23 @@
+digraph "SonarAnalyzer.TryMultiCatchFinally" {
+0 [shape=record label="{BRANCH:TryStatement|IdentifierNameSyntax: A|InvocationExpressionSyntax: A()|IdentifierNameSyntax: B|InvocationExpressionSyntax: B()|IdentifierNameSyntax: C|InvocationExpressionSyntax: C()}"]
+0 -> 1
+0 -> 2
+0 -> 3
+0 -> 4
+0 -> 5
+4 [shape=record label="{SIMPLE|IdentifierNameSyntax: Handle|IdentifierNameSyntax: ex|InvocationExpressionSyntax: Handle(ex)}"]
+4 -> 5
+3 [shape=record label="{SIMPLE|IdentifierNameSyntax: Handle|IdentifierNameSyntax: ex|InvocationExpressionSyntax: Handle(ex)}"]
+3 -> 5
+2 [shape=record label="{BINARY:CatchFilterClause|IdentifierNameSyntax: ex|MemberAccessExpressionSyntax: ex.Message|MemberAccessExpressionSyntax: ex.Message.Contains|LiteralExpressionSyntax: \"memory\"|InvocationExpressionSyntax: ex.Message.Contains(\"memory\")}"]
+2 -> 6 [label="True"]
+2 -> 5 [label="False"]
+6 [shape=record label="{SIMPLE|IdentifierNameSyntax: Handle|IdentifierNameSyntax: ex|InvocationExpressionSyntax: Handle(ex)}"]
+6 -> 5
+1 [shape=record label="{SIMPLE|IdentifierNameSyntax: Handle|IdentifierNameSyntax: ex|InvocationExpressionSyntax: Handle(ex)}"]
+1 -> 5
+5 [shape=record label="{BRANCH:FinallyClause|IdentifierNameSyntax: F|InvocationExpressionSyntax: F()}"]
+5 -> 7
+5 -> 7
+7 [shape=record label="{EXIT}"]
+}

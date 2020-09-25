@@ -1,0 +1,15 @@
+digraph "SonarAnalyzer.DoContinue" {
+0 [shape=record label="{SIMPLE|LiteralExpressionSyntax: 0|VariableDeclaratorSyntax: i = 0}"]
+0 -> 1
+1 [shape=record label="{BINARY:LessThanExpression|IdentifierNameSyntax: i|PostfixUnaryExpressionSyntax: i++|IdentifierNameSyntax: i|LiteralExpressionSyntax: 5|BinaryExpressionSyntax: i \< 5}"]
+1 -> 2 [label="True"]
+1 -> 3 [label="False"]
+2 [shape=record label="{JUMP:ContinueStatement}"]
+2 -> 4
+3 [shape=record label="{SIMPLE|IdentifierNameSyntax: i|LiteralExpressionSyntax: 10|AssignmentExpressionSyntax: i += 10}"]
+3 -> 4
+4 [shape=record label="{BINARY:LessThanExpression|IdentifierNameSyntax: i|LiteralExpressionSyntax: 10|BinaryExpressionSyntax: i \< 10}"]
+4 -> 1 [label="True"]
+4 -> 5 [label="False"]
+5 [shape=record label="{EXIT}"]
+}

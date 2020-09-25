@@ -1,0 +1,14 @@
+digraph "Roslyn.ConditionalAccess" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# ParameterReferenceOperation / IdentifierNameSyntax: o|0# FlowCaptureOperation / IdentifierNameSyntax: o|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: o|0# IsNullOperation / IdentifierNameSyntax: o|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: o|1# InvocationOperation / InvocationExpressionSyntax: .ToString()|0# FlowCaptureOperation / InvocationExpressionSyntax: .ToString()|##########}"]
+1 -> 2 [label="Else"]
+3 [shape=record label="{BLOCK #3|1# DefaultValueOperation / IdentifierNameSyntax: o|0# FlowCaptureOperation / IdentifierNameSyntax: o|##########}"]
+1 -> 3 [label="WhenTrue"]
+4 [shape=record label="{BLOCK #4|1# LocalReferenceOperation / VariableDeclaratorSyntax: ret = o?.ToString()|1# FlowCaptureReferenceOperation / ConditionalAccessExpressionSyntax: o?.ToString()|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: ret = o?.ToString()|##########}"]
+2 -> 4
+3 -> 4
+5 [shape=record label="{EXIT #5}"]
+4 -> 5
+}

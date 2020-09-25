@@ -1,0 +1,12 @@
+public void While(int i)
+    {
+        while (i > 0)
+        {
+            i--;
+            var j = i;
+            while (j > 0)
+            {
+                j--;
+            }
+        }
+    }

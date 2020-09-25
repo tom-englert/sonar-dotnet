@@ -1,0 +1,10 @@
+public IEnumerable<string> YieldBreakCondition(bool condition)
+    {
+        yield return "A";
+        yield return "B";
+        if (condition)
+        {
+            yield break;
+        }
+        yield return "C";
+    }

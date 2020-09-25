@@ -1,0 +1,5 @@
+digraph "SonarAnalyzer.Index" {
+0 [shape=record label="{SIMPLE|IdentifierNameSyntax: arr|PrefixUnaryExpressionSyntax: ^1|ElementAccessExpressionSyntax: arr[^1]|VariableDeclaratorSyntax: value = arr[^1]}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}

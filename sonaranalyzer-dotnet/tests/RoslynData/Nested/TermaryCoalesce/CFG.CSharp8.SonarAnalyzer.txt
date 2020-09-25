@@ -1,0 +1,15 @@
+digraph "SonarAnalyzer.TermaryCoalesce" {
+0 [shape=record label="{BINARY:IdentifierName|IdentifierNameSyntax: condition}"]
+0 -> 1 [label="True"]
+0 -> 2 [label="False"]
+1 [shape=record label="{BINARY:CoalesceExpression|IdentifierNameSyntax: first}"]
+1 -> 3 [label="True"]
+1 -> 4 [label="False"]
+3 [shape=record label="{SIMPLE|IdentifierNameSyntax: second}"]
+3 -> 4
+2 [shape=record label="{SIMPLE|IdentifierNameSyntax: ternaryFalse}"]
+2 -> 4
+4 [shape=record label="{SIMPLE|VariableDeclaratorSyntax: x = condition ? (first ?? second) : ternaryFalse}"]
+4 -> 5
+5 [shape=record label="{EXIT}"]
+}

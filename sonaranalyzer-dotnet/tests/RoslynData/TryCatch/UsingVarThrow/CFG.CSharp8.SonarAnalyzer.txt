@@ -1,0 +1,7 @@
+digraph "SonarAnalyzer.UsingVarThrow" {
+0 [shape=record label="{JUMP:ThrowStatement|ObjectCreationExpressionSyntax: new MemoryStream()|VariableDeclaratorSyntax: ms = new MemoryStream()|IdentifierNameSyntax: ms|MemberAccessExpressionSyntax: ms.Write|LiteralExpressionSyntax: null|LiteralExpressionSyntax: 0|LiteralExpressionSyntax: 0|InvocationExpressionSyntax: ms.Write(null, 0, 0)|LiteralExpressionSyntax: \"Message\"|ObjectCreationExpressionSyntax: new Exception(\"Message\")}"]
+0 -> 1
+2 [shape=record label="{SIMPLE|IdentifierNameSyntax: ms|MemberAccessExpressionSyntax: ms.Write|LiteralExpressionSyntax: null|LiteralExpressionSyntax: 1|LiteralExpressionSyntax: 1|InvocationExpressionSyntax: ms.Write(null, 1, 1)}"]
+2 -> 1
+1 [shape=record label="{EXIT}"]
+}

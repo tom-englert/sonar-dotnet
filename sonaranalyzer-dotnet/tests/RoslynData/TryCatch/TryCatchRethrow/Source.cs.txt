@@ -1,0 +1,14 @@
+public void TryCatchRethrow()
+    {
+        try
+        {
+            A();
+            B();
+            C();
+        }
+        catch (Exception ex)
+        {
+            Handle(ex);
+            throw;
+        }
+    }

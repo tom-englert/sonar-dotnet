@@ -1,0 +1,23 @@
+public string SwitchStatementBreak(int value)
+    {
+        string ret;
+        switch (value)
+        {
+            case 0:
+                ret = "Zero";
+                break;
+
+            case 1:
+                ret = "One";
+                break;
+
+            case 2:
+                ret = "Two";
+                break;
+
+            default:
+                ret = "Other";
+                break;
+        }
+        return ret;
+    }

@@ -1,0 +1,6 @@
+public IEnumerable<string> YieldReturn()
+    {
+        yield return "A";
+        yield return "B";
+        yield return "C";
+    }

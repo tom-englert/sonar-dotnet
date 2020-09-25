@@ -1,0 +1,7 @@
+digraph "Roslyn.ArrowAdd" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|## BranchValue ##|1# ParameterReferenceOperation / IdentifierNameSyntax: a|1# ParameterReferenceOperation / IdentifierNameSyntax: b|0# BinaryOperation / BinaryExpressionSyntax: a + b|##########}"]
+0 -> 1
+2 [shape=record label="{EXIT #2}"]
+1 -> 2
+}

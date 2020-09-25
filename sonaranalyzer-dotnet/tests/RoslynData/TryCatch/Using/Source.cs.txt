@@ -1,0 +1,7 @@
+public void Using()
+    {
+        using (var ms = new MemoryStream())
+        {
+            ms.Write(null, 0, 0);
+        }
+    }

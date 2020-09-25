@@ -1,0 +1,4 @@
+public void TermaryCoalesce(bool condition, string first, string second, string ternaryFalse, string last)
+    {
+        var x = condition ? (first ?? second) : ternaryFalse;
+    }

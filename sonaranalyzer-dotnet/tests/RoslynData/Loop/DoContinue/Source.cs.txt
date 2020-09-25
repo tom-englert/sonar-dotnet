@@ -1,0 +1,13 @@
+public void DoContinue()
+    {
+        var i = 0;
+        do
+        {
+            i++;
+            if (i < 5)
+            {
+                continue;
+            }
+            i += 10;
+        } while (i < 10);
+    }

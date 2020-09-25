@@ -1,0 +1,14 @@
+digraph "SonarAnalyzer.TryCatchWhenFinally" {
+0 [shape=record label="{BRANCH:TryStatement|IdentifierNameSyntax: A|InvocationExpressionSyntax: A()|IdentifierNameSyntax: B|InvocationExpressionSyntax: B()|IdentifierNameSyntax: C|InvocationExpressionSyntax: C()}"]
+0 -> 1
+0 -> 2
+1 [shape=record label="{BINARY:CatchFilterClause|IdentifierNameSyntax: ex|MemberAccessExpressionSyntax: ex.Message|MemberAccessExpressionSyntax: ex.Message.Contains|LiteralExpressionSyntax: \"memory\"|InvocationExpressionSyntax: ex.Message.Contains(\"memory\")}"]
+1 -> 3 [label="True"]
+1 -> 2 [label="False"]
+3 [shape=record label="{SIMPLE|IdentifierNameSyntax: Handle|IdentifierNameSyntax: ex|InvocationExpressionSyntax: Handle(ex)}"]
+3 -> 2
+2 [shape=record label="{BRANCH:FinallyClause|IdentifierNameSyntax: F|InvocationExpressionSyntax: F()}"]
+2 -> 4
+2 -> 4
+4 [shape=record label="{EXIT}"]
+}

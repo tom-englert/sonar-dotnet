@@ -48,24 +48,28 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(ProcessMethod, SyntaxKind.MethodDeclaration);
+            // Output is rendered to Solution/Tests/RoslynData project
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                ProcessBaseMethod,
+                SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration);
             //FIXME: Expressions a dalsi syntaxe, ktere muzeme generovat
         }
 
-        private void ProcessMethod(SyntaxNodeAnalysisContext c)
+        private void ProcessBaseMethod(SyntaxNodeAnalysisContext c)
         {
-            var method = (MethodDeclarationSyntax)c.Node;
+            var method = (BaseMethodDeclarationSyntax)c.Node;
+            var methodName = (method as MethodDeclarationSyntax)?.Identifier.ValueText ?? c.Node.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText + ".ctor";
             var sourceFileName = Path.GetFileNameWithoutExtension(c.Node.GetLocation().GetLineSpan().Path);
             var languageVersion = c.Compilation.GetLanguageVersion().ToString();
-            var root = Path.GetFullPath(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @$"\..\..\..\..\RoslynData\{sourceFileName}\{method.Identifier.ValueText}\");
+            var root = Path.GetFullPath(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @$"\..\..\..\..\RoslynData\{sourceFileName}\{methodName}\");
             Directory.CreateDirectory(root);
             File.WriteAllText(root + "Source.cs.txt", method.ToString());
             if (CSharpControlFlowGraph.TryGet(method.Body, c.SemanticModel, out var cfg))
             {
-                File.WriteAllText(root + $"CFG.{languageVersion}.SonarAnalyzer.txt", CfgSerializer.Serialize("SonarAnalyzer." + method.Identifier.ValueText, cfg));
+                File.WriteAllText(root + $"CFG.{languageVersion}.SonarAnalyzer.txt", CfgSerializer.Serialize("SonarAnalyzer." + methodName, cfg));
             }
             var roslynCfg = RoslynCFG.Create(c.Node, c.SemanticModel);
-            File.WriteAllText(root + $"CFG.{languageVersion}.Roslyn.txt", Serialize("Roslyn." + method.Identifier.ValueText, roslynCfg));
+            File.WriteAllText(root + $"CFG.{languageVersion}.Roslyn.txt", Serialize("Roslyn." + methodName, roslynCfg));
         }
 
         private string Serialize(string methodName, RoslynCFG cfg)

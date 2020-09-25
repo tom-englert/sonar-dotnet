@@ -1,0 +1,7 @@
+digraph "Roslyn.Range" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# LocalReferenceOperation / VariableDeclaratorSyntax: value = arr[1..4]|2# ParameterReferenceOperation / IdentifierNameSyntax: arr|4# LiteralOperation / LiteralExpressionSyntax: 1|3# ConversionOperation / LiteralExpressionSyntax: 1|4# LiteralOperation / LiteralExpressionSyntax: 4|3# ConversionOperation / LiteralExpressionSyntax: 4|2# RangeOperation / RangeExpressionSyntax: 1..4|1# ArrayElementReferenceOperation / ElementAccessExpressionSyntax: arr[1..4]|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: value = arr[1..4]|##########}"]
+0 -> 1
+2 [shape=record label="{EXIT #2}"]
+1 -> 2
+}

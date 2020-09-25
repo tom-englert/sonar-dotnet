@@ -1,0 +1,17 @@
+public string SwitchStatementReturn(int value)
+    {
+        switch (value)
+        {
+            case 0:
+                return "Zero";
+
+            case 1:
+                return "One";
+
+            case 2:
+                return "Two";
+
+            default:
+                return "Other";
+        }
+    }

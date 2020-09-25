@@ -1,0 +1,23 @@
+public void TryCatchRethrowNested()
+    {
+        try
+        {
+            A();
+            try
+            {
+                B();
+                C();
+                D();
+            }
+            catch (NullReferenceException nre)
+            {
+                throw;
+            }
+            E();
+        }
+        catch (Exception ex)
+        {
+            Handle(ex);
+        }
+        F();
+    }

@@ -1,0 +1,5 @@
+digraph "SonarAnalyzer.Range" {
+0 [shape=record label="{SIMPLE|IdentifierNameSyntax: arr|RangeExpressionSyntax: 1..4|ElementAccessExpressionSyntax: arr[1..4]|VariableDeclaratorSyntax: value = arr[1..4]}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}

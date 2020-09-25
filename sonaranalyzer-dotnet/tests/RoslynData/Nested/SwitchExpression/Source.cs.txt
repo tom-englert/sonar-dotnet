@@ -1,0 +1,11 @@
+public void SwitchExpression(int a, int b)
+    {
+        var ret = a switch
+        {
+            0 => "Zero",
+            1 => "One",
+            2 => b switch { 0 => "Two bIsZero", 1 => "Two bIsOne", _ => "Two bIsMore" },
+            3 => "Three",
+            _ => null
+        };
+    }

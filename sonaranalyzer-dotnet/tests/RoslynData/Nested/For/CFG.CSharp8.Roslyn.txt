@@ -1,0 +1,21 @@
+digraph "Roslyn.For" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# LocalReferenceOperation / VariableDeclaratorSyntax: i = 0|1# LiteralOperation / LiteralExpressionSyntax: 0|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: i = 0|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|## BranchValue ##|1# LocalReferenceOperation / IdentifierNameSyntax: i|1# ParameterReferenceOperation / IdentifierNameSyntax: a|0# BinaryOperation / BinaryExpressionSyntax: i \< a|##########}"]
+1 -> 2
+7 -> 2
+3 [shape=record label="{BLOCK #3|1# LocalReferenceOperation / VariableDeclaratorSyntax: j = 0|1# LiteralOperation / LiteralExpressionSyntax: 0|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: j = 0|##########}"]
+2 -> 3 [label="Else"]
+4 [shape=record label="{BLOCK #4|## BranchValue ##|1# LocalReferenceOperation / IdentifierNameSyntax: j|1# ParameterReferenceOperation / IdentifierNameSyntax: b|0# BinaryOperation / BinaryExpressionSyntax: j \< b|##########}"]
+3 -> 4
+6 -> 4
+5 [shape=record label="{BLOCK #5|1# LocalReferenceOperation / VariableDeclaratorSyntax: x = i + j|2# LocalReferenceOperation / IdentifierNameSyntax: i|2# LocalReferenceOperation / IdentifierNameSyntax: j|1# BinaryOperation / BinaryExpressionSyntax: i + j|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: x = i + j|##########}"]
+4 -> 5 [label="Else"]
+6 [shape=record label="{BLOCK #6|2# LocalReferenceOperation / IdentifierNameSyntax: i|1# IncrementOrDecrementOperation / PostfixUnaryExpressionSyntax: i++|0# ExpressionStatementOperation / PostfixUnaryExpressionSyntax: i++|##########}"]
+5 -> 6
+7 [shape=record label="{BLOCK #7|2# LocalReferenceOperation / IdentifierNameSyntax: i|1# IncrementOrDecrementOperation / PostfixUnaryExpressionSyntax: i++|0# ExpressionStatementOperation / PostfixUnaryExpressionSyntax: i++|##########}"]
+4 -> 7 [label="WhenFalse"]
+8 [shape=record label="{EXIT #8}"]
+2 -> 8 [label="WhenFalse"]
+}

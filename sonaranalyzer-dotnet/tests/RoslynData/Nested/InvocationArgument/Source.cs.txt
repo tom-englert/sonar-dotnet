@@ -1,0 +1,4 @@
+public void InvocationArgument(bool condition, object a)
+    {
+        Console.WriteLine(condition ? a.ToString() : "Default");
+    }

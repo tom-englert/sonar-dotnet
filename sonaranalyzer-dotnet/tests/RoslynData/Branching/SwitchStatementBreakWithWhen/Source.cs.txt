@@ -1,0 +1,23 @@
+public string SwitchStatementBreakWithWhen(int value, bool condition)
+    {
+        string ret;
+        switch (value)
+        {
+            case 0 when condition:
+                ret = "Zero";
+                break;
+
+            case 1:
+                ret = "One";
+                break;
+
+            case 2:
+                ret = "Two";
+                break;
+
+            default:
+                ret = "Other";
+                break;
+        }
+        return ret;
+    }

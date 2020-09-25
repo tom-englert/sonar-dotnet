@@ -1,0 +1,10 @@
+digraph "Roslyn.TryThrowCatch" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|2# InstanceReferenceOperation / IdentifierNameSyntax: A|1# InvocationOperation / InvocationExpressionSyntax: A()|0# ExpressionStatementOperation / ExpressionStatementSyntax: A();|##########|2# InstanceReferenceOperation / IdentifierNameSyntax: B|1# InvocationOperation / InvocationExpressionSyntax: B()|0# ExpressionStatementOperation / ExpressionStatementSyntax: B();|##########|## BranchValue ##|2# LiteralOperation / LiteralExpressionSyntax: \"Message\"|1# ArgumentOperation / ArgumentSyntax: \"Message\"|0# ObjectCreationOperation / ObjectCreationExpressionSyntax: new Exception(\"Message\")|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|2# InstanceReferenceOperation / IdentifierNameSyntax: C|1# InvocationOperation / InvocationExpressionSyntax: C()|0# ExpressionStatementOperation / ExpressionStatementSyntax: C();|##########}"]
+3 [shape=record label="{BLOCK #3|1# LocalReferenceOperation / CatchDeclarationSyntax: (Exception ex)|1# CaughtExceptionOperation / CatchDeclarationSyntax: (Exception ex)|0# SimpleAssignmentOperation / CatchDeclarationSyntax: (Exception ex)|##########|2# InstanceReferenceOperation / IdentifierNameSyntax: Handle|3# LocalReferenceOperation / IdentifierNameSyntax: ex|2# ArgumentOperation / ArgumentSyntax: ex|1# InvocationOperation / InvocationExpressionSyntax: Handle(ex)|0# ExpressionStatementOperation / ExpressionStatementSyntax: Handle(ex);|##########}"]
+4 [shape=record label="{EXIT #4}"]
+2 -> 4
+3 -> 4
+}

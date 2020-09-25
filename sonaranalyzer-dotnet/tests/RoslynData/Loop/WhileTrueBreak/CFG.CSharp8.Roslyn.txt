@@ -1,0 +1,12 @@
+digraph "Roslyn.WhileTrueBreak" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: true|##########}"]
+0 -> 1
+3 -> 1
+2 [shape=record label="{BLOCK #2|1# LocalReferenceOperation / VariableDeclaratorSyntax: beforeBreak = \"BeforeBreak\"|1# LiteralOperation / LiteralExpressionSyntax: \"BeforeBreak\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: beforeBreak = \"BeforeBreak\"|##########}"]
+1 -> 2 [label="Else"]
+3 [shape=record label="{BLOCK #3|1# LocalReferenceOperation / VariableDeclaratorSyntax: afterBreak = \"AfterBreak\"|1# LiteralOperation / LiteralExpressionSyntax: \"AfterBreak\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: afterBreak = \"AfterBreak\"|##########}"]
+4 [shape=record label="{EXIT #4}"]
+1 -> 4 [label="WhenFalse"]
+2 -> 4
+}

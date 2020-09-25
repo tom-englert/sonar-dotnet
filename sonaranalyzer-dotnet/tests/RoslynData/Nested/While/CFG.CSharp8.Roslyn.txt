@@ -1,0 +1,15 @@
+digraph "Roslyn.While" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|## BranchValue ##|1# ParameterReferenceOperation / IdentifierNameSyntax: i|1# LiteralOperation / LiteralExpressionSyntax: 0|0# BinaryOperation / BinaryExpressionSyntax: i \> 0|##########}"]
+0 -> 1
+3 -> 1 [label="WhenFalse"]
+2 [shape=record label="{BLOCK #2|2# ParameterReferenceOperation / IdentifierNameSyntax: i|1# IncrementOrDecrementOperation / PostfixUnaryExpressionSyntax: i--|0# ExpressionStatementOperation / ExpressionStatementSyntax: i--;|##########|1# LocalReferenceOperation / VariableDeclaratorSyntax: j = i|1# ParameterReferenceOperation / IdentifierNameSyntax: i|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: j = i|##########}"]
+1 -> 2 [label="Else"]
+3 [shape=record label="{BLOCK #3|## BranchValue ##|1# LocalReferenceOperation / IdentifierNameSyntax: j|1# LiteralOperation / LiteralExpressionSyntax: 0|0# BinaryOperation / BinaryExpressionSyntax: j \> 0|##########}"]
+2 -> 3
+4 -> 3
+4 [shape=record label="{BLOCK #4|2# LocalReferenceOperation / IdentifierNameSyntax: j|1# IncrementOrDecrementOperation / PostfixUnaryExpressionSyntax: j--|0# ExpressionStatementOperation / ExpressionStatementSyntax: j--;|##########}"]
+3 -> 4 [label="Else"]
+5 [shape=record label="{EXIT #5}"]
+1 -> 5 [label="WhenFalse"]
+}

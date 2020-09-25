@@ -1,0 +1,22 @@
+digraph "SonarAnalyzer.DoTryBreakCatchContinueFinally" {
+0 [shape=record label="{SIMPLE|IdentifierNameSyntax: A|InvocationExpressionSyntax: A()}"]
+0 -> 1
+1 [shape=record label="{BRANCH:TryStatement|IdentifierNameSyntax: B|InvocationExpressionSyntax: B()}"]
+1 -> 2
+1 -> 3
+1 -> 4
+5 [shape=record label="{BRANCH:TryStatement|IdentifierNameSyntax: C|InvocationExpressionSyntax: C()}"]
+5 -> 2
+5 -> 3
+2 [shape=record label="{JUMP:ContinueStatement|IdentifierNameSyntax: Handle|IdentifierNameSyntax: ex|InvocationExpressionSyntax: Handle(ex)}"]
+2 -> 6
+3 [shape=record label="{BRANCH:FinallyClause|IdentifierNameSyntax: F|InvocationExpressionSyntax: F()}"]
+3 -> 7
+3 -> 4
+7 [shape=record label="{SIMPLE|IdentifierNameSyntax: D|InvocationExpressionSyntax: D()}"]
+7 -> 6
+6 [shape=record label="{BINARY:TrueLiteralExpression|LiteralExpressionSyntax: true}"]
+6 -> 0 [label="True"]
+6 -> 4 [label="False"]
+4 [shape=record label="{EXIT}"]
+}

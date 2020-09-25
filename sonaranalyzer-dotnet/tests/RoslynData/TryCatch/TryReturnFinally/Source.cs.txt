@@ -1,0 +1,14 @@
+public void TryReturnFinally()
+    {
+        try
+        {
+            A();
+            B();
+            return;
+            C();
+        }
+        finally
+        {
+            F();
+        }
+    }

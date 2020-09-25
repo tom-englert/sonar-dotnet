@@ -1,0 +1,19 @@
+digraph "Roslyn.IsTypeInConditionChain" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|## BranchValue ##|1# ParameterReferenceOperation / IdentifierNameSyntax: a|1# DeclarationPatternOperation / DeclarationPatternSyntax: string str|0# IsPatternOperation / IsPatternExpressionSyntax: a is string str|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|## BranchValue ##|2# LocalReferenceOperation / IdentifierNameSyntax: str|1# InvocationOperation / InvocationExpressionSyntax: str.GetType()|1# RecursivePatternOperation / RecursivePatternSyntax: \{ \} type|0# IsPatternOperation / IsPatternExpressionSyntax: str.GetType() is \{ \} type|##########}"]
+1 -> 2 [label="Else"]
+3 [shape=record label="{BLOCK #3|## BranchValue ##|2# LocalReferenceOperation / IdentifierNameSyntax: type|1# PropertyReferenceOperation / MemberAccessExpressionSyntax: type.BaseType|1# DeclarationPatternOperation / DeclarationPatternSyntax: Type baseType|0# IsPatternOperation / IsPatternExpressionSyntax: type.BaseType is Type baseType|##########}"]
+2 -> 3 [label="Else"]
+4 [shape=record label="{BLOCK #4|## BranchValue ##|1# LocalReferenceOperation / IdentifierNameSyntax: baseType|0# PropertyReferenceOperation / MemberAccessExpressionSyntax: baseType.IsAbstract|##########}"]
+3 -> 4 [label="Else"]
+5 [shape=record label="{BLOCK #5|1# LocalReferenceOperation / VariableDeclaratorSyntax: ret = \"value\"|1# LiteralOperation / LiteralExpressionSyntax: \"value\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: ret = \"value\"|##########}"]
+4 -> 5 [label="Else"]
+6 [shape=record label="{EXIT #6}"]
+1 -> 6 [label="WhenFalse"]
+2 -> 6 [label="WhenFalse"]
+3 -> 6 [label="WhenFalse"]
+4 -> 6 [label="WhenFalse"]
+5 -> 6
+}

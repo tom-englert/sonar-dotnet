@@ -1,0 +1,28 @@
+digraph "Roslyn.CoalescingAssignmentTermaryCoalescingAssingment" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# ParameterReferenceOperation / IdentifierNameSyntax: first|0# FlowCaptureOperation / IdentifierNameSyntax: first|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: first|0# FlowCaptureOperation / IdentifierNameSyntax: first|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: first|0# IsNullOperation / IdentifierNameSyntax: first|##########}"]
+1 -> 2
+3 [shape=record label="{BLOCK #3|1# ParameterReferenceOperation / IdentifierNameSyntax: second|0# FlowCaptureOperation / IdentifierNameSyntax: second|##########}"]
+2 -> 3 [label="WhenTrue"]
+4 [shape=record label="{BLOCK #4|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: second|0# FlowCaptureOperation / IdentifierNameSyntax: second|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: second|0# IsNullOperation / IdentifierNameSyntax: second|##########}"]
+3 -> 4
+5 [shape=record label="{BLOCK #5|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: second|0# FlowCaptureOperation / AssignmentExpressionSyntax: second ??= (condition ? ternaryTrue : ternaryFalse)|##########}"]
+4 -> 5 [label="Else"]
+6 [shape=record label="{BLOCK #6|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: condition|##########}"]
+4 -> 6 [label="WhenTrue"]
+7 [shape=record label="{BLOCK #7|1# ParameterReferenceOperation / IdentifierNameSyntax: ternaryTrue|0# FlowCaptureOperation / IdentifierNameSyntax: ternaryTrue|##########}"]
+6 -> 7 [label="Else"]
+8 [shape=record label="{BLOCK #8|1# ParameterReferenceOperation / IdentifierNameSyntax: ternaryFalse|0# FlowCaptureOperation / IdentifierNameSyntax: ternaryFalse|##########}"]
+6 -> 8 [label="WhenFalse"]
+9 [shape=record label="{BLOCK #9|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: second|2# FlowCaptureReferenceOperation / ConditionalExpressionSyntax: condition ? ternaryTrue : ternaryFalse|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: second ??= (condition ? ternaryTrue : ternaryFalse)|0# FlowCaptureOperation / AssignmentExpressionSyntax: second ??= (condition ? ternaryTrue : ternaryFalse)|##########}"]
+7 -> 9
+8 -> 9
+10 [shape=record label="{BLOCK #10|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: first|1# FlowCaptureReferenceOperation / AssignmentExpressionSyntax: second ??= (condition ? ternaryTrue : ternaryFalse)|0# SimpleAssignmentOperation / AssignmentExpressionSyntax: first ??= second ??= (condition ? ternaryTrue : ternaryFalse)|##########}"]
+5 -> 10
+9 -> 10
+11 [shape=record label="{EXIT #11}"]
+2 -> 11 [label="Else"]
+10 -> 11
+}

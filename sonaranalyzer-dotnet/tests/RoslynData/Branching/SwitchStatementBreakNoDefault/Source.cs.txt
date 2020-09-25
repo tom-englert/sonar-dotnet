@@ -1,0 +1,20 @@
+public string SwitchStatementBreakNoDefault(int value)
+    {
+        string ret = "default";
+        switch (value)
+        {
+            case 0:
+                ret = "Zero";
+                break;
+
+            case 1:
+                ret = "One";
+                break;
+
+            case 2:
+                ret = "Two";
+                break;
+
+        }
+        return ret;
+    }

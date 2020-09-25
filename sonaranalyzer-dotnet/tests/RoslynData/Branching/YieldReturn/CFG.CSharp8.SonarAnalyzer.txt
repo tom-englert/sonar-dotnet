@@ -1,0 +1,9 @@
+digraph "SonarAnalyzer.YieldReturn" {
+0 [shape=record label="{JUMP:YieldReturnStatement|LiteralExpressionSyntax: \"A\"}"]
+0 -> 1
+1 [shape=record label="{JUMP:YieldReturnStatement|LiteralExpressionSyntax: \"B\"}"]
+1 -> 2
+2 [shape=record label="{JUMP:YieldReturnStatement|LiteralExpressionSyntax: \"C\"}"]
+2 -> 3
+3 [shape=record label="{EXIT}"]
+}

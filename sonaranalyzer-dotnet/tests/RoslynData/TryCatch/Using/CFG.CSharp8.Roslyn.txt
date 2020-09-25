@@ -1,0 +1,15 @@
+digraph "Roslyn.Using" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# LocalReferenceOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|1# ObjectCreationOperation / ObjectCreationExpressionSyntax: new MemoryStream()|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|2# LocalReferenceOperation / IdentifierNameSyntax: ms|4# LiteralOperation / LiteralExpressionSyntax: null|3# ConversionOperation / LiteralExpressionSyntax: null|2# ArgumentOperation / ArgumentSyntax: null|3# LiteralOperation / LiteralExpressionSyntax: 0|2# ArgumentOperation / ArgumentSyntax: 0|3# LiteralOperation / LiteralExpressionSyntax: 0|2# ArgumentOperation / ArgumentSyntax: 0|1# InvocationOperation / InvocationExpressionSyntax: ms.Write(null, 0, 0)|0# ExpressionStatementOperation / ExpressionStatementSyntax: ms.Write(null, 0, 0);|##########}"]
+1 -> 2
+3 [shape=record label="{BLOCK #3|## BranchValue ##|1# LocalReferenceOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|0# IsNullOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|##########}"]
+4 [shape=record label="{BLOCK #4|2# LocalReferenceOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|1# ConversionOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|0# InvocationOperation / VariableDeclaratorSyntax: ms = new MemoryStream()|##########}"]
+3 -> 4 [label="Else"]
+5 [shape=record label="{BLOCK #5}"]
+3 -> 5 [label="WhenTrue"]
+4 -> 5
+6 [shape=record label="{EXIT #6}"]
+2 -> 6
+}

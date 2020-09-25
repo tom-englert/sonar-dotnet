@@ -1,0 +1,4 @@
+public void CoalesceSingle(string a, string b)
+    {
+        var c = a ?? b;
+    }

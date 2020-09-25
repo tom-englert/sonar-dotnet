@@ -1,0 +1,10 @@
+public void ForEach(string[] names, int[] numbers)
+    {
+        foreach (var number in numbers)
+        {
+            foreach (var name in names)
+            {
+                var ret = $"{number}. {name}";
+            }
+        }
+    }

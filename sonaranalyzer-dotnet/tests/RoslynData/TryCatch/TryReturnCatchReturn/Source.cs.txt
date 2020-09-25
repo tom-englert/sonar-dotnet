@@ -1,0 +1,14 @@
+public string TryReturnCatchReturn()
+    {
+        try
+        {
+            A();
+            B();
+            C();
+            return "OK";
+        }
+        catch(Exception ex)
+        {
+            return "Error: " + ex.Message;
+        }
+    }

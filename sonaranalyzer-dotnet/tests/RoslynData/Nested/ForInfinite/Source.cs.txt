@@ -1,0 +1,8 @@
+public void ForInfinite()
+    {
+        for (; ; )
+        {
+            var value = "Value";
+            break;
+        }
+    }

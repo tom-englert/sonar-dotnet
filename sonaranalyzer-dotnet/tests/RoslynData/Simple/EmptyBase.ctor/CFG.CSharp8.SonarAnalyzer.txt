@@ -1,0 +1,3 @@
+digraph "SonarAnalyzer.EmptyBase.ctor" {
+0 [shape=record label="{EXIT}"]
+}

@@ -1,0 +1,17 @@
+public void TryCatchWhenFinally()
+    {
+        try
+        {
+            A();
+            B();
+            C();
+        }
+        catch (Exception ex) when (ex.Message.Contains("memory"))
+        {
+            Handle(ex);
+        }
+        finally
+        {
+            F();
+        }
+    }

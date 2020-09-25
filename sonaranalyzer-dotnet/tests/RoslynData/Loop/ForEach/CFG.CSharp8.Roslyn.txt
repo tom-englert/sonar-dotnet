@@ -1,0 +1,20 @@
+digraph "Roslyn.ForEach" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|4# LiteralOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|5# LiteralOperation / LiteralExpressionSyntax: 0|5# LiteralOperation / LiteralExpressionSyntax: 1|5# LiteralOperation / LiteralExpressionSyntax: 2|5# LiteralOperation / LiteralExpressionSyntax: 4|5# LiteralOperation / LiteralExpressionSyntax: 8|5# LiteralOperation / LiteralExpressionSyntax: 16|4# ArrayInitializerOperation / InitializerExpressionSyntax: \{ 0, 1, 2, 4, 8, 16 \}|3# ArrayCreationOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|2# ConversionOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|1# InvocationOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|0# FlowCaptureOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|## BranchValue ##|1# FlowCaptureReferenceOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|0# InvocationOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|##########}"]
+1 -> 2
+4 -> 2
+3 [shape=record label="{BLOCK #3|1# LocalReferenceOperation / IdentifierNameSyntax: var|3# FlowCaptureReferenceOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|2# PropertyReferenceOperation / IdentifierNameSyntax: var|1# ConversionOperation / IdentifierNameSyntax: var|0# SimpleAssignmentOperation / IdentifierNameSyntax: var|##########}"]
+2 -> 3 [label="Else"]
+4 [shape=record label="{BLOCK #4|1# LocalReferenceOperation / VariableDeclaratorSyntax: value = i.ToString()|2# LocalReferenceOperation / IdentifierNameSyntax: i|1# InvocationOperation / InvocationExpressionSyntax: i.ToString()|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: value = i.ToString()|##########}"]
+3 -> 4
+5 [shape=record label="{BLOCK #5|2# FlowCaptureReferenceOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|1# ConversionOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|0# FlowCaptureOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|0# IsNullOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|##########}"]
+6 [shape=record label="{BLOCK #6|1# FlowCaptureReferenceOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|0# InvocationOperation / ImplicitArrayCreationExpressionSyntax: new[] \{ 0, 1, 2, 4, 8, 16 \}|##########}"]
+5 -> 6 [label="Else"]
+7 [shape=record label="{BLOCK #7}"]
+5 -> 7 [label="WhenTrue"]
+6 -> 7
+8 [shape=record label="{EXIT #8}"]
+2 -> 8 [label="WhenFalse"]
+}

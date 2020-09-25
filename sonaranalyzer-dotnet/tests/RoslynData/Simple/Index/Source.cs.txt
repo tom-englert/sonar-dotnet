@@ -1,0 +1,4 @@
+public void Index(string[] arr)
+    {
+        var value = arr[^1];
+    }

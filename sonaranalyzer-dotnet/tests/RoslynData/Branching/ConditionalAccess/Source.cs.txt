@@ -1,0 +1,4 @@
+public void ConditionalAccess(object o)
+    {
+        var ret = o?.ToString();
+    }

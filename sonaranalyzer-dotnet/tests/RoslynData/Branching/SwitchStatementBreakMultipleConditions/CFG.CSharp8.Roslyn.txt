@@ -1,0 +1,20 @@
+digraph "Roslyn.SwitchStatementBreakMultipleConditions" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# ParameterReferenceOperation / IdentifierNameSyntax: value|0# FlowCaptureOperation / IdentifierNameSyntax: value|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 0|0# BinaryOperation / LiteralExpressionSyntax: 0|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 1|0# BinaryOperation / LiteralExpressionSyntax: 1|##########}"]
+1 -> 2 [label="WhenFalse"]
+3 [shape=record label="{BLOCK #3|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 2|0# BinaryOperation / LiteralExpressionSyntax: 2|##########}"]
+2 -> 3 [label="WhenFalse"]
+4 [shape=record label="{BLOCK #4|2# LocalReferenceOperation / IdentifierNameSyntax: ret|2# LiteralOperation / LiteralExpressionSyntax: \"Small\"|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: ret = \"Small\"|0# ExpressionStatementOperation / ExpressionStatementSyntax: ret = \"Small\";|##########}"]
+1 -> 4 [label="Else"]
+2 -> 4 [label="Else"]
+3 -> 4 [label="Else"]
+5 [shape=record label="{BLOCK #5|2# LocalReferenceOperation / IdentifierNameSyntax: ret|2# LiteralOperation / LiteralExpressionSyntax: \"Other\"|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: ret = \"Other\"|0# ExpressionStatementOperation / ExpressionStatementSyntax: ret = \"Other\";|##########}"]
+3 -> 5 [label="WhenFalse"]
+6 [shape=record label="{BLOCK #6|## BranchValue ##|0# LocalReferenceOperation / IdentifierNameSyntax: ret|##########}"]
+4 -> 6
+5 -> 6
+7 [shape=record label="{EXIT #7}"]
+6 -> 7
+}

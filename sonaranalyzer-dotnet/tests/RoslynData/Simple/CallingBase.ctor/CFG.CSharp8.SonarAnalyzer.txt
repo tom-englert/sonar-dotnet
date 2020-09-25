@@ -1,0 +1,5 @@
+digraph "SonarAnalyzer.CallingBase.ctor" {
+0 [shape=record label="{SIMPLE|LiteralExpressionSyntax: 40|LiteralExpressionSyntax: 2|BinaryExpressionSyntax: 40 + 2|ConstructorInitializerSyntax: : base(40 + 2)|LiteralExpressionSyntax: \"Ipsum\"|VariableDeclaratorSyntax: lorem = \"Ipsum\"}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}

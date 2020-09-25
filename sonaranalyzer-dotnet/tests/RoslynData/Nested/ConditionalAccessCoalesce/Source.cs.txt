@@ -1,0 +1,4 @@
+public void ConditionalAccessCoalesce(object o)
+    {
+        var ret = o?.ToString() ?? "N/A";
+    }

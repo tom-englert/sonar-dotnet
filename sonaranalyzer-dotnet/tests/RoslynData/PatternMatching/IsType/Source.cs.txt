@@ -1,0 +1,4 @@
+public void IsType(object a)
+    {
+        var ret = a is string str && str.Length > 0;
+    }

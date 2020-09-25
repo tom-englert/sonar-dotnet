@@ -1,0 +1,9 @@
+public void WhileTrueReturn()
+    {
+        while (true)
+        {
+            var beforeReturn = "BeforeReturn";
+            return;
+            var afterReturn = "afterReturn";
+        }
+    }

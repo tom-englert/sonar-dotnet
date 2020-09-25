@@ -1,0 +1,16 @@
+digraph "Roslyn.WhileAndOr" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: a|##########}"]
+0 -> 1
+4 -> 1
+2 [shape=record label="{BLOCK #2|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: b|##########}"]
+1 -> 2 [label="Else"]
+3 [shape=record label="{BLOCK #3|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: c|##########}"]
+2 -> 3 [label="Else"]
+4 [shape=record label="{BLOCK #4|2# ParameterReferenceOperation / IdentifierNameSyntax: a|2# LiteralOperation / LiteralExpressionSyntax: false|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: a = false|0# ExpressionStatementOperation / ExpressionStatementSyntax: a = false;|##########}"]
+2 -> 4 [label="WhenTrue"]
+3 -> 4 [label="Else"]
+5 [shape=record label="{EXIT #5}"]
+1 -> 5 [label="WhenFalse"]
+3 -> 5 [label="WhenFalse"]
+}

@@ -14,29 +14,51 @@ public class Sample
         Console.WriteLine(value);
     }
 
-    public string Condition(bool condition)
+    public int ArrowAdd(int a, int b) => a + b;
+
+    public void EmptyStatements()
     {
-        string value = "Init";
-        if (condition)
-        {
-            value = "True";
-        }
-        else
-        {
-            value = "False";
-        }
-        return value;
+        ; ; ; ; ; ; ; ;
     }
 
-    public string ElseIf(int value)
+    public void VariableDeclaration()
     {
-        if (value == 0)
-            return "Zero";
-        else if (value == 1)
-            return "One";
-        else if (value == 2)
-            return "Two";
-        else
-            return "Something else";
+        int a = 1, b = a + 1, c = 1 + 2 + 3;
     }
+
+    public void Throw()
+    {
+        var a = "aaa";
+        throw new Exception("Message");
+        var b = "bbb";
+    }
+
+    public void VoidReturnBeforeExit()
+    {
+        var a = "aaa";
+        return;
+    }
+
+    public void Index(string[] arr)
+    {
+        var value = arr[^1];
+    }
+
+    public void Range(string[] arr)
+    {
+        var value = arr[1..4];
+    }
+}
+
+public class CallingBase : EmptyBase
+{
+    public CallingBase() : base(40 + 2)
+    {
+        var lorem = "Ipsum";
+    }
+}
+
+public class EmptyBase
+{
+    public EmptyBase(int arg) { }
 }

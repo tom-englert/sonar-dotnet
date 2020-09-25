@@ -1,0 +1,15 @@
+digraph "SonarAnalyzer.ForEach" {
+0 [shape=record label="{FOREACH:ForEachStatement|IdentifierNameSyntax: numbers}"]
+0 -> 1
+1 [shape=record label="{BINARY:ForEachStatement}"]
+1 -> 2 [label="True"]
+1 -> 3 [label="False"]
+2 [shape=record label="{FOREACH:ForEachStatement|IdentifierNameSyntax: names}"]
+2 -> 4
+4 [shape=record label="{BINARY:ForEachStatement}"]
+4 -> 5 [label="True"]
+4 -> 1 [label="False"]
+5 [shape=record label="{SIMPLE|IdentifierNameSyntax: number|IdentifierNameSyntax: name|InterpolatedStringExpressionSyntax: $\"\{number\}. \{name\}\"|VariableDeclaratorSyntax: ret = $\"\{number\}. \{name\}\"}"]
+5 -> 4
+3 [shape=record label="{EXIT}"]
+}

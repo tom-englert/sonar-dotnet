@@ -1,0 +1,4 @@
+public void CoalesceThrow(string a, string b)
+    {
+        var c = a ?? b ?? throw new ArgumentNullException();
+    }

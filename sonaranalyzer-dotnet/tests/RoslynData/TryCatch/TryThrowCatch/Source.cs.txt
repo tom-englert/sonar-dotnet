@@ -1,0 +1,14 @@
+public void TryThrowCatch()
+    {
+        try
+        {
+            A();
+            B();
+            throw new Exception("Message");
+            C();
+        }
+        catch (Exception ex)
+        {
+            Handle(ex);
+        }
+    }
