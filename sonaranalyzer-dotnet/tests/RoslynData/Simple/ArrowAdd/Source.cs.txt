@@ -1,1 +1,0 @@
-public int ArrowAdd(int a, int b) => a + b;

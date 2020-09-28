@@ -1,4 +1,0 @@
-public void ConditionalAccessChained(object o)
-    {
-        var ret = o?.ToString()?.Substring(0, 1)?.Length;
-    }

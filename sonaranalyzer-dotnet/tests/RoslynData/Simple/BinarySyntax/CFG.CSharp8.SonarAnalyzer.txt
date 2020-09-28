@@ -1,5 +1,0 @@
-digraph "SonarAnalyzer.BinarySyntax" {
-0 [shape=record label="{SIMPLE|LiteralExpressionSyntax: \"Lorem\"|LiteralExpressionSyntax: \"Ipsum\"|BinaryExpressionSyntax: \"Lorem\" + \"Ipsum\"|LiteralExpressionSyntax: \"Dolor\"|BinaryExpressionSyntax: \"Lorem\" + \"Ipsum\" + \"Dolor\"|LiteralExpressionSyntax: \"Samet\"|BinaryExpressionSyntax: \"Lorem\" + \"Ipsum\" + \"Dolor\" + \"Samet\"|VariableDeclaratorSyntax: value = \"Lorem\" + \"Ipsum\" + \"Dolor\" + \"Samet\"|IdentifierNameSyntax: Console|MemberAccessExpressionSyntax: Console.WriteLine|IdentifierNameSyntax: value|InvocationExpressionSyntax: Console.WriteLine(value)}"]
-0 -> 1
-1 [shape=record label="{EXIT}"]
-}

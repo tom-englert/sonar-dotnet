@@ -1,4 +1,0 @@
-public void CoalescingAssignmentSingle(string a, string b)
-    {
-        a ??= b;
-    }

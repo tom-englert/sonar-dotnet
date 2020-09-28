@@ -1,5 +1,0 @@
-digraph "SonarAnalyzer.VariableDeclaration" {
-0 [shape=record label="{SIMPLE|LiteralExpressionSyntax: 1|VariableDeclaratorSyntax: a = 1|IdentifierNameSyntax: a|LiteralExpressionSyntax: 1|BinaryExpressionSyntax: a + 1|VariableDeclaratorSyntax: b = a + 1|LiteralExpressionSyntax: 1|LiteralExpressionSyntax: 2|BinaryExpressionSyntax: 1 + 2|LiteralExpressionSyntax: 3|BinaryExpressionSyntax: 1 + 2 + 3|VariableDeclaratorSyntax: c = 1 + 2 + 3}"]
-0 -> 1
-1 [shape=record label="{EXIT}"]
-}

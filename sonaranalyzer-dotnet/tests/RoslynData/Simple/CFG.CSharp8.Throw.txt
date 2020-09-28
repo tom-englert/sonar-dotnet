@@ -1,0 +1,31 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22Throw%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.Throw%22%20%7B%0Alabel%20%3D%20%22Sonar.Throw%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AThrowStatement%7CLiteralExpressionSyntax%3A%20%5C%22aaa%5C%22%7CVariableDeclaratorSyntax%3A%20a%20%3D%20%5C%22aaa%5C%22%7CLiteralExpressionSyntax%3A%20%5C%22Message%5C%22%7CObjectCreationExpressionSyntax%3A%20new%20Exception(%5C%22Message%5C%22)%7D%22%5D%0D%0A0%20-%3E%201%0D%0A2%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CLiteralExpressionSyntax%3A%20%5C%22bbb%5C%22%7CVariableDeclaratorSyntax%3A%20b%20%3D%20%5C%22bbb%5C%22%7D%22%5D%0D%0A2%20-%3E%201%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.Throw%22%20%7B%0Alabel%20%3D%20%22Roslyn.Throw%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20a%20%3D%20%5C%22aaa%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22aaa%5C%22%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20a%20%3D%20%5C%22aaa%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Message%5C%22%7C1%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%20%5C%22Message%5C%22%7C0%23%20ObjectCreationOperation%20%2F%20ObjectCreationExpressionSyntax%3A%20new%20Exception(%5C%22Message%5C%22)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20b%20%3D%20%5C%22bbb%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22bbb%5C%22%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20b%20%3D%20%5C%22bbb%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R3%7D%22%5D%0D%0AR2%20-%3E%20R3%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void Throw()
+    {
+        var a = "aaa";
+        throw new Exception("Message");
+        var b = "bbb";
+    }
+*/
+
+digraph "Throw" {
+subgraph "cluster_Sonar.Throw" {
+label = "Sonar.Throw"
+0 [shape=record label="{JUMP:ThrowStatement|LiteralExpressionSyntax: \"aaa\"|VariableDeclaratorSyntax: a = \"aaa\"|LiteralExpressionSyntax: \"Message\"|ObjectCreationExpressionSyntax: new Exception(\"Message\")}"]
+0 -> 1
+2 [shape=record label="{SIMPLE|LiteralExpressionSyntax: \"bbb\"|VariableDeclaratorSyntax: b = \"bbb\"}"]
+2 -> 1
+1 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.Throw" {
+label = "Roslyn.Throw"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|1# LocalReferenceOperation / VariableDeclaratorSyntax: a = \"aaa\"|1# LiteralOperation / LiteralExpressionSyntax: \"aaa\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: a = \"aaa\"|##########|## BranchValue ##|2# LiteralOperation / LiteralExpressionSyntax: \"Message\"|1# ArgumentOperation / ArgumentSyntax: \"Message\"|0# ObjectCreationOperation / ObjectCreationExpressionSyntax: new Exception(\"Message\")|##########}"]
+R0 -> R1
+R2 [shape=record label="{BLOCK #R2|1# LocalReferenceOperation / VariableDeclaratorSyntax: b = \"bbb\"|1# LiteralOperation / LiteralExpressionSyntax: \"bbb\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: b = \"bbb\"|##########}"]
+R3 [shape=record label="{EXIT #R3}"]
+R2 -> R3
+}
+}

@@ -1,6 +1,0 @@
-public void Throw()
-    {
-        var a = "aaa";
-        throw new Exception("Message");
-        var b = "bbb";
-    }

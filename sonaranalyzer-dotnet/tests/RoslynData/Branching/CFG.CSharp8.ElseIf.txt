@@ -1,0 +1,63 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22ElseIf%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.ElseIf%22%20%7B%0Alabel%20%3D%20%22Sonar.ElseIf%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3AEqualsExpression%7CIdentifierNameSyntax%3A%20value%7CLiteralExpressionSyntax%3A%200%7CBinaryExpressionSyntax%3A%20value%20%3D%3D%200%7D%22%5D%0D%0A0%20-%3E%201%20%5Blabel%3D%22True%22%5D%0D%0A0%20-%3E%202%20%5Blabel%3D%22False%22%5D%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AReturnStatement%7CLiteralExpressionSyntax%3A%20%5C%22Zero%5C%22%7D%22%5D%0D%0A1%20-%3E%203%0D%0A2%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3AEqualsExpression%7CIdentifierNameSyntax%3A%20value%7CLiteralExpressionSyntax%3A%201%7CBinaryExpressionSyntax%3A%20value%20%3D%3D%201%7D%22%5D%0D%0A2%20-%3E%204%20%5Blabel%3D%22True%22%5D%0D%0A2%20-%3E%205%20%5Blabel%3D%22False%22%5D%0D%0A4%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AReturnStatement%7CLiteralExpressionSyntax%3A%20%5C%22One%5C%22%7D%22%5D%0D%0A4%20-%3E%203%0D%0A5%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3AEqualsExpression%7CIdentifierNameSyntax%3A%20value%7CLiteralExpressionSyntax%3A%202%7CBinaryExpressionSyntax%3A%20value%20%3D%3D%202%7D%22%5D%0D%0A5%20-%3E%206%20%5Blabel%3D%22True%22%5D%0D%0A5%20-%3E%207%20%5Blabel%3D%22False%22%5D%0D%0A6%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AReturnStatement%7CLiteralExpressionSyntax%3A%20%5C%22Two%5C%22%7D%22%5D%0D%0A6%20-%3E%203%0D%0A7%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AReturnStatement%7CLiteralExpressionSyntax%3A%20%5C%22Something%20else%5C%22%7D%22%5D%0D%0A7%20-%3E%203%0D%0A3%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.ElseIf%22%20%7B%0Alabel%20%3D%20%22Roslyn.ElseIf%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C%23%23%20BranchValue%20%23%23%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C0%23%20BinaryOperation%20%2F%20BinaryExpressionSyntax%3A%20value%20%3D%3D%200%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C%23%23%20BranchValue%20%23%23%7C0%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Zero%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R2%20%5Blabel%3D%22Else%22%5D%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R3%7C%23%23%20BranchValue%20%23%23%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%201%7C0%23%20BinaryOperation%20%2F%20BinaryExpressionSyntax%3A%20value%20%3D%3D%201%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R3%20%5Blabel%3D%22WhenFalse%22%5D%0D%0AR4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R4%7C%23%23%20BranchValue%20%23%23%7C0%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22One%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR3%20-%3E%20R4%20%5Blabel%3D%22Else%22%5D%0D%0AR5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R5%7C%23%23%20BranchValue%20%23%23%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%202%7C0%23%20BinaryOperation%20%2F%20BinaryExpressionSyntax%3A%20value%20%3D%3D%202%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR3%20-%3E%20R5%20%5Blabel%3D%22WhenFalse%22%5D%0D%0AR6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R6%7C%23%23%20BranchValue%20%23%23%7C0%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Two%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR5%20-%3E%20R6%20%5Blabel%3D%22Else%22%5D%0D%0AR7%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R7%7C%23%23%20BranchValue%20%23%23%7C0%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Something%20else%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR5%20-%3E%20R7%20%5Blabel%3D%22WhenFalse%22%5D%0D%0AR8%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R8%7D%22%5D%0D%0AR2%20-%3E%20R8%0D%0AR4%20-%3E%20R8%0D%0AR6%20-%3E%20R8%0D%0AR7%20-%3E%20R8%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public string ElseIf(int value)
+    {
+        if (value == 0)
+            return "Zero";
+        else if (value == 1)
+            return "One";
+        else if (value == 2)
+            return "Two";
+        else
+            return "Something else";
+    }
+*/
+
+digraph "ElseIf" {
+subgraph "cluster_Sonar.ElseIf" {
+label = "Sonar.ElseIf"
+0 [shape=record label="{BINARY:EqualsExpression|IdentifierNameSyntax: value|LiteralExpressionSyntax: 0|BinaryExpressionSyntax: value == 0}"]
+0 -> 1 [label="True"]
+0 -> 2 [label="False"]
+1 [shape=record label="{JUMP:ReturnStatement|LiteralExpressionSyntax: \"Zero\"}"]
+1 -> 3
+2 [shape=record label="{BINARY:EqualsExpression|IdentifierNameSyntax: value|LiteralExpressionSyntax: 1|BinaryExpressionSyntax: value == 1}"]
+2 -> 4 [label="True"]
+2 -> 5 [label="False"]
+4 [shape=record label="{JUMP:ReturnStatement|LiteralExpressionSyntax: \"One\"}"]
+4 -> 3
+5 [shape=record label="{BINARY:EqualsExpression|IdentifierNameSyntax: value|LiteralExpressionSyntax: 2|BinaryExpressionSyntax: value == 2}"]
+5 -> 6 [label="True"]
+5 -> 7 [label="False"]
+6 [shape=record label="{JUMP:ReturnStatement|LiteralExpressionSyntax: \"Two\"}"]
+6 -> 3
+7 [shape=record label="{JUMP:ReturnStatement|LiteralExpressionSyntax: \"Something else\"}"]
+7 -> 3
+3 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.ElseIf" {
+label = "Roslyn.ElseIf"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|## BranchValue ##|1# ParameterReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 0|0# BinaryOperation / BinaryExpressionSyntax: value == 0|##########}"]
+R0 -> R1
+R2 [shape=record label="{BLOCK #R2|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: \"Zero\"|##########}"]
+R1 -> R2 [label="Else"]
+R3 [shape=record label="{BLOCK #R3|## BranchValue ##|1# ParameterReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 1|0# BinaryOperation / BinaryExpressionSyntax: value == 1|##########}"]
+R1 -> R3 [label="WhenFalse"]
+R4 [shape=record label="{BLOCK #R4|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: \"One\"|##########}"]
+R3 -> R4 [label="Else"]
+R5 [shape=record label="{BLOCK #R5|## BranchValue ##|1# ParameterReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 2|0# BinaryOperation / BinaryExpressionSyntax: value == 2|##########}"]
+R3 -> R5 [label="WhenFalse"]
+R6 [shape=record label="{BLOCK #R6|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: \"Two\"|##########}"]
+R5 -> R6 [label="Else"]
+R7 [shape=record label="{BLOCK #R7|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: \"Something else\"|##########}"]
+R5 -> R7 [label="WhenFalse"]
+R8 [shape=record label="{EXIT #R8}"]
+R2 -> R8
+R4 -> R8
+R6 -> R8
+R7 -> R8
+}
+}

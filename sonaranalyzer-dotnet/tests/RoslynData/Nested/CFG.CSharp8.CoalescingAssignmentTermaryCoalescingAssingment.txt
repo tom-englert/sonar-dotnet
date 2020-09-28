@@ -1,0 +1,62 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22CoalescingAssignmentTermaryCoalescingAssingment%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.CoalescingAssignmentTermaryCoalescingAssingment%22%20%7B%0Alabel%20%3D%20%22Sonar.CoalescingAssignmentTermaryCoalescingAssingment%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3ACoalesceAssignmentExpression%7CIdentifierNameSyntax%3A%20first%7D%22%5D%0D%0A0%20-%3E%201%20%5Blabel%3D%22True%22%5D%0D%0A0%20-%3E%202%20%5Blabel%3D%22False%22%5D%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3ACoalesceAssignmentExpression%7CIdentifierNameSyntax%3A%20second%7D%22%5D%0D%0A1%20-%3E%203%20%5Blabel%3D%22True%22%5D%0D%0A1%20-%3E%204%20%5Blabel%3D%22False%22%5D%0D%0A3%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3AIdentifierName%7CIdentifierNameSyntax%3A%20condition%7D%22%5D%0D%0A3%20-%3E%205%20%5Blabel%3D%22True%22%5D%0D%0A3%20-%3E%206%20%5Blabel%3D%22False%22%5D%0D%0A5%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A%20ternaryTrue%7D%22%5D%0D%0A5%20-%3E%204%0D%0A6%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A%20ternaryFalse%7D%22%5D%0D%0A6%20-%3E%204%0D%0A4%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CAssignmentExpressionSyntax%3A%20second%20%3F%3F%3D%20(condition%20%3F%20ternaryTrue%20%3A%20ternaryFalse)%7D%22%5D%0D%0A4%20-%3E%202%0D%0A2%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CAssignmentExpressionSyntax%3A%20first%20%3F%3F%3D%20second%20%3F%3F%3D%20(condition%20%3F%20ternaryTrue%20%3A%20ternaryFalse)%7D%22%5D%0D%0A2%20-%3E%207%0D%0A7%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.CoalescingAssignmentTermaryCoalescingAssingment%22%20%7B%0Alabel%20%3D%20%22Roslyn.CoalescingAssignmentTermaryCoalescingAssingment%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20first%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20first%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20first%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20first%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20first%7C0%23%20IsNullOperation%20%2F%20IdentifierNameSyntax%3A%20first%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R2%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R3%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20second%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20second%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR2%20-%3E%20R3%20%5Blabel%3D%22WhenTrue%22%5D%0D%0AR4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R4%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20second%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20second%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20second%7C0%23%20IsNullOperation%20%2F%20IdentifierNameSyntax%3A%20second%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR3%20-%3E%20R4%0D%0AR5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R5%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20second%7C0%23%20FlowCaptureOperation%20%2F%20AssignmentExpressionSyntax%3A%20second%20%3F%3F%3D%20(condition%20%3F%20ternaryTrue%20%3A%20ternaryFalse)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR4%20-%3E%20R5%20%5Blabel%3D%22Else%22%5D%0D%0AR6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R6%7C%23%23%20BranchValue%20%23%23%7C0%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20condition%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR4%20-%3E%20R6%20%5Blabel%3D%22WhenTrue%22%5D%0D%0AR7%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R7%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20ternaryTrue%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20ternaryTrue%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR6%20-%3E%20R7%20%5Blabel%3D%22Else%22%5D%0D%0AR8%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R8%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20ternaryFalse%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20ternaryFalse%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR6%20-%3E%20R8%20%5Blabel%3D%22WhenFalse%22%5D%0D%0AR9%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R9%7C2%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20second%7C2%23%20FlowCaptureReferenceOperation%20%2F%20ConditionalExpressionSyntax%3A%20condition%20%3F%20ternaryTrue%20%3A%20ternaryFalse%7C1%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20second%20%3F%3F%3D%20(condition%20%3F%20ternaryTrue%20%3A%20ternaryFalse)%7C0%23%20FlowCaptureOperation%20%2F%20AssignmentExpressionSyntax%3A%20second%20%3F%3F%3D%20(condition%20%3F%20ternaryTrue%20%3A%20ternaryFalse)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR7%20-%3E%20R9%0D%0AR8%20-%3E%20R9%0D%0AR10%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R10%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20first%7C1%23%20FlowCaptureReferenceOperation%20%2F%20AssignmentExpressionSyntax%3A%20second%20%3F%3F%3D%20(condition%20%3F%20ternaryTrue%20%3A%20ternaryFalse)%7C0%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20first%20%3F%3F%3D%20second%20%3F%3F%3D%20(condition%20%3F%20ternaryTrue%20%3A%20ternaryFalse)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR5%20-%3E%20R10%0D%0AR9%20-%3E%20R10%0D%0AR11%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R11%7D%22%5D%0D%0AR2%20-%3E%20R11%20%5Blabel%3D%22Else%22%5D%0D%0AR10%20-%3E%20R11%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void CoalescingAssignmentTermaryCoalescingAssingment(bool condition, string first, string second, string ternaryTrue, string ternaryFalse)
+    {
+        first ??= second ??= (condition ? ternaryTrue : ternaryFalse);
+    }
+*/
+
+digraph "CoalescingAssignmentTermaryCoalescingAssingment" {
+subgraph "cluster_Sonar.CoalescingAssignmentTermaryCoalescingAssingment" {
+label = "Sonar.CoalescingAssignmentTermaryCoalescingAssingment"
+0 [shape=record label="{BINARY:CoalesceAssignmentExpression|IdentifierNameSyntax: first}"]
+0 -> 1 [label="True"]
+0 -> 2 [label="False"]
+1 [shape=record label="{BINARY:CoalesceAssignmentExpression|IdentifierNameSyntax: second}"]
+1 -> 3 [label="True"]
+1 -> 4 [label="False"]
+3 [shape=record label="{BINARY:IdentifierName|IdentifierNameSyntax: condition}"]
+3 -> 5 [label="True"]
+3 -> 6 [label="False"]
+5 [shape=record label="{SIMPLE|IdentifierNameSyntax: ternaryTrue}"]
+5 -> 4
+6 [shape=record label="{SIMPLE|IdentifierNameSyntax: ternaryFalse}"]
+6 -> 4
+4 [shape=record label="{SIMPLE|AssignmentExpressionSyntax: second ??= (condition ? ternaryTrue : ternaryFalse)}"]
+4 -> 2
+2 [shape=record label="{SIMPLE|AssignmentExpressionSyntax: first ??= second ??= (condition ? ternaryTrue : ternaryFalse)}"]
+2 -> 7
+7 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.CoalescingAssignmentTermaryCoalescingAssingment" {
+label = "Roslyn.CoalescingAssignmentTermaryCoalescingAssingment"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|1# ParameterReferenceOperation / IdentifierNameSyntax: first|0# FlowCaptureOperation / IdentifierNameSyntax: first|##########}"]
+R0 -> R1
+R2 [shape=record label="{BLOCK #R2|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: first|0# FlowCaptureOperation / IdentifierNameSyntax: first|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: first|0# IsNullOperation / IdentifierNameSyntax: first|##########}"]
+R1 -> R2
+R3 [shape=record label="{BLOCK #R3|1# ParameterReferenceOperation / IdentifierNameSyntax: second|0# FlowCaptureOperation / IdentifierNameSyntax: second|##########}"]
+R2 -> R3 [label="WhenTrue"]
+R4 [shape=record label="{BLOCK #R4|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: second|0# FlowCaptureOperation / IdentifierNameSyntax: second|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: second|0# IsNullOperation / IdentifierNameSyntax: second|##########}"]
+R3 -> R4
+R5 [shape=record label="{BLOCK #R5|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: second|0# FlowCaptureOperation / AssignmentExpressionSyntax: second ??= (condition ? ternaryTrue : ternaryFalse)|##########}"]
+R4 -> R5 [label="Else"]
+R6 [shape=record label="{BLOCK #R6|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: condition|##########}"]
+R4 -> R6 [label="WhenTrue"]
+R7 [shape=record label="{BLOCK #R7|1# ParameterReferenceOperation / IdentifierNameSyntax: ternaryTrue|0# FlowCaptureOperation / IdentifierNameSyntax: ternaryTrue|##########}"]
+R6 -> R7 [label="Else"]
+R8 [shape=record label="{BLOCK #R8|1# ParameterReferenceOperation / IdentifierNameSyntax: ternaryFalse|0# FlowCaptureOperation / IdentifierNameSyntax: ternaryFalse|##########}"]
+R6 -> R8 [label="WhenFalse"]
+R9 [shape=record label="{BLOCK #R9|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: second|2# FlowCaptureReferenceOperation / ConditionalExpressionSyntax: condition ? ternaryTrue : ternaryFalse|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: second ??= (condition ? ternaryTrue : ternaryFalse)|0# FlowCaptureOperation / AssignmentExpressionSyntax: second ??= (condition ? ternaryTrue : ternaryFalse)|##########}"]
+R7 -> R9
+R8 -> R9
+R10 [shape=record label="{BLOCK #R10|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: first|1# FlowCaptureReferenceOperation / AssignmentExpressionSyntax: second ??= (condition ? ternaryTrue : ternaryFalse)|0# SimpleAssignmentOperation / AssignmentExpressionSyntax: first ??= second ??= (condition ? ternaryTrue : ternaryFalse)|##########}"]
+R5 -> R10
+R9 -> R10
+R11 [shape=record label="{EXIT #R11}"]
+R2 -> R11 [label="Else"]
+R10 -> R11
+}
+}

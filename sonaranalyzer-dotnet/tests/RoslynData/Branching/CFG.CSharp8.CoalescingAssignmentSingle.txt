@@ -1,0 +1,36 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22CoalescingAssignmentSingle%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.CoalescingAssignmentSingle%22%20%7B%0Alabel%20%3D%20%22Sonar.CoalescingAssignmentSingle%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3ACoalesceAssignmentExpression%7CIdentifierNameSyntax%3A%20a%7D%22%5D%0D%0A0%20-%3E%201%20%5Blabel%3D%22True%22%5D%0D%0A0%20-%3E%202%20%5Blabel%3D%22False%22%5D%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A%20b%7D%22%5D%0D%0A1%20-%3E%202%0D%0A2%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CAssignmentExpressionSyntax%3A%20a%20%3F%3F%3D%20b%7D%22%5D%0D%0A2%20-%3E%203%0D%0A3%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.CoalescingAssignmentSingle%22%20%7B%0Alabel%20%3D%20%22Roslyn.CoalescingAssignmentSingle%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20a%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20a%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20a%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20a%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20a%7C0%23%20IsNullOperation%20%2F%20IdentifierNameSyntax%3A%20a%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R2%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R3%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20a%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20b%7C0%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20a%20%3F%3F%3D%20b%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR2%20-%3E%20R3%20%5Blabel%3D%22WhenTrue%22%5D%0D%0AR4%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R4%7D%22%5D%0D%0AR2%20-%3E%20R4%20%5Blabel%3D%22Else%22%5D%0D%0AR3%20-%3E%20R4%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void CoalescingAssignmentSingle(string a, string b)
+    {
+        a ??= b;
+    }
+*/
+
+digraph "CoalescingAssignmentSingle" {
+subgraph "cluster_Sonar.CoalescingAssignmentSingle" {
+label = "Sonar.CoalescingAssignmentSingle"
+0 [shape=record label="{BINARY:CoalesceAssignmentExpression|IdentifierNameSyntax: a}"]
+0 -> 1 [label="True"]
+0 -> 2 [label="False"]
+1 [shape=record label="{SIMPLE|IdentifierNameSyntax: b}"]
+1 -> 2
+2 [shape=record label="{SIMPLE|AssignmentExpressionSyntax: a ??= b}"]
+2 -> 3
+3 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.CoalescingAssignmentSingle" {
+label = "Roslyn.CoalescingAssignmentSingle"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|1# ParameterReferenceOperation / IdentifierNameSyntax: a|0# FlowCaptureOperation / IdentifierNameSyntax: a|##########}"]
+R0 -> R1
+R2 [shape=record label="{BLOCK #R2|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|0# FlowCaptureOperation / IdentifierNameSyntax: a|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|0# IsNullOperation / IdentifierNameSyntax: a|##########}"]
+R1 -> R2
+R3 [shape=record label="{BLOCK #R3|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: a|1# ParameterReferenceOperation / IdentifierNameSyntax: b|0# SimpleAssignmentOperation / AssignmentExpressionSyntax: a ??= b|##########}"]
+R2 -> R3 [label="WhenTrue"]
+R4 [shape=record label="{EXIT #R4}"]
+R2 -> R4 [label="Else"]
+R3 -> R4
+}
+}

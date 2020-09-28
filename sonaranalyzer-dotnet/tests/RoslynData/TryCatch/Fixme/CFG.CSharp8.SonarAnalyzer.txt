@@ -1,3 +1,0 @@
-digraph "SonarAnalyzer.Fixme" {
-0 [shape=record label="{EXIT}"]
-}

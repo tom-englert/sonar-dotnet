@@ -1,9 +1,0 @@
-digraph "Roslyn.TryCatch" {
-0 [shape=record label="{ENTRY #0}"]
-1 [shape=record label="{BLOCK #1|2# InstanceReferenceOperation / IdentifierNameSyntax: A|1# InvocationOperation / InvocationExpressionSyntax: A()|0# ExpressionStatementOperation / ExpressionStatementSyntax: A();|##########|2# InstanceReferenceOperation / IdentifierNameSyntax: B|1# InvocationOperation / InvocationExpressionSyntax: B()|0# ExpressionStatementOperation / ExpressionStatementSyntax: B();|##########|2# InstanceReferenceOperation / IdentifierNameSyntax: C|1# InvocationOperation / InvocationExpressionSyntax: C()|0# ExpressionStatementOperation / ExpressionStatementSyntax: C();|##########}"]
-0 -> 1
-2 [shape=record label="{BLOCK #2|1# LocalReferenceOperation / CatchDeclarationSyntax: (Exception ex)|1# CaughtExceptionOperation / CatchDeclarationSyntax: (Exception ex)|0# SimpleAssignmentOperation / CatchDeclarationSyntax: (Exception ex)|##########|2# InstanceReferenceOperation / IdentifierNameSyntax: Handle|3# LocalReferenceOperation / IdentifierNameSyntax: ex|2# ArgumentOperation / ArgumentSyntax: ex|1# InvocationOperation / InvocationExpressionSyntax: Handle(ex)|0# ExpressionStatementOperation / ExpressionStatementSyntax: Handle(ex);|##########}"]
-3 [shape=record label="{EXIT #3}"]
-1 -> 3
-2 -> 3
-}

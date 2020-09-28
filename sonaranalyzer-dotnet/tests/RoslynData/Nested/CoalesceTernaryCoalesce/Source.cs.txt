@@ -1,4 +1,0 @@
-public void CoalesceTernaryCoalesce(bool condition, string first, string ternaryTrue, string ternaryFalse, string last)
-    {
-        var x = first ?? (condition ? ternaryTrue : ternaryFalse) ?? last;
-    }

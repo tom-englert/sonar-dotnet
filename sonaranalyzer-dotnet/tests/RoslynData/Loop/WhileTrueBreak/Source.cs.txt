@@ -1,9 +1,0 @@
-public void WhileTrueBreak()
-    {
-        while (true)
-        {
-            var beforeBreak = "BeforeBreak";
-            break;
-            var afterBreak = "AfterBreak";
-        }
-    }

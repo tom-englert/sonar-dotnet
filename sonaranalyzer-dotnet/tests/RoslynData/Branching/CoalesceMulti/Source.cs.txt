@@ -1,4 +1,0 @@
-public void CoalesceMulti(string a, string b, string c, string d)
-    {
-        var e = a ?? b ?? c ?? d;
-    }

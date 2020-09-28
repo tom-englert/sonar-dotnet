@@ -1,4 +1,0 @@
-public void Range(string[] arr)
-    {
-        var value = arr[1..4];
-    }

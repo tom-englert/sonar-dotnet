@@ -1,5 +1,0 @@
-digraph "SonarAnalyzer.VoidReturnBeforeExit" {
-0 [shape=record label="{JUMP:ReturnStatement|LiteralExpressionSyntax: \"aaa\"|VariableDeclaratorSyntax: a = \"aaa\"}"]
-0 -> 1
-1 [shape=record label="{EXIT}"]
-}

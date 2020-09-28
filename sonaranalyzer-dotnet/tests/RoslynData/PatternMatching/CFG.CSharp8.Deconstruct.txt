@@ -1,0 +1,27 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22Deconstruct%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.Deconstruct%22%20%7B%0Alabel%20%3D%20%22Sonar.Deconstruct%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A%20A%7CAssignmentExpressionSyntax%3A%20a%20%3D%20A%7CIdentifierNameSyntax%3A%20B%7CAssignmentExpressionSyntax%3A%20b%20%3D%20B%7D%22%5D%0D%0A0%20-%3E%201%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.Deconstruct%22%20%7B%0Alabel%20%3D%20%22Roslyn.Deconstruct%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C2%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20a%7C3%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C2%23%20FieldReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C1%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20a%20%3D%20A%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20a%20%3D%20A%3B%7C%23%23%23%23%23%23%23%23%23%23%7C2%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20b%7C3%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20B%7C2%23%20FieldReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20B%7C1%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20b%20%3D%20B%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20b%20%3D%20B%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R2%7D%22%5D%0D%0AR1%20-%3E%20R2%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void Deconstruct(out int a, out int b)
+    {
+        a = A;
+        b = B;
+    }
+*/
+
+digraph "Deconstruct" {
+subgraph "cluster_Sonar.Deconstruct" {
+label = "Sonar.Deconstruct"
+0 [shape=record label="{SIMPLE|IdentifierNameSyntax: A|AssignmentExpressionSyntax: a = A|IdentifierNameSyntax: B|AssignmentExpressionSyntax: b = B}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.Deconstruct" {
+label = "Roslyn.Deconstruct"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|2# ParameterReferenceOperation / IdentifierNameSyntax: a|3# InstanceReferenceOperation / IdentifierNameSyntax: A|2# FieldReferenceOperation / IdentifierNameSyntax: A|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: a = A|0# ExpressionStatementOperation / ExpressionStatementSyntax: a = A;|##########|2# ParameterReferenceOperation / IdentifierNameSyntax: b|3# InstanceReferenceOperation / IdentifierNameSyntax: B|2# FieldReferenceOperation / IdentifierNameSyntax: B|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: b = B|0# ExpressionStatementOperation / ExpressionStatementSyntax: b = B;|##########}"]
+R0 -> R1
+R2 [shape=record label="{EXIT #R2}"]
+R1 -> R2
+}
+}

@@ -1,0 +1,75 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22SwitchStatementGoto%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.SwitchStatementGoto%22%20%7B%0Alabel%20%3D%20%22Sonar.SwitchStatementGoto%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BBRANCH%3ASwitchStatement%7CVariableDeclaratorSyntax%3A%20ret%7CIdentifierNameSyntax%3A%20value%7D%22%5D%0D%0A0%20-%3E%201%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3ACaseSwitchLabel%7CIdentifierNameSyntax%3A%20value%7D%22%5D%0D%0A1%20-%3E%202%20%5Blabel%3D%22True%22%5D%0D%0A1%20-%3E%203%20%5Blabel%3D%22False%22%5D%0D%0A2%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AGotoCaseStatement%7D%22%5D%0D%0A2%20-%3E%204%0D%0A3%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3ACaseSwitchLabel%7CIdentifierNameSyntax%3A%20value%7D%22%5D%0D%0A3%20-%3E%204%20%5Blabel%3D%22True%22%5D%0D%0A3%20-%3E%205%20%5Blabel%3D%22False%22%5D%0D%0A4%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3ABreakStatement%7CLiteralExpressionSyntax%3A%20%5C%22ZeroOrOne%5C%22%7CAssignmentExpressionSyntax%3A%20ret%20%3D%20%5C%22ZeroOrOne%5C%22%7D%22%5D%0D%0A4%20-%3E%206%0D%0A5%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3ACaseSwitchLabel%7CIdentifierNameSyntax%3A%20value%7D%22%5D%0D%0A5%20-%3E%207%20%5Blabel%3D%22True%22%5D%0D%0A5%20-%3E%208%20%5Blabel%3D%22False%22%5D%0D%0A7%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AGotoDefaultStatement%7D%22%5D%0D%0A7%20-%3E%208%0D%0A8%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3ABreakStatement%7CLiteralExpressionSyntax%3A%20%5C%22Other%5C%22%7CAssignmentExpressionSyntax%3A%20ret%20%3D%20%5C%22Other%5C%22%7D%22%5D%0D%0A8%20-%3E%206%0D%0A6%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AReturnStatement%7CIdentifierNameSyntax%3A%20ret%7D%22%5D%0D%0A6%20-%3E%209%0D%0A9%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.SwitchStatementGoto%22%20%7B%0Alabel%20%3D%20%22Roslyn.SwitchStatementGoto%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C0%23%20BinaryOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%201%7C0%23%20BinaryOperation%20%2F%20LiteralExpressionSyntax%3A%201%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R2%20%5Blabel%3D%22WhenFalse%22%5D%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R3%7C2%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20ret%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22ZeroOrOne%5C%22%7C1%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20ret%20%3D%20%5C%22ZeroOrOne%5C%22%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20ret%20%3D%20%5C%22ZeroOrOne%5C%22%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R3%20%5Blabel%3D%22Else%22%5D%0D%0AR2%20-%3E%20R3%20%5Blabel%3D%22Else%22%5D%0D%0AR4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R4%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%202%7C0%23%20BinaryOperation%20%2F%20LiteralExpressionSyntax%3A%202%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR2%20-%3E%20R4%20%5Blabel%3D%22WhenFalse%22%5D%0D%0AR5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R5%7C2%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20ret%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Other%5C%22%7C1%23%20SimpleAssignmentOperation%20%2F%20AssignmentExpressionSyntax%3A%20ret%20%3D%20%5C%22Other%5C%22%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20ret%20%3D%20%5C%22Other%5C%22%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR4%20-%3E%20R5%20%5Blabel%3D%22WhenFalse%22%5D%0D%0AR4%20-%3E%20R5%20%5Blabel%3D%22Else%22%5D%0D%0AR6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R6%7C%23%23%20BranchValue%20%23%23%7C0%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20ret%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR3%20-%3E%20R6%0D%0AR5%20-%3E%20R6%0D%0AR7%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R7%7D%22%5D%0D%0AR6%20-%3E%20R7%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public string SwitchStatementGoto(int value)
+    {
+        string ret;
+        switch (value)
+        {
+            case 0:
+                goto case 1;
+
+            case 1:
+                ret = "ZeroOrOne";
+                break;
+
+            case 2:
+                goto default;
+
+            default:
+                ret = "Other";
+                break;
+        }
+        return ret;
+    }
+*/
+
+digraph "SwitchStatementGoto" {
+subgraph "cluster_Sonar.SwitchStatementGoto" {
+label = "Sonar.SwitchStatementGoto"
+0 [shape=record label="{BRANCH:SwitchStatement|VariableDeclaratorSyntax: ret|IdentifierNameSyntax: value}"]
+0 -> 1
+1 [shape=record label="{BINARY:CaseSwitchLabel|IdentifierNameSyntax: value}"]
+1 -> 2 [label="True"]
+1 -> 3 [label="False"]
+2 [shape=record label="{JUMP:GotoCaseStatement}"]
+2 -> 4
+3 [shape=record label="{BINARY:CaseSwitchLabel|IdentifierNameSyntax: value}"]
+3 -> 4 [label="True"]
+3 -> 5 [label="False"]
+4 [shape=record label="{JUMP:BreakStatement|LiteralExpressionSyntax: \"ZeroOrOne\"|AssignmentExpressionSyntax: ret = \"ZeroOrOne\"}"]
+4 -> 6
+5 [shape=record label="{BINARY:CaseSwitchLabel|IdentifierNameSyntax: value}"]
+5 -> 7 [label="True"]
+5 -> 8 [label="False"]
+7 [shape=record label="{JUMP:GotoDefaultStatement}"]
+7 -> 8
+8 [shape=record label="{JUMP:BreakStatement|LiteralExpressionSyntax: \"Other\"|AssignmentExpressionSyntax: ret = \"Other\"}"]
+8 -> 6
+6 [shape=record label="{JUMP:ReturnStatement|IdentifierNameSyntax: ret}"]
+6 -> 9
+9 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.SwitchStatementGoto" {
+label = "Roslyn.SwitchStatementGoto"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|1# ParameterReferenceOperation / IdentifierNameSyntax: value|0# FlowCaptureOperation / IdentifierNameSyntax: value|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 0|0# BinaryOperation / LiteralExpressionSyntax: 0|##########}"]
+R0 -> R1
+R2 [shape=record label="{BLOCK #R2|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 1|0# BinaryOperation / LiteralExpressionSyntax: 1|##########}"]
+R1 -> R2 [label="WhenFalse"]
+R3 [shape=record label="{BLOCK #R3|2# LocalReferenceOperation / IdentifierNameSyntax: ret|2# LiteralOperation / LiteralExpressionSyntax: \"ZeroOrOne\"|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: ret = \"ZeroOrOne\"|0# ExpressionStatementOperation / ExpressionStatementSyntax: ret = \"ZeroOrOne\";|##########}"]
+R1 -> R3 [label="Else"]
+R2 -> R3 [label="Else"]
+R4 [shape=record label="{BLOCK #R4|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: value|1# LiteralOperation / LiteralExpressionSyntax: 2|0# BinaryOperation / LiteralExpressionSyntax: 2|##########}"]
+R2 -> R4 [label="WhenFalse"]
+R5 [shape=record label="{BLOCK #R5|2# LocalReferenceOperation / IdentifierNameSyntax: ret|2# LiteralOperation / LiteralExpressionSyntax: \"Other\"|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: ret = \"Other\"|0# ExpressionStatementOperation / ExpressionStatementSyntax: ret = \"Other\";|##########}"]
+R4 -> R5 [label="WhenFalse"]
+R4 -> R5 [label="Else"]
+R6 [shape=record label="{BLOCK #R6|## BranchValue ##|0# LocalReferenceOperation / IdentifierNameSyntax: ret|##########}"]
+R3 -> R6
+R5 -> R6
+R7 [shape=record label="{EXIT #R7}"]
+R6 -> R7
+}
+}

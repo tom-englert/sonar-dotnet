@@ -1,7 +1,0 @@
-public void For()
-    {
-        for(var i = 0; i < 10; i++)
-        {
-            var value = "Value";
-        }
-    }

@@ -1,7 +1,0 @@
-public void WhileAndOr(bool a, bool b, bool c)
-    {
-        while (a && (b || c))
-        {
-            a = false;
-        }
-    }

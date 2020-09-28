@@ -1,0 +1,44 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22YieldBreakCondition%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.YieldBreakCondition%22%20%7B%0Alabel%20%3D%20%22Sonar.YieldBreakCondition%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AYieldReturnStatement%7CLiteralExpressionSyntax%3A%20%5C%22A%5C%22%7D%22%5D%0D%0A0%20-%3E%201%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AYieldReturnStatement%7CLiteralExpressionSyntax%3A%20%5C%22B%5C%22%7D%22%5D%0D%0A1%20-%3E%202%0D%0A2%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3AIdentifierName%7CIdentifierNameSyntax%3A%20condition%7D%22%5D%0D%0A2%20-%3E%203%20%5Blabel%3D%22True%22%5D%0D%0A2%20-%3E%204%20%5Blabel%3D%22False%22%5D%0D%0A3%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AYieldBreakStatement%7D%22%5D%0D%0A3%20-%3E%205%0D%0A4%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AYieldReturnStatement%7CLiteralExpressionSyntax%3A%20%5C%22C%5C%22%7D%22%5D%0D%0A4%20-%3E%205%0D%0A5%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.YieldBreakCondition%22%20%7B%0Alabel%20%3D%20%22Roslyn.YieldBreakCondition%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22A%5C%22%7C0%23%20ReturnOperation%20%2F%20YieldStatementSyntax%3A%20yield%20return%20%5C%22A%5C%22%3B%7C%23%23%23%23%23%23%23%23%23%23%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22B%5C%22%7C0%23%20ReturnOperation%20%2F%20YieldStatementSyntax%3A%20yield%20return%20%5C%22B%5C%22%3B%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C0%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20condition%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22C%5C%22%7C0%23%20ReturnOperation%20%2F%20YieldStatementSyntax%3A%20yield%20return%20%5C%22C%5C%22%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R2%20%5Blabel%3D%22WhenFalse%22%5D%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R3%7D%22%5D%0D%0AR1%20-%3E%20R3%20%5Blabel%3D%22Else%22%5D%0D%0AR2%20-%3E%20R3%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public IEnumerable<string> YieldBreakCondition(bool condition)
+    {
+        yield return "A";
+        yield return "B";
+        if (condition)
+        {
+            yield break;
+        }
+        yield return "C";
+    }
+*/
+
+digraph "YieldBreakCondition" {
+subgraph "cluster_Sonar.YieldBreakCondition" {
+label = "Sonar.YieldBreakCondition"
+0 [shape=record label="{JUMP:YieldReturnStatement|LiteralExpressionSyntax: \"A\"}"]
+0 -> 1
+1 [shape=record label="{JUMP:YieldReturnStatement|LiteralExpressionSyntax: \"B\"}"]
+1 -> 2
+2 [shape=record label="{BINARY:IdentifierName|IdentifierNameSyntax: condition}"]
+2 -> 3 [label="True"]
+2 -> 4 [label="False"]
+3 [shape=record label="{JUMP:YieldBreakStatement}"]
+3 -> 5
+4 [shape=record label="{JUMP:YieldReturnStatement|LiteralExpressionSyntax: \"C\"}"]
+4 -> 5
+5 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.YieldBreakCondition" {
+label = "Roslyn.YieldBreakCondition"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|1# LiteralOperation / LiteralExpressionSyntax: \"A\"|0# ReturnOperation / YieldStatementSyntax: yield return \"A\";|##########|1# LiteralOperation / LiteralExpressionSyntax: \"B\"|0# ReturnOperation / YieldStatementSyntax: yield return \"B\";|##########|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: condition|##########}"]
+R0 -> R1
+R2 [shape=record label="{BLOCK #R2|1# LiteralOperation / LiteralExpressionSyntax: \"C\"|0# ReturnOperation / YieldStatementSyntax: yield return \"C\";|##########}"]
+R1 -> R2 [label="WhenFalse"]
+R3 [shape=record label="{EXIT #R3}"]
+R1 -> R3 [label="Else"]
+R2 -> R3
+}
+}

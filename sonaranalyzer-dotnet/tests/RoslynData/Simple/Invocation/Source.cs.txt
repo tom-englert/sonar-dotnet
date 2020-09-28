@@ -1,5 +1,0 @@
-public void Invocation(object arg)
-    {
-        var value = arg.ToString();
-        Console.WriteLine(value);
-    }

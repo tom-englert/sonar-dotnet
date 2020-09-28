@@ -1,7 +1,0 @@
-digraph "Roslyn.VariableDeclaration" {
-0 [shape=record label="{ENTRY #0}"]
-1 [shape=record label="{BLOCK #1|1# LocalReferenceOperation / VariableDeclaratorSyntax: a = 1|1# LiteralOperation / LiteralExpressionSyntax: 1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: a = 1|##########|1# LocalReferenceOperation / VariableDeclaratorSyntax: b = a + 1|2# LocalReferenceOperation / IdentifierNameSyntax: a|2# LiteralOperation / LiteralExpressionSyntax: 1|1# BinaryOperation / BinaryExpressionSyntax: a + 1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: b = a + 1|##########|1# LocalReferenceOperation / VariableDeclaratorSyntax: c = 1 + 2 + 3|3# LiteralOperation / LiteralExpressionSyntax: 1|3# LiteralOperation / LiteralExpressionSyntax: 2|2# BinaryOperation / BinaryExpressionSyntax: 1 + 2|2# LiteralOperation / LiteralExpressionSyntax: 3|1# BinaryOperation / BinaryExpressionSyntax: 1 + 2 + 3|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: c = 1 + 2 + 3|##########}"]
-0 -> 1
-2 [shape=record label="{EXIT #2}"]
-1 -> 2
-}

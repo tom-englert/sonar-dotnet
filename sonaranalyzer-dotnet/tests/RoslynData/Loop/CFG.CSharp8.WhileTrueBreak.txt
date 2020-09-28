@@ -1,0 +1,41 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22WhileTrueBreak%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.WhileTrueBreak%22%20%7B%0Alabel%20%3D%20%22Sonar.WhileTrueBreak%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3ATrueLiteralExpression%7CLiteralExpressionSyntax%3A%20true%7D%22%5D%0D%0A0%20-%3E%201%20%5Blabel%3D%22True%22%5D%0D%0A0%20-%3E%202%20%5Blabel%3D%22False%22%5D%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3ABreakStatement%7CLiteralExpressionSyntax%3A%20%5C%22BeforeBreak%5C%22%7CVariableDeclaratorSyntax%3A%20beforeBreak%20%3D%20%5C%22BeforeBreak%5C%22%7D%22%5D%0D%0A1%20-%3E%202%0D%0A3%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CLiteralExpressionSyntax%3A%20%5C%22AfterBreak%5C%22%7CVariableDeclaratorSyntax%3A%20afterBreak%20%3D%20%5C%22AfterBreak%5C%22%7D%22%5D%0D%0A3%20-%3E%200%0D%0A2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.WhileTrueBreak%22%20%7B%0Alabel%20%3D%20%22Roslyn.WhileTrueBreak%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C%23%23%20BranchValue%20%23%23%7C0%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20true%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR3%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20beforeBreak%20%3D%20%5C%22BeforeBreak%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22BeforeBreak%5C%22%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20beforeBreak%20%3D%20%5C%22BeforeBreak%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R2%20%5Blabel%3D%22Else%22%5D%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R3%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20afterBreak%20%3D%20%5C%22AfterBreak%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22AfterBreak%5C%22%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20afterBreak%20%3D%20%5C%22AfterBreak%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR4%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R4%7D%22%5D%0D%0AR1%20-%3E%20R4%20%5Blabel%3D%22WhenFalse%22%5D%0D%0AR2%20-%3E%20R4%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void WhileTrueBreak()
+    {
+        while (true)
+        {
+            var beforeBreak = "BeforeBreak";
+            break;
+            var afterBreak = "AfterBreak";
+        }
+    }
+*/
+
+digraph "WhileTrueBreak" {
+subgraph "cluster_Sonar.WhileTrueBreak" {
+label = "Sonar.WhileTrueBreak"
+0 [shape=record label="{BINARY:TrueLiteralExpression|LiteralExpressionSyntax: true}"]
+0 -> 1 [label="True"]
+0 -> 2 [label="False"]
+1 [shape=record label="{JUMP:BreakStatement|LiteralExpressionSyntax: \"BeforeBreak\"|VariableDeclaratorSyntax: beforeBreak = \"BeforeBreak\"}"]
+1 -> 2
+3 [shape=record label="{SIMPLE|LiteralExpressionSyntax: \"AfterBreak\"|VariableDeclaratorSyntax: afterBreak = \"AfterBreak\"}"]
+3 -> 0
+2 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.WhileTrueBreak" {
+label = "Roslyn.WhileTrueBreak"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: true|##########}"]
+R0 -> R1
+R3 -> R1
+R2 [shape=record label="{BLOCK #R2|1# LocalReferenceOperation / VariableDeclaratorSyntax: beforeBreak = \"BeforeBreak\"|1# LiteralOperation / LiteralExpressionSyntax: \"BeforeBreak\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: beforeBreak = \"BeforeBreak\"|##########}"]
+R1 -> R2 [label="Else"]
+R3 [shape=record label="{BLOCK #R3|1# LocalReferenceOperation / VariableDeclaratorSyntax: afterBreak = \"AfterBreak\"|1# LiteralOperation / LiteralExpressionSyntax: \"AfterBreak\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: afterBreak = \"AfterBreak\"|##########}"]
+R4 [shape=record label="{EXIT #R4}"]
+R1 -> R4 [label="WhenFalse"]
+R2 -> R4
+}
+}

@@ -1,5 +1,0 @@
-public void Deconstruct(out int a, out int b)
-    {
-        a = A;
-        b = B;
-    }

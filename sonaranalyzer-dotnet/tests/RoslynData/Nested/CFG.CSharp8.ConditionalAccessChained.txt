@@ -1,0 +1,54 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22ConditionalAccessChained%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.ConditionalAccessChained%22%20%7B%0Alabel%20%3D%20%22Sonar.ConditionalAccessChained%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3AConditionalAccessExpression%7CIdentifierNameSyntax%3A%20o%7D%22%5D%0D%0A0%20-%3E%201%20%5Blabel%3D%22True%22%5D%0D%0A0%20-%3E%202%20%5Blabel%3D%22False%22%5D%0D%0A2%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3AConditionalAccessExpression%7CIdentifierNameSyntax%3A%20ToString%7CMemberBindingExpressionSyntax%3A%20.ToString%7CInvocationExpressionSyntax%3A%20.ToString()%7D%22%5D%0D%0A2%20-%3E%201%20%5Blabel%3D%22True%22%5D%0D%0A2%20-%3E%203%20%5Blabel%3D%22False%22%5D%0D%0A3%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3AConditionalAccessExpression%7CIdentifierNameSyntax%3A%20Substring%7CMemberBindingExpressionSyntax%3A%20.Substring%7CLiteralExpressionSyntax%3A%200%7CLiteralExpressionSyntax%3A%201%7CInvocationExpressionSyntax%3A%20.Substring(0%2C%201)%7D%22%5D%0D%0A3%20-%3E%201%20%5Blabel%3D%22True%22%5D%0D%0A3%20-%3E%204%20%5Blabel%3D%22False%22%5D%0D%0A4%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A%20Length%7CMemberBindingExpressionSyntax%3A%20.Length%7D%22%5D%0D%0A4%20-%3E%201%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CVariableDeclaratorSyntax%3A%20ret%20%3D%20o%3F.ToString()%3F.Substring(0%2C%201)%3F.Length%7D%22%5D%0D%0A1%20-%3E%205%0D%0A5%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.ConditionalAccessChained%22%20%7B%0Alabel%20%3D%20%22Roslyn.ConditionalAccessChained%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20o%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20o%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20o%7C0%23%20IsNullOperation%20%2F%20IdentifierNameSyntax%3A%20o%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C2%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20o%7C1%23%20InvocationOperation%20%2F%20InvocationExpressionSyntax%3A%20.ToString()%7C0%23%20FlowCaptureOperation%20%2F%20InvocationExpressionSyntax%3A%20.ToString()%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R2%20%5Blabel%3D%22Else%22%5D%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R3%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20InvocationExpressionSyntax%3A%20.ToString()%7C0%23%20IsNullOperation%20%2F%20InvocationExpressionSyntax%3A%20.ToString()%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR2%20-%3E%20R3%0D%0AR4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R4%7C2%23%20FlowCaptureReferenceOperation%20%2F%20InvocationExpressionSyntax%3A%20.ToString()%7C3%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%200%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%200%7C3%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%201%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%201%7C1%23%20InvocationOperation%20%2F%20InvocationExpressionSyntax%3A%20.Substring(0%2C%201)%7C0%23%20FlowCaptureOperation%20%2F%20InvocationExpressionSyntax%3A%20.Substring(0%2C%201)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR3%20-%3E%20R4%20%5Blabel%3D%22Else%22%5D%0D%0AR5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R5%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20InvocationExpressionSyntax%3A%20.Substring(0%2C%201)%7C0%23%20IsNullOperation%20%2F%20InvocationExpressionSyntax%3A%20.Substring(0%2C%201)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR4%20-%3E%20R5%0D%0AR6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R6%7C3%23%20FlowCaptureReferenceOperation%20%2F%20InvocationExpressionSyntax%3A%20.Substring(0%2C%201)%7C2%23%20PropertyReferenceOperation%20%2F%20MemberBindingExpressionSyntax%3A%20.Length%7C1%23%20ConversionOperation%20%2F%20MemberBindingExpressionSyntax%3A%20.Length%7C0%23%20FlowCaptureOperation%20%2F%20MemberBindingExpressionSyntax%3A%20.Length%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR5%20-%3E%20R6%20%5Blabel%3D%22Else%22%5D%0D%0AR7%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R7%7C1%23%20DefaultValueOperation%20%2F%20ConditionalAccessExpressionSyntax%3A%20o%3F.ToString()%3F.Substring(0%2C%201)%3F.Length%7C0%23%20FlowCaptureOperation%20%2F%20ConditionalAccessExpressionSyntax%3A%20o%3F.ToString()%3F.Substring(0%2C%201)%3F.Length%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R7%20%5Blabel%3D%22WhenTrue%22%5D%0D%0AR3%20-%3E%20R7%20%5Blabel%3D%22WhenTrue%22%5D%0D%0AR5%20-%3E%20R7%20%5Blabel%3D%22WhenTrue%22%5D%0D%0AR8%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R8%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20ret%20%3D%20o%3F.ToString()%3F.Substring(0%2C%201)%3F.Length%7C1%23%20FlowCaptureReferenceOperation%20%2F%20ConditionalAccessExpressionSyntax%3A%20o%3F.ToString()%3F.Substring(0%2C%201)%3F.Length%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20ret%20%3D%20o%3F.ToString()%3F.Substring(0%2C%201)%3F.Length%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR6%20-%3E%20R8%0D%0AR7%20-%3E%20R8%0D%0AR9%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R9%7D%22%5D%0D%0AR8%20-%3E%20R9%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void ConditionalAccessChained(object o)
+    {
+        var ret = o?.ToString()?.Substring(0, 1)?.Length;
+    }
+*/
+
+digraph "ConditionalAccessChained" {
+subgraph "cluster_Sonar.ConditionalAccessChained" {
+label = "Sonar.ConditionalAccessChained"
+0 [shape=record label="{BINARY:ConditionalAccessExpression|IdentifierNameSyntax: o}"]
+0 -> 1 [label="True"]
+0 -> 2 [label="False"]
+2 [shape=record label="{BINARY:ConditionalAccessExpression|IdentifierNameSyntax: ToString|MemberBindingExpressionSyntax: .ToString|InvocationExpressionSyntax: .ToString()}"]
+2 -> 1 [label="True"]
+2 -> 3 [label="False"]
+3 [shape=record label="{BINARY:ConditionalAccessExpression|IdentifierNameSyntax: Substring|MemberBindingExpressionSyntax: .Substring|LiteralExpressionSyntax: 0|LiteralExpressionSyntax: 1|InvocationExpressionSyntax: .Substring(0, 1)}"]
+3 -> 1 [label="True"]
+3 -> 4 [label="False"]
+4 [shape=record label="{SIMPLE|IdentifierNameSyntax: Length|MemberBindingExpressionSyntax: .Length}"]
+4 -> 1
+1 [shape=record label="{SIMPLE|VariableDeclaratorSyntax: ret = o?.ToString()?.Substring(0, 1)?.Length}"]
+1 -> 5
+5 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.ConditionalAccessChained" {
+label = "Roslyn.ConditionalAccessChained"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|1# ParameterReferenceOperation / IdentifierNameSyntax: o|0# FlowCaptureOperation / IdentifierNameSyntax: o|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: o|0# IsNullOperation / IdentifierNameSyntax: o|##########}"]
+R0 -> R1
+R2 [shape=record label="{BLOCK #R2|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: o|1# InvocationOperation / InvocationExpressionSyntax: .ToString()|0# FlowCaptureOperation / InvocationExpressionSyntax: .ToString()|##########}"]
+R1 -> R2 [label="Else"]
+R3 [shape=record label="{BLOCK #R3|## BranchValue ##|1# FlowCaptureReferenceOperation / InvocationExpressionSyntax: .ToString()|0# IsNullOperation / InvocationExpressionSyntax: .ToString()|##########}"]
+R2 -> R3
+R4 [shape=record label="{BLOCK #R4|2# FlowCaptureReferenceOperation / InvocationExpressionSyntax: .ToString()|3# LiteralOperation / LiteralExpressionSyntax: 0|2# ArgumentOperation / ArgumentSyntax: 0|3# LiteralOperation / LiteralExpressionSyntax: 1|2# ArgumentOperation / ArgumentSyntax: 1|1# InvocationOperation / InvocationExpressionSyntax: .Substring(0, 1)|0# FlowCaptureOperation / InvocationExpressionSyntax: .Substring(0, 1)|##########}"]
+R3 -> R4 [label="Else"]
+R5 [shape=record label="{BLOCK #R5|## BranchValue ##|1# FlowCaptureReferenceOperation / InvocationExpressionSyntax: .Substring(0, 1)|0# IsNullOperation / InvocationExpressionSyntax: .Substring(0, 1)|##########}"]
+R4 -> R5
+R6 [shape=record label="{BLOCK #R6|3# FlowCaptureReferenceOperation / InvocationExpressionSyntax: .Substring(0, 1)|2# PropertyReferenceOperation / MemberBindingExpressionSyntax: .Length|1# ConversionOperation / MemberBindingExpressionSyntax: .Length|0# FlowCaptureOperation / MemberBindingExpressionSyntax: .Length|##########}"]
+R5 -> R6 [label="Else"]
+R7 [shape=record label="{BLOCK #R7|1# DefaultValueOperation / ConditionalAccessExpressionSyntax: o?.ToString()?.Substring(0, 1)?.Length|0# FlowCaptureOperation / ConditionalAccessExpressionSyntax: o?.ToString()?.Substring(0, 1)?.Length|##########}"]
+R1 -> R7 [label="WhenTrue"]
+R3 -> R7 [label="WhenTrue"]
+R5 -> R7 [label="WhenTrue"]
+R8 [shape=record label="{BLOCK #R8|1# LocalReferenceOperation / VariableDeclaratorSyntax: ret = o?.ToString()?.Substring(0, 1)?.Length|1# FlowCaptureReferenceOperation / ConditionalAccessExpressionSyntax: o?.ToString()?.Substring(0, 1)?.Length|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: ret = o?.ToString()?.Substring(0, 1)?.Length|##########}"]
+R6 -> R8
+R7 -> R8
+R9 [shape=record label="{EXIT #R9}"]
+R8 -> R9
+}
+}

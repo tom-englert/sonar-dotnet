@@ -1,7 +1,0 @@
-digraph "SonarAnalyzer.Throw" {
-0 [shape=record label="{JUMP:ThrowStatement|LiteralExpressionSyntax: \"aaa\"|VariableDeclaratorSyntax: a = \"aaa\"|LiteralExpressionSyntax: \"Message\"|ObjectCreationExpressionSyntax: new Exception(\"Message\")}"]
-0 -> 1
-2 [shape=record label="{SIMPLE|LiteralExpressionSyntax: \"bbb\"|VariableDeclaratorSyntax: b = \"bbb\"}"]
-2 -> 1
-1 [shape=record label="{EXIT}"]
-}

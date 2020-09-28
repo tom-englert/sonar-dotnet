@@ -1,4 +1,0 @@
-public void VariableDeclaration()
-    {
-        int a = 1, b = a + 1, c = 1 + 2 + 3;
-    }

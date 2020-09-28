@@ -1,9 +1,0 @@
-public string ConditionAndOr(bool a, bool b, bool c)
-    {
-        string value = "Init";
-        if (a && ((((b || c)))))
-        {
-            value = "Modified";
-        }
-        return value;
-    }

@@ -1,7 +1,0 @@
-digraph "Roslyn.ForInfinite" {
-0 [shape=record label="{ENTRY #0}"]
-1 [shape=record label="{BLOCK #1|1# LocalReferenceOperation / VariableDeclaratorSyntax: value = \"Value\"|1# LiteralOperation / LiteralExpressionSyntax: \"Value\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: value = \"Value\"|##########}"]
-0 -> 1
-2 [shape=record label="{EXIT #2}"]
-1 -> 2
-}

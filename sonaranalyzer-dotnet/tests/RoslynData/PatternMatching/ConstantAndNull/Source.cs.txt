@@ -1,4 +1,0 @@
-public void ConstantAndNull(object a, object b)
-    {
-        var ret = a is 10 && b is null;
-    }

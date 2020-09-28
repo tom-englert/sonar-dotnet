@@ -1,5 +1,0 @@
-public void BinarySyntax()
-    {
-        var value = "Lorem" + "Ipsum" + "Dolor" + "Samet";
-        Console.WriteLine(value);
-    }

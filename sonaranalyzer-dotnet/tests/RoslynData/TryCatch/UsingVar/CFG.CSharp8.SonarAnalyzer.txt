@@ -1,5 +1,0 @@
-digraph "SonarAnalyzer.UsingVar" {
-0 [shape=record label="{SIMPLE|ObjectCreationExpressionSyntax: new MemoryStream()|VariableDeclaratorSyntax: ms = new MemoryStream()|IdentifierNameSyntax: ms|MemberAccessExpressionSyntax: ms.Write|LiteralExpressionSyntax: null|LiteralExpressionSyntax: 0|LiteralExpressionSyntax: 0|InvocationExpressionSyntax: ms.Write(null, 0, 0)}"]
-0 -> 1
-1 [shape=record label="{EXIT}"]
-}

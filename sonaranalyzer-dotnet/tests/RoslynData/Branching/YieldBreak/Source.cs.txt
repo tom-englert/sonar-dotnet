@@ -1,7 +1,0 @@
-public IEnumerable<string> YieldBreak()
-    {
-        yield return "A";
-        yield return "B";
-        yield break;
-        yield return "C";
-    }

@@ -1,0 +1,44 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22TryReturnFinally%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.TryReturnFinally%22%20%7B%0Alabel%20%3D%20%22Sonar.TryReturnFinally%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BBRANCH%3ATryStatement%7D%22%5D%0D%0A0%20-%3E%201%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BJUMP%3AReturnStatement%7CIdentifierNameSyntax%3A%20A%7CInvocationExpressionSyntax%3A%20A()%7CIdentifierNameSyntax%3A%20B%7CInvocationExpressionSyntax%3A%20B()%7D%22%5D%0D%0A1%20-%3E%202%0D%0A2%20%5Bshape%3Drecord%20label%3D%22%7BBRANCH%3AFinallyClause%7CIdentifierNameSyntax%3A%20C%7CInvocationExpressionSyntax%3A%20C()%7CIdentifierNameSyntax%3A%20F%7CInvocationExpressionSyntax%3A%20F()%7D%22%5D%0D%0A2%20-%3E%203%0D%0A2%20-%3E%203%0D%0A3%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.TryReturnFinally%22%20%7B%0Alabel%20%3D%20%22Roslyn.TryReturnFinally%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C1%23%20InvocationOperation%20%2F%20InvocationExpressionSyntax%3A%20A()%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20A()%3B%7C%23%23%23%23%23%23%23%23%23%23%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20B%7C1%23%20InvocationOperation%20%2F%20InvocationExpressionSyntax%3A%20B()%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20B()%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20C%7C1%23%20InvocationOperation%20%2F%20InvocationExpressionSyntax%3A%20C()%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20C()%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R3%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20F%7C1%23%20InvocationOperation%20%2F%20InvocationExpressionSyntax%3A%20F()%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20F()%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR4%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R4%7D%22%5D%0D%0AR1%20-%3E%20R4%0D%0AR2%20-%3E%20R4%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void TryReturnFinally()
+    {
+        try
+        {
+            A();
+            B();
+            return;
+            C();
+        }
+        finally
+        {
+            F();
+        }
+    }
+*/
+
+digraph "TryReturnFinally" {
+subgraph "cluster_Sonar.TryReturnFinally" {
+label = "Sonar.TryReturnFinally"
+0 [shape=record label="{BRANCH:TryStatement}"]
+0 -> 1
+1 [shape=record label="{JUMP:ReturnStatement|IdentifierNameSyntax: A|InvocationExpressionSyntax: A()|IdentifierNameSyntax: B|InvocationExpressionSyntax: B()}"]
+1 -> 2
+2 [shape=record label="{BRANCH:FinallyClause|IdentifierNameSyntax: C|InvocationExpressionSyntax: C()|IdentifierNameSyntax: F|InvocationExpressionSyntax: F()}"]
+2 -> 3
+2 -> 3
+3 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.TryReturnFinally" {
+label = "Roslyn.TryReturnFinally"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|2# InstanceReferenceOperation / IdentifierNameSyntax: A|1# InvocationOperation / InvocationExpressionSyntax: A()|0# ExpressionStatementOperation / ExpressionStatementSyntax: A();|##########|2# InstanceReferenceOperation / IdentifierNameSyntax: B|1# InvocationOperation / InvocationExpressionSyntax: B()|0# ExpressionStatementOperation / ExpressionStatementSyntax: B();|##########}"]
+R0 -> R1
+R2 [shape=record label="{BLOCK #R2|2# InstanceReferenceOperation / IdentifierNameSyntax: C|1# InvocationOperation / InvocationExpressionSyntax: C()|0# ExpressionStatementOperation / ExpressionStatementSyntax: C();|##########}"]
+R3 [shape=record label="{BLOCK #R3|2# InstanceReferenceOperation / IdentifierNameSyntax: F|1# InvocationOperation / InvocationExpressionSyntax: F()|0# ExpressionStatementOperation / ExpressionStatementSyntax: F();|##########}"]
+R4 [shape=record label="{EXIT #R4}"]
+R1 -> R4
+R2 -> R4
+}
+}

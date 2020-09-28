@@ -1,3 +1,0 @@
-digraph "SonarAnalyzer.Handle" {
-0 [shape=record label="{EXIT}"]
-}

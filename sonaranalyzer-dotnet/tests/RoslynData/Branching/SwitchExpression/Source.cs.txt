@@ -1,8 +1,0 @@
-public string SwitchExpression(int value) =>
-        value switch
-        {
-            0 => "Zero",
-            1 => "One",
-            2 => "Two",
-            _ => "Else"
-        };

@@ -1,9 +1,0 @@
-digraph "Roslyn.CallingBase.ctor" {
-0 [shape=record label="{ENTRY #0}"]
-1 [shape=record label="{BLOCK #1|2# InstanceReferenceOperation / ConstructorInitializerSyntax: : base(40 + 2)|4# LiteralOperation / LiteralExpressionSyntax: 40|4# LiteralOperation / LiteralExpressionSyntax: 2|3# BinaryOperation / BinaryExpressionSyntax: 40 + 2|2# ArgumentOperation / ArgumentSyntax: 40 + 2|1# InvocationOperation / ConstructorInitializerSyntax: : base(40 + 2)|0# ExpressionStatementOperation / ConstructorInitializerSyntax: : base(40 + 2)|##########}"]
-0 -> 1
-2 [shape=record label="{BLOCK #2|1# LocalReferenceOperation / VariableDeclaratorSyntax: lorem = \"Ipsum\"|1# LiteralOperation / LiteralExpressionSyntax: \"Ipsum\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: lorem = \"Ipsum\"|##########}"]
-1 -> 2
-3 [shape=record label="{EXIT #3}"]
-2 -> 3
-}

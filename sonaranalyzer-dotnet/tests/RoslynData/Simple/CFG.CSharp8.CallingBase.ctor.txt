@@ -1,0 +1,28 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22CallingBase.ctor%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.CallingBase.ctor%22%20%7B%0Alabel%20%3D%20%22Sonar.CallingBase.ctor%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CLiteralExpressionSyntax%3A%2040%7CLiteralExpressionSyntax%3A%202%7CBinaryExpressionSyntax%3A%2040%20%2B%202%7CConstructorInitializerSyntax%3A%20%3A%20base(40%20%2B%202)%7CLiteralExpressionSyntax%3A%20%5C%22Ipsum%5C%22%7CVariableDeclaratorSyntax%3A%20lorem%20%3D%20%5C%22Ipsum%5C%22%7D%22%5D%0D%0A0%20-%3E%201%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.CallingBase.ctor%22%20%7B%0Alabel%20%3D%20%22Roslyn.CallingBase.ctor%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C2%23%20InstanceReferenceOperation%20%2F%20ConstructorInitializerSyntax%3A%20%3A%20base(40%20%2B%202)%7C4%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%2040%7C4%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%202%7C3%23%20BinaryOperation%20%2F%20BinaryExpressionSyntax%3A%2040%20%2B%202%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%2040%20%2B%202%7C1%23%20InvocationOperation%20%2F%20ConstructorInitializerSyntax%3A%20%3A%20base(40%20%2B%202)%7C0%23%20ExpressionStatementOperation%20%2F%20ConstructorInitializerSyntax%3A%20%3A%20base(40%20%2B%202)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20lorem%20%3D%20%5C%22Ipsum%5C%22%7C1%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Ipsum%5C%22%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20lorem%20%3D%20%5C%22Ipsum%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R2%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R3%7D%22%5D%0D%0AR2%20-%3E%20R3%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public CallingBase() : base(40 + 2)
+    {
+        var lorem = "Ipsum";
+    }
+*/
+
+digraph "CallingBase.ctor" {
+subgraph "cluster_Sonar.CallingBase.ctor" {
+label = "Sonar.CallingBase.ctor"
+0 [shape=record label="{SIMPLE|LiteralExpressionSyntax: 40|LiteralExpressionSyntax: 2|BinaryExpressionSyntax: 40 + 2|ConstructorInitializerSyntax: : base(40 + 2)|LiteralExpressionSyntax: \"Ipsum\"|VariableDeclaratorSyntax: lorem = \"Ipsum\"}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.CallingBase.ctor" {
+label = "Roslyn.CallingBase.ctor"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|2# InstanceReferenceOperation / ConstructorInitializerSyntax: : base(40 + 2)|4# LiteralOperation / LiteralExpressionSyntax: 40|4# LiteralOperation / LiteralExpressionSyntax: 2|3# BinaryOperation / BinaryExpressionSyntax: 40 + 2|2# ArgumentOperation / ArgumentSyntax: 40 + 2|1# InvocationOperation / ConstructorInitializerSyntax: : base(40 + 2)|0# ExpressionStatementOperation / ConstructorInitializerSyntax: : base(40 + 2)|##########}"]
+R0 -> R1
+R2 [shape=record label="{BLOCK #R2|1# LocalReferenceOperation / VariableDeclaratorSyntax: lorem = \"Ipsum\"|1# LiteralOperation / LiteralExpressionSyntax: \"Ipsum\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: lorem = \"Ipsum\"|##########}"]
+R1 -> R2
+R3 [shape=record label="{EXIT #R3}"]
+R2 -> R3
+}
+}

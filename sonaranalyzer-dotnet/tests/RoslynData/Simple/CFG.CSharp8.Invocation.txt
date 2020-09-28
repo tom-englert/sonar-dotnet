@@ -1,0 +1,27 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22Invocation%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.Invocation%22%20%7B%0Alabel%20%3D%20%22Sonar.Invocation%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A%20arg%7CMemberAccessExpressionSyntax%3A%20arg.ToString%7CInvocationExpressionSyntax%3A%20arg.ToString()%7CVariableDeclaratorSyntax%3A%20value%20%3D%20arg.ToString()%7CIdentifierNameSyntax%3A%20Console%7CMemberAccessExpressionSyntax%3A%20Console.WriteLine%7CIdentifierNameSyntax%3A%20value%7CInvocationExpressionSyntax%3A%20Console.WriteLine(value)%7D%22%5D%0D%0A0%20-%3E%201%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.Invocation%22%20%7B%0Alabel%20%3D%20%22Roslyn.Invocation%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20value%20%3D%20arg.ToString()%7C2%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20arg%7C1%23%20InvocationOperation%20%2F%20InvocationExpressionSyntax%3A%20arg.ToString()%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20value%20%3D%20arg.ToString()%7C%23%23%23%23%23%23%23%23%23%23%7C3%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20value%7C2%23%20ArgumentOperation%20%2F%20ArgumentSyntax%3A%20value%7C1%23%20InvocationOperation%20%2F%20InvocationExpressionSyntax%3A%20Console.WriteLine(value)%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20Console.WriteLine(value)%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R2%7D%22%5D%0D%0AR1%20-%3E%20R2%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void Invocation(object arg)
+    {
+        var value = arg.ToString();
+        Console.WriteLine(value);
+    }
+*/
+
+digraph "Invocation" {
+subgraph "cluster_Sonar.Invocation" {
+label = "Sonar.Invocation"
+0 [shape=record label="{SIMPLE|IdentifierNameSyntax: arg|MemberAccessExpressionSyntax: arg.ToString|InvocationExpressionSyntax: arg.ToString()|VariableDeclaratorSyntax: value = arg.ToString()|IdentifierNameSyntax: Console|MemberAccessExpressionSyntax: Console.WriteLine|IdentifierNameSyntax: value|InvocationExpressionSyntax: Console.WriteLine(value)}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.Invocation" {
+label = "Roslyn.Invocation"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|1# LocalReferenceOperation / VariableDeclaratorSyntax: value = arg.ToString()|2# ParameterReferenceOperation / IdentifierNameSyntax: arg|1# InvocationOperation / InvocationExpressionSyntax: arg.ToString()|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: value = arg.ToString()|##########|3# LocalReferenceOperation / IdentifierNameSyntax: value|2# ArgumentOperation / ArgumentSyntax: value|1# InvocationOperation / InvocationExpressionSyntax: Console.WriteLine(value)|0# ExpressionStatementOperation / ExpressionStatementSyntax: Console.WriteLine(value);|##########}"]
+R0 -> R1
+R2 [shape=record label="{EXIT #R2}"]
+R1 -> R2
+}
+}

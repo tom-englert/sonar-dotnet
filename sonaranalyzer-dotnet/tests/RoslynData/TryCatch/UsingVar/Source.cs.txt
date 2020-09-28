@@ -1,5 +1,0 @@
-public void UsingVar()
-    {
-        using var ms = new MemoryStream();
-        ms.Write(null, 0, 0);
-    }

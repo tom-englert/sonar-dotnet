@@ -1,0 +1,19 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22D%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.D%22%20%7B%0Alabel%20%3D%20%22Sonar.D%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.D%22%20%7B%0Alabel%20%3D%20%22Roslyn.D%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R1%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+private void D() { }
+*/
+
+digraph "D" {
+subgraph "cluster_Sonar.D" {
+label = "Sonar.D"
+0 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.D" {
+label = "Roslyn.D"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{EXIT #R1}"]
+R0 -> R1
+}
+}

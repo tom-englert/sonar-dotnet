@@ -1,5 +1,0 @@
-public void VoidReturnBeforeExit()
-    {
-        var a = "aaa";
-        return;
-    }

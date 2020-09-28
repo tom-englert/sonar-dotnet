@@ -1,8 +1,0 @@
-digraph "Roslyn.Throw" {
-0 [shape=record label="{ENTRY #0}"]
-1 [shape=record label="{BLOCK #1|1# LocalReferenceOperation / VariableDeclaratorSyntax: a = \"aaa\"|1# LiteralOperation / LiteralExpressionSyntax: \"aaa\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: a = \"aaa\"|##########|## BranchValue ##|2# LiteralOperation / LiteralExpressionSyntax: \"Message\"|1# ArgumentOperation / ArgumentSyntax: \"Message\"|0# ObjectCreationOperation / ObjectCreationExpressionSyntax: new Exception(\"Message\")|##########}"]
-0 -> 1
-2 [shape=record label="{BLOCK #2|1# LocalReferenceOperation / VariableDeclaratorSyntax: b = \"bbb\"|1# LiteralOperation / LiteralExpressionSyntax: \"bbb\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: b = \"bbb\"|##########}"]
-3 [shape=record label="{EXIT #3}"]
-2 -> 3
-}

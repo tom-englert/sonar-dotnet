@@ -1,8 +1,0 @@
-public void DoWhile()
-    {
-        string value = null;
-        do
-        {
-            value = "Value";
-        } while (value == null);
-    }

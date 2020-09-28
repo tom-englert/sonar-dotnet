@@ -1,0 +1,68 @@
+// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#digraph%20%22ForEach%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.ForEach%22%20%7B%0Alabel%20%3D%20%22Sonar.ForEach%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BFOREACH%3AForEachStatement%7CIdentifierNameSyntax%3A%20numbers%7D%22%5D%0D%0A0%20-%3E%201%0D%0A1%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3AForEachStatement%7D%22%5D%0D%0A1%20-%3E%202%20%5Blabel%3D%22True%22%5D%0D%0A1%20-%3E%203%20%5Blabel%3D%22False%22%5D%0D%0A2%20%5Bshape%3Drecord%20label%3D%22%7BFOREACH%3AForEachStatement%7CIdentifierNameSyntax%3A%20names%7D%22%5D%0D%0A2%20-%3E%204%0D%0A4%20%5Bshape%3Drecord%20label%3D%22%7BBINARY%3AForEachStatement%7D%22%5D%0D%0A4%20-%3E%205%20%5Blabel%3D%22True%22%5D%0D%0A4%20-%3E%201%20%5Blabel%3D%22False%22%5D%0D%0A5%20%5Bshape%3Drecord%20label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A%20number%7CIdentifierNameSyntax%3A%20name%7CInterpolatedStringExpressionSyntax%3A%20%24%5C%22%5C%7Bnumber%5C%7D.%20%5C%7Bname%5C%7D%5C%22%7CVariableDeclaratorSyntax%3A%20ret%20%3D%20%24%5C%22%5C%7Bnumber%5C%7D.%20%5C%7Bname%5C%7D%5C%22%7D%22%5D%0D%0A5%20-%3E%204%0D%0A3%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.ForEach%22%20%7B%0Alabel%20%3D%20%22Roslyn.ForEach%22%0D%0AR0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23R0%7D%22%5D%0D%0AR1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R1%7C3%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C2%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C1%23%20InvocationOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0%20-%3E%20R1%0D%0AR2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R2%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C0%23%20InvocationOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1%20-%3E%20R2%0D%0AR5%20-%3E%20R2%20%5Blabel%3D%22WhenFalse%22%5D%0D%0AR3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R3%7C1%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C3%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C2%23%20PropertyReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C1%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C0%23%20SimpleAssignmentOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR2%20-%3E%20R3%20%5Blabel%3D%22Else%22%5D%0D%0AR4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R4%7C3%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C2%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C1%23%20InvocationOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR3%20-%3E%20R4%0D%0AR5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R5%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C0%23%20InvocationOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR4%20-%3E%20R5%0D%0AR7%20-%3E%20R5%0D%0AR6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R6%7C1%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C3%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C2%23%20PropertyReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C1%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C0%23%20SimpleAssignmentOperation%20%2F%20IdentifierNameSyntax%3A%20var%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR5%20-%3E%20R6%20%5Blabel%3D%22Else%22%5D%0D%0AR7%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R7%7C1%23%20LocalReferenceOperation%20%2F%20VariableDeclaratorSyntax%3A%20ret%20%3D%20%24%5C%22%5C%7Bnumber%5C%7D.%20%5C%7Bname%5C%7D%5C%22%7C3%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20number%7C2%23%20InterpolationOperation%20%2F%20InterpolationSyntax%3A%20%5C%7Bnumber%5C%7D%7C3%23%20LiteralOperation%20%2F%20InterpolatedStringTextSyntax%3A%20.%20%7C2%23%20InterpolatedStringTextOperation%20%2F%20InterpolatedStringTextSyntax%3A%20.%20%7C3%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20name%7C2%23%20InterpolationOperation%20%2F%20InterpolationSyntax%3A%20%5C%7Bname%5C%7D%7C1%23%20InterpolatedStringOperation%20%2F%20InterpolatedStringExpressionSyntax%3A%20%24%5C%22%5C%7Bnumber%5C%7D.%20%5C%7Bname%5C%7D%5C%22%7C0%23%20SimpleAssignmentOperation%20%2F%20VariableDeclaratorSyntax%3A%20ret%20%3D%20%24%5C%22%5C%7Bnumber%5C%7D.%20%5C%7Bname%5C%7D%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR6%20-%3E%20R7%0D%0AR8%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R8%7C2%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C1%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C0%23%20IsNullOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR9%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R9%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C0%23%20InvocationOperation%20%2F%20IdentifierNameSyntax%3A%20names%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR8%20-%3E%20R9%20%5Blabel%3D%22Else%22%5D%0D%0AR10%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R10%7D%22%5D%0D%0AR8%20-%3E%20R10%20%5Blabel%3D%22WhenTrue%22%5D%0D%0AR9%20-%3E%20R10%0D%0AR11%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R11%7C2%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C1%23%20ConversionOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C0%23%20IsNullOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR12%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R12%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C0%23%20InvocationOperation%20%2F%20IdentifierNameSyntax%3A%20numbers%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR11%20-%3E%20R12%20%5Blabel%3D%22Else%22%5D%0D%0AR13%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23R13%7D%22%5D%0D%0AR11%20-%3E%20R13%20%5Blabel%3D%22WhenTrue%22%5D%0D%0AR12%20-%3E%20R13%0D%0AR14%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23R14%7D%22%5D%0D%0AR2%20-%3E%20R14%20%5Blabel%3D%22WhenFalse%22%5D%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void ForEach(string[] names, int[] numbers)
+    {
+        foreach (var number in numbers)
+        {
+            foreach (var name in names)
+            {
+                var ret = $"{number}. {name}";
+            }
+        }
+    }
+*/
+
+digraph "ForEach" {
+subgraph "cluster_Sonar.ForEach" {
+label = "Sonar.ForEach"
+0 [shape=record label="{FOREACH:ForEachStatement|IdentifierNameSyntax: numbers}"]
+0 -> 1
+1 [shape=record label="{BINARY:ForEachStatement}"]
+1 -> 2 [label="True"]
+1 -> 3 [label="False"]
+2 [shape=record label="{FOREACH:ForEachStatement|IdentifierNameSyntax: names}"]
+2 -> 4
+4 [shape=record label="{BINARY:ForEachStatement}"]
+4 -> 5 [label="True"]
+4 -> 1 [label="False"]
+5 [shape=record label="{SIMPLE|IdentifierNameSyntax: number|IdentifierNameSyntax: name|InterpolatedStringExpressionSyntax: $\"\{number\}. \{name\}\"|VariableDeclaratorSyntax: ret = $\"\{number\}. \{name\}\"}"]
+5 -> 4
+3 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.ForEach" {
+label = "Roslyn.ForEach"
+R0 [shape=record label="{ENTRY #R0}"]
+R1 [shape=record label="{BLOCK #R1|3# ParameterReferenceOperation / IdentifierNameSyntax: numbers|2# ConversionOperation / IdentifierNameSyntax: numbers|1# InvocationOperation / IdentifierNameSyntax: numbers|0# FlowCaptureOperation / IdentifierNameSyntax: numbers|##########}"]
+R0 -> R1
+R2 [shape=record label="{BLOCK #R2|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: numbers|0# InvocationOperation / IdentifierNameSyntax: numbers|##########}"]
+R1 -> R2
+R5 -> R2 [label="WhenFalse"]
+R3 [shape=record label="{BLOCK #R3|1# LocalReferenceOperation / IdentifierNameSyntax: var|3# FlowCaptureReferenceOperation / IdentifierNameSyntax: numbers|2# PropertyReferenceOperation / IdentifierNameSyntax: var|1# ConversionOperation / IdentifierNameSyntax: var|0# SimpleAssignmentOperation / IdentifierNameSyntax: var|##########}"]
+R2 -> R3 [label="Else"]
+R4 [shape=record label="{BLOCK #R4|3# ParameterReferenceOperation / IdentifierNameSyntax: names|2# ConversionOperation / IdentifierNameSyntax: names|1# InvocationOperation / IdentifierNameSyntax: names|0# FlowCaptureOperation / IdentifierNameSyntax: names|##########}"]
+R3 -> R4
+R5 [shape=record label="{BLOCK #R5|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: names|0# InvocationOperation / IdentifierNameSyntax: names|##########}"]
+R4 -> R5
+R7 -> R5
+R6 [shape=record label="{BLOCK #R6|1# LocalReferenceOperation / IdentifierNameSyntax: var|3# FlowCaptureReferenceOperation / IdentifierNameSyntax: names|2# PropertyReferenceOperation / IdentifierNameSyntax: var|1# ConversionOperation / IdentifierNameSyntax: var|0# SimpleAssignmentOperation / IdentifierNameSyntax: var|##########}"]
+R5 -> R6 [label="Else"]
+R7 [shape=record label="{BLOCK #R7|1# LocalReferenceOperation / VariableDeclaratorSyntax: ret = $\"\{number\}. \{name\}\"|3# LocalReferenceOperation / IdentifierNameSyntax: number|2# InterpolationOperation / InterpolationSyntax: \{number\}|3# LiteralOperation / InterpolatedStringTextSyntax: . |2# InterpolatedStringTextOperation / InterpolatedStringTextSyntax: . |3# LocalReferenceOperation / IdentifierNameSyntax: name|2# InterpolationOperation / InterpolationSyntax: \{name\}|1# InterpolatedStringOperation / InterpolatedStringExpressionSyntax: $\"\{number\}. \{name\}\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: ret = $\"\{number\}. \{name\}\"|##########}"]
+R6 -> R7
+R8 [shape=record label="{BLOCK #R8|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: names|1# ConversionOperation / IdentifierNameSyntax: names|0# FlowCaptureOperation / IdentifierNameSyntax: names|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: names|0# IsNullOperation / IdentifierNameSyntax: names|##########}"]
+R9 [shape=record label="{BLOCK #R9|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: names|0# InvocationOperation / IdentifierNameSyntax: names|##########}"]
+R8 -> R9 [label="Else"]
+R10 [shape=record label="{BLOCK #R10}"]
+R8 -> R10 [label="WhenTrue"]
+R9 -> R10
+R11 [shape=record label="{BLOCK #R11|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: numbers|1# ConversionOperation / IdentifierNameSyntax: numbers|0# FlowCaptureOperation / IdentifierNameSyntax: numbers|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: numbers|0# IsNullOperation / IdentifierNameSyntax: numbers|##########}"]
+R12 [shape=record label="{BLOCK #R12|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: numbers|0# InvocationOperation / IdentifierNameSyntax: numbers|##########}"]
+R11 -> R12 [label="Else"]
+R13 [shape=record label="{BLOCK #R13}"]
+R11 -> R13 [label="WhenTrue"]
+R12 -> R13
+R14 [shape=record label="{EXIT #R14}"]
+R2 -> R14 [label="WhenFalse"]
+}
+}

@@ -1,7 +1,0 @@
-public void UsingVarThrow()
-    {
-        using var ms = new MemoryStream();
-        ms.Write(null, 0, 0);
-        throw new Exception("Message");
-        ms.Write(null, 1, 1);
-    }
