@@ -203,7 +203,7 @@ public class Sample
                 break;
                 C();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Handle(ex);
                 continue;
@@ -225,7 +225,7 @@ public class Sample
             C();
             return "OK";
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             return "Error: " + ex.Message;
         }
@@ -263,4 +263,24 @@ public class Sample
         ms.Write(null, 1, 1);
     }
 
+    public void TryFinallyTryFinally()
+    {
+        try
+        {
+            A();
+        }
+        finally
+        {
+            F();
+        }
+        B();
+        try
+        {
+            C();
+        }
+        finally
+        {
+            F();
+        }
+    }
 }

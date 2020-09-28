@@ -1,0 +1,76 @@
+// http://viz-js.com/
+// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22TryFinallyTryFinally%22+%7B%0D%0Asubgraph+%22cluster_Sonar.TryFinallyTryFinally%22+%7B%0Alabel+%3D+%22Sonar.TryFinallyTryFinally%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BBRANCH%3ATryStatement%7CIdentifierNameSyntax%3A+A%7CInvocationExpressionSyntax%3A+A()%7D%22%5D%0D%0A0+-%3E+1%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BBRANCH%3AFinallyClause%7CIdentifierNameSyntax%3A+F%7CInvocationExpressionSyntax%3A+F()%7D%22%5D%0D%0A1+-%3E+2%0D%0A1+-%3E+3%0D%0A2+%5Bshape%3Drecord+label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A+B%7CInvocationExpressionSyntax%3A+B()%7D%22%5D%0D%0A2+-%3E+4%0D%0A4+%5Bshape%3Drecord+label%3D%22%7BBRANCH%3ATryStatement%7CIdentifierNameSyntax%3A+C%7CInvocationExpressionSyntax%3A+C()%7D%22%5D%0D%0A4+-%3E+5%0D%0A5+%5Bshape%3Drecord+label%3D%22%7BBRANCH%3AFinallyClause%7CIdentifierNameSyntax%3A+F%7CInvocationExpressionSyntax%3A+F()%7D%22%5D%0D%0A5+-%3E+3%0D%0A5+-%3E+3%0D%0A3+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.TryFinallyTryFinally%22+%7B%0Alabel+%3D+%22Roslyn.TryFinallyTryFinally%22%0D%0Asubgraph+%22cluster_TryAndFinally+region%22+%7B%0Alabel+%3D+%22TryAndFinally+region%22%0D%0Asubgraph+%22cluster_Try+region%22+%7B%0Alabel+%3D+%22Try+region%22%0D%0AR1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R1%7C2%23+InstanceReferenceOperation+%2F+IdentifierNameSyntax%3A+A%7C1%23+InvocationOperation+%2F+InvocationExpressionSyntax%3A+A()%7C0%23+ExpressionStatementOperation+%2F+ExpressionStatementSyntax%3A+A()%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0+-%3E+R1%0D%0A%7D%0D%0Asubgraph+%22cluster_Finally+region%22+%7B%0Alabel+%3D+%22Finally+region%22%0D%0AR2+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R2%7C2%23+InstanceReferenceOperation+%2F+IdentifierNameSyntax%3A+F%7C1%23+InvocationOperation+%2F+InvocationExpressionSyntax%3A+F()%7C0%23+ExpressionStatementOperation+%2F+ExpressionStatementSyntax%3A+F()%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0A%7D%0D%0Asubgraph+%22cluster_TryAndFinally+region%22+%7B%0Alabel+%3D+%22TryAndFinally+region%22%0D%0Asubgraph+%22cluster_Try+region%22+%7B%0Alabel+%3D+%22Try+region%22%0D%0AR4+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R4%7C2%23+InstanceReferenceOperation+%2F+IdentifierNameSyntax%3A+C%7C1%23+InvocationOperation+%2F+InvocationExpressionSyntax%3A+C()%7C0%23+ExpressionStatementOperation+%2F+ExpressionStatementSyntax%3A+C()%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR3+-%3E+R4%0D%0A%7D%0D%0Asubgraph+%22cluster_Finally+region%22+%7B%0Alabel+%3D+%22Finally+region%22%0D%0AR5+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R5%7C2%23+InstanceReferenceOperation+%2F+IdentifierNameSyntax%3A+F%7C1%23+InvocationOperation+%2F+InvocationExpressionSyntax%3A+F()%7C0%23+ExpressionStatementOperation+%2F+ExpressionStatementSyntax%3A+F()%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0A%7D%0D%0AR0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23R0%7D%22%5D%0D%0AR3+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R3%7C2%23+InstanceReferenceOperation+%2F+IdentifierNameSyntax%3A+B%7C1%23+InvocationOperation+%2F+InvocationExpressionSyntax%3A+B()%7C0%23+ExpressionStatementOperation+%2F+ExpressionStatementSyntax%3A+B()%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1+-%3E+R3%0D%0AR6+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23R6%7D%22%5D%0D%0AR4+-%3E+R6%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void TryFinallyTryFinally()
+    {
+        try
+        {
+            A();
+        }
+        finally
+        {
+            F();
+        }
+        B();
+        try
+        {
+            C();
+        }
+        finally
+        {
+            F();
+        }
+    }
+*/
+
+digraph "TryFinallyTryFinally" {
+subgraph "cluster_Sonar.TryFinallyTryFinally" {
+label = "Sonar.TryFinallyTryFinally"
+0 [shape=record label="{BRANCH:TryStatement|IdentifierNameSyntax: A|InvocationExpressionSyntax: A()}"]
+0 -> 1
+1 [shape=record label="{BRANCH:FinallyClause|IdentifierNameSyntax: F|InvocationExpressionSyntax: F()}"]
+1 -> 2
+1 -> 3
+2 [shape=record label="{SIMPLE|IdentifierNameSyntax: B|InvocationExpressionSyntax: B()}"]
+2 -> 4
+4 [shape=record label="{BRANCH:TryStatement|IdentifierNameSyntax: C|InvocationExpressionSyntax: C()}"]
+4 -> 5
+5 [shape=record label="{BRANCH:FinallyClause|IdentifierNameSyntax: F|InvocationExpressionSyntax: F()}"]
+5 -> 3
+5 -> 3
+3 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.TryFinallyTryFinally" {
+label = "Roslyn.TryFinallyTryFinally"
+subgraph "cluster_TryAndFinally region" {
+label = "TryAndFinally region"
+subgraph "cluster_Try region" {
+label = "Try region"
+R1 [shape=record label="{BLOCK #R1|2# InstanceReferenceOperation / IdentifierNameSyntax: A|1# InvocationOperation / InvocationExpressionSyntax: A()|0# ExpressionStatementOperation / ExpressionStatementSyntax: A();|##########}"]
+R0 -> R1
+}
+subgraph "cluster_Finally region" {
+label = "Finally region"
+R2 [shape=record label="{BLOCK #R2|2# InstanceReferenceOperation / IdentifierNameSyntax: F|1# InvocationOperation / InvocationExpressionSyntax: F()|0# ExpressionStatementOperation / ExpressionStatementSyntax: F();|##########}"]
+}
+}
+subgraph "cluster_TryAndFinally region" {
+label = "TryAndFinally region"
+subgraph "cluster_Try region" {
+label = "Try region"
+R4 [shape=record label="{BLOCK #R4|2# InstanceReferenceOperation / IdentifierNameSyntax: C|1# InvocationOperation / InvocationExpressionSyntax: C()|0# ExpressionStatementOperation / ExpressionStatementSyntax: C();|##########}"]
+R3 -> R4
+}
+subgraph "cluster_Finally region" {
+label = "Finally region"
+R5 [shape=record label="{BLOCK #R5|2# InstanceReferenceOperation / IdentifierNameSyntax: F|1# InvocationOperation / InvocationExpressionSyntax: F()|0# ExpressionStatementOperation / ExpressionStatementSyntax: F();|##########}"]
+}
+}
+R0 [shape=record label="{ENTRY #R0}"]
+R3 [shape=record label="{BLOCK #R3|2# InstanceReferenceOperation / IdentifierNameSyntax: B|1# InvocationOperation / InvocationExpressionSyntax: B()|0# ExpressionStatementOperation / ExpressionStatementSyntax: B();|##########}"]
+R1 -> R3
+R6 [shape=record label="{EXIT #R6}"]
+R4 -> R6
+}
+}

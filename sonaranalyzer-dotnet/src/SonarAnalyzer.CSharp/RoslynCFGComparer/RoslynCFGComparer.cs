@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var graph = Serialize(CSharpControlFlowGraph.Create((CSharpSyntaxNode)method.Body ?? method.ExpressionBody, c.SemanticModel), RoslynCFG.Create(c.Node, c.SemanticModel), methodName);
             File.WriteAllText(root + $"CFG.{languageVersion}.{methodName}.txt",
                 $@"// http://viz-js.com/
-// https://dreampuf.github.io/GraphvizOnline/#{System.Net.WebUtility.UrlEncode(graph).Replace("+", "%20")}
+// http://magjac.com/graphviz-visual-editor/?dot={System.Net.WebUtility.UrlEncode(graph)}
 
 /*
 {method}
@@ -99,6 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private class RoslynCfgWalker
         {
             private readonly DotWriter writer;
+            private readonly HashSet<BasicBlock> visited = new HashSet<BasicBlock>();
 
             public RoslynCfgWalker(DotWriter writer)
             {
@@ -108,7 +109,25 @@ namespace SonarAnalyzer.Rules.CSharp
             public void Visit(string methodName, RoslynCFG cfg, bool subgraph)
             {
                 writer.WriteGraphStart(methodName, subgraph);
-                foreach (var block in cfg.Blocks)
+                foreach(var region in cfg.Root.NestedRegions)
+                {
+                    Visit(cfg, region);
+                }
+                foreach (var block in cfg.Blocks.Where(x => !visited.Contains(x)).ToArray())
+                {
+                    Visit(block);
+                }
+                writer.WriteGraphEnd();
+            }
+
+            private void Visit(RoslynCFG cfg, ControlFlowRegion region)
+            {
+                writer.WriteGraphStart(region.Kind + " region", true);
+                foreach (var nested in region.NestedRegions)
+                {
+                    Visit(cfg, nested);
+                }
+                foreach (var block in cfg.Blocks.Where(x => x.EnclosingRegion == region))
                 {
                     Visit(block);
                 }
@@ -117,6 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void Visit(BasicBlock block)
             {
+                visited.Add(block);
                 WriteNode(block);
                 WriteEdges(block);
             }
