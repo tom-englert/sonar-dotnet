@@ -1,0 +1,7 @@
+digraph "Roslyn.Deconstruct" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|2# ParameterReferenceOperation / IdentifierNameSyntax: a|3# InstanceReferenceOperation / IdentifierNameSyntax: A|2# FieldReferenceOperation / IdentifierNameSyntax: A|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: a = A|0# ExpressionStatementOperation / ExpressionStatementSyntax: a = A;|##########|2# ParameterReferenceOperation / IdentifierNameSyntax: b|3# InstanceReferenceOperation / IdentifierNameSyntax: B|2# FieldReferenceOperation / IdentifierNameSyntax: B|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: b = B|0# ExpressionStatementOperation / ExpressionStatementSyntax: b = B;|##########}"]
+0 -> 1
+2 [shape=record label="{EXIT #2}"]
+1 -> 2
+}

@@ -1,0 +1,24 @@
+digraph "Roslyn.SwitchStatementIs" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# ParameterReferenceOperation / IdentifierNameSyntax: arg|0# FlowCaptureOperation / IdentifierNameSyntax: arg|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: arg|1# DeclarationPatternOperation / DeclarationPatternSyntax: TypeA a|0# IsPatternOperation / DeclarationPatternSyntax: TypeA a|##########}"]
+1 -> 2
+3 [shape=record label="{BLOCK #3|## BranchValue ##|1# LocalReferenceOperation / IdentifierNameSyntax: a|0# InvocationOperation / InvocationExpressionSyntax: a.ToString()|##########}"]
+2 -> 3 [label="Else"]
+4 [shape=record label="{BLOCK #4|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: arg|1# DeclarationPatternOperation / DeclarationPatternSyntax: TypeB b|0# IsPatternOperation / DeclarationPatternSyntax: TypeB b|##########}"]
+2 -> 4 [label="WhenFalse"]
+5 [shape=record label="{BLOCK #5|## BranchValue ##|1# LocalReferenceOperation / IdentifierNameSyntax: b|0# InvocationOperation / InvocationExpressionSyntax: b.ToString()|##########}"]
+4 -> 5 [label="Else"]
+6 [shape=record label="{BLOCK #6|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: arg|1# DeclarationPatternOperation / DeclarationPatternSyntax: TypeC c|0# IsPatternOperation / DeclarationPatternSyntax: TypeC c|##########}"]
+4 -> 6 [label="WhenFalse"]
+7 [shape=record label="{BLOCK #7|## BranchValue ##|1# LocalReferenceOperation / IdentifierNameSyntax: c|0# InvocationOperation / InvocationExpressionSyntax: c.ToString()|##########}"]
+6 -> 7 [label="Else"]
+8 [shape=record label="{BLOCK #8|## BranchValue ##|1# LiteralOperation / LiteralExpressionSyntax: null|0# ConversionOperation / LiteralExpressionSyntax: null|##########}"]
+6 -> 8 [label="WhenFalse"]
+9 [shape=record label="{EXIT #9}"]
+3 -> 9
+5 -> 9
+7 -> 9
+8 -> 9
+}

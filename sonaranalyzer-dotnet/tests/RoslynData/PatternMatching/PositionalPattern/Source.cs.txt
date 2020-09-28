@@ -1,0 +1,9 @@
+public string PositionalPattern(object arg)
+    {
+        return arg switch
+        {
+            Deconstructed(0, _) => "A is zero",
+            Deconstructed(_, 0) => "B is zero",
+            _ => "No zero"
+        };
+    }

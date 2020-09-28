@@ -1,6 +1,6 @@
 public void IsTypeInConditionChain(object a)
     {
-        if(a is string str
+        if (a is string str
             && str.GetType() is { } type
             && type.BaseType is Type baseType
             && baseType.IsAbstract)

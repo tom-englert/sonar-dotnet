@@ -1,0 +1,33 @@
+digraph "Roslyn.PropertyPattern" {
+0 [shape=record label="{ENTRY #0}"]
+1 [shape=record label="{BLOCK #1|1# ParameterReferenceOperation / IdentifierNameSyntax: arg|0# FlowCaptureOperation / IdentifierNameSyntax: arg|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: arg|4# InstanceReferenceOperation / IdentifierNameSyntax: RootValue|3# FieldReferenceOperation / IdentifierNameSyntax: RootValue|4# LiteralOperation / LiteralExpressionSyntax: 0|3# ConstantPatternOperation / ConstantPatternSyntax: 0|2# PropertySubpatternOperation / SubpatternSyntax: RootValue: 0|1# RecursivePatternOperation / RecursivePatternSyntax: \{ RootValue: 0 \}|0# IsPatternOperation / SwitchExpressionArmSyntax: \{ RootValue: 0 \} =\> \"RootValue is zero\"|##########}"]
+0 -> 1
+2 [shape=record label="{BLOCK #2|1# LiteralOperation / LiteralExpressionSyntax: \"RootValue is zero\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"RootValue is zero\"|##########}"]
+1 -> 2 [label="Else"]
+3 [shape=record label="{BLOCK #3|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: arg|4# InstanceReferenceOperation / IdentifierNameSyntax: A|3# FieldReferenceOperation / IdentifierNameSyntax: A|6# InstanceReferenceOperation / IdentifierNameSyntax: ValueA|5# FieldReferenceOperation / IdentifierNameSyntax: ValueA|6# LiteralOperation / LiteralExpressionSyntax: 0|5# ConstantPatternOperation / ConstantPatternSyntax: 0|4# PropertySubpatternOperation / SubpatternSyntax: ValueA: 0|3# RecursivePatternOperation / RecursivePatternSyntax: \{ ValueA: 0 \}|2# PropertySubpatternOperation / SubpatternSyntax: A: \{ ValueA: 0 \}|1# RecursivePatternOperation / RecursivePatternSyntax: \{ A: \{ ValueA: 0 \} \}|0# IsPatternOperation / SwitchExpressionArmSyntax: \{ A: \{ ValueA: 0 \} \} =\> \"A is zero\"|##########}"]
+1 -> 3 [label="WhenFalse"]
+4 [shape=record label="{BLOCK #4|1# LiteralOperation / LiteralExpressionSyntax: \"A is zero\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"A is zero\"|##########}"]
+3 -> 4 [label="Else"]
+5 [shape=record label="{BLOCK #5|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: arg|4# InstanceReferenceOperation / IdentifierNameSyntax: B|3# FieldReferenceOperation / IdentifierNameSyntax: B|6# InstanceReferenceOperation / IdentifierNameSyntax: ValueB|5# FieldReferenceOperation / IdentifierNameSyntax: ValueB|6# LiteralOperation / LiteralExpressionSyntax: 0|5# ConstantPatternOperation / ConstantPatternSyntax: 0|4# PropertySubpatternOperation / SubpatternSyntax: ValueB: 0|3# RecursivePatternOperation / RecursivePatternSyntax: \{ ValueB: 0 \}|2# PropertySubpatternOperation / SubpatternSyntax: B: \{ ValueB: 0 \}|1# RecursivePatternOperation / RecursivePatternSyntax: \{ B: \{ ValueB: 0 \} \}|0# IsPatternOperation / SwitchExpressionArmSyntax: \{ B: \{ ValueB: 0 \} \} =\> \"A is zero\"|##########}"]
+3 -> 5 [label="WhenFalse"]
+6 [shape=record label="{BLOCK #6|1# LiteralOperation / LiteralExpressionSyntax: \"A is zero\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"A is zero\"|##########}"]
+5 -> 6 [label="Else"]
+7 [shape=record label="{BLOCK #7|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: arg|4# InstanceReferenceOperation / IdentifierNameSyntax: C|3# FieldReferenceOperation / IdentifierNameSyntax: C|6# InstanceReferenceOperation / IdentifierNameSyntax: ValueC|5# FieldReferenceOperation / IdentifierNameSyntax: ValueC|6# LiteralOperation / LiteralExpressionSyntax: 0|5# ConstantPatternOperation / ConstantPatternSyntax: 0|4# PropertySubpatternOperation / SubpatternSyntax: ValueC: 0|3# RecursivePatternOperation / RecursivePatternSyntax: \{ ValueC: 0 \}|2# PropertySubpatternOperation / SubpatternSyntax: C: \{ ValueC: 0 \}|1# RecursivePatternOperation / RecursivePatternSyntax: \{ C: \{ ValueC: 0 \} \}|0# IsPatternOperation / SwitchExpressionArmSyntax: \{ C: \{ ValueC: 0 \} \} =\> \"A is zero\"|##########}"]
+5 -> 7 [label="WhenFalse"]
+8 [shape=record label="{BLOCK #8|1# LiteralOperation / LiteralExpressionSyntax: \"A is zero\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"A is zero\"|##########}"]
+7 -> 8 [label="Else"]
+9 [shape=record label="{BLOCK #9|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: arg|1# DiscardPatternOperation / DiscardPatternSyntax: _|0# IsPatternOperation / SwitchExpressionArmSyntax: _ =\> \"Default\"|##########}"]
+7 -> 9 [label="WhenFalse"]
+10 [shape=record label="{BLOCK #10|1# LiteralOperation / LiteralExpressionSyntax: \"Default\"|0# FlowCaptureOperation / LiteralExpressionSyntax: \"Default\"|##########}"]
+9 -> 10 [label="Else"]
+11 [shape=record label="{BLOCK #11|## BranchValue ##|0# ObjectCreationOperation / SwitchExpressionSyntax: arg switch\n        \{\n            \{ RootValue: 0 \} =\> \"RootValue is zero\",\n            \{ A: \{ ValueA: 0 \} \} =\> \"A is zero\",\n            \{ B: \{ ValueB: 0 \} \} =\> \"A is zero\",\n            \{ C: \{ ValueC: 0 \} \} =\> \"A is zero\",\n            _ =\> \"Default\"\n        \}|##########}"]
+9 -> 11 [label="WhenFalse"]
+12 [shape=record label="{BLOCK #12|## BranchValue ##|0# FlowCaptureReferenceOperation / SwitchExpressionSyntax: arg switch\n        \{\n            \{ RootValue: 0 \} =\> \"RootValue is zero\",\n            \{ A: \{ ValueA: 0 \} \} =\> \"A is zero\",\n            \{ B: \{ ValueB: 0 \} \} =\> \"A is zero\",\n            \{ C: \{ ValueC: 0 \} \} =\> \"A is zero\",\n            _ =\> \"Default\"\n        \}|##########}"]
+2 -> 12
+4 -> 12
+6 -> 12
+8 -> 12
+10 -> 12
+13 [shape=record label="{EXIT #13}"]
+12 -> 13
+}

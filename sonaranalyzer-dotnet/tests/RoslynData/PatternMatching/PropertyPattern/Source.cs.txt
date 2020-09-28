@@ -1,0 +1,11 @@
+public string PropertyPattern(Wrapper arg)
+    {
+        return arg switch
+        {
+            { RootValue: 0 } => "RootValue is zero",
+            { A: { ValueA: 0 } } => "A is zero",
+            { B: { ValueB: 0 } } => "A is zero",
+            { C: { ValueC: 0 } } => "A is zero",
+            _ => "Default"
+        };
+    }

@@ -1,0 +1,9 @@
+public string TuplePattern((int, int) tuple)
+    {
+        return tuple switch
+        {
+            (0, _) => "First is zero",
+            (_, 0) => "Second is zero",
+            _ => "No zero"
+        };
+    }
