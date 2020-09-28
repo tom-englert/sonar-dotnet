@@ -30,6 +30,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.FlowAnalysis;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using RoslynCFG = Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph;
@@ -61,25 +62,38 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodName = (method as MethodDeclarationSyntax)?.Identifier.ValueText ?? c.Node.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText + ".ctor";
             var sourceFileName = Path.GetFileNameWithoutExtension(c.Node.GetLocation().GetLineSpan().Path);
             var languageVersion = c.Compilation.GetLanguageVersion().ToString();
-            var root = Path.GetFullPath(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @$"\..\..\..\..\RoslynData\{sourceFileName}\{methodName}\");
+            var root = Path.GetFullPath(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @$"\..\..\..\..\RoslynData\{sourceFileName}\");
             Directory.CreateDirectory(root);
-            File.WriteAllText(root + "Source.cs.txt", method.ToString());
-            if (CSharpControlFlowGraph.TryGet(method.Body, c.SemanticModel, out var cfg))
-            {
-                File.WriteAllText(root + $"CFG.{languageVersion}.SonarAnalyzer.txt", CfgSerializer.Serialize("SonarAnalyzer." + methodName, cfg));
-            }
-            var roslynCfg = RoslynCFG.Create(c.Node, c.SemanticModel);
-            File.WriteAllText(root + $"CFG.{languageVersion}.Roslyn.txt", Serialize("Roslyn." + methodName, roslynCfg));
+            var graph = Serialize(CSharpControlFlowGraph.Create((CSharpSyntaxNode)method.Body ?? method.ExpressionBody, c.SemanticModel), RoslynCFG.Create(c.Node, c.SemanticModel), methodName);
+            File.WriteAllText(root + $"CFG.{languageVersion}.{methodName}.txt",
+                $@"// http://viz-js.com/
+// https://dreampuf.github.io/GraphvizOnline/#{System.Net.WebUtility.UrlEncode(graph).Replace("+", "%20")}
+
+/*
+{method}
+*/
+
+{graph}");
         }
 
-        private string Serialize(string methodName, RoslynCFG cfg)
+        private string Serialize(IControlFlowGraph sonarCfg, RoslynCFG roslynCfg, string methodName)
         {
-            var stringBuilder = new StringBuilder();
-            using (var writer = new StringWriter(stringBuilder))
+            var sb = new StringBuilder();
+            var writer = new DotWriter(sb);
+            writer.WriteGraphStart(methodName, false);
+            if(sonarCfg == null)
             {
-                new RoslynCfgWalker(new DotWriter(writer)).Visit(methodName, cfg);
+                writer.WriteGraphStart("Sonar." + methodName, true);
+                writer.WriteNode("0", "N/A");
+                writer.WriteGraphEnd();
             }
-            return stringBuilder.ToString();
+            else
+            {
+                CfgSerializer.Serialize("Sonar." + methodName, sonarCfg, sb, true);
+            }
+            new RoslynCfgWalker(writer).Visit("Roslyn." + methodName, roslynCfg, true);
+            writer.WriteGraphEnd();
+            return sb.ToString();
         }
 
         private class RoslynCfgWalker
@@ -91,9 +105,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 this.writer = writer;
             }
 
-            public void Visit(string methodName, RoslynCFG cfg)
+            public void Visit(string methodName, RoslynCFG cfg, bool subgraph)
             {
-                writer.WriteGraphStart(methodName);
+                writer.WriteGraphStart(methodName, subgraph);
                 foreach (var block in cfg.Blocks)
                 {
                     Visit(block);
@@ -107,17 +121,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 WriteEdges(block);
             }
 
-            private void WriteNode(BasicBlock block, SyntaxNode terminator = null)
+            private void WriteNode(BasicBlock block)
             {
-                var header = block.Kind.ToString().ToUpperInvariant();
-                if (terminator != null)
-                {
-                    // shorten the text
-                    var terminatorType = terminator.Kind().ToString().Replace("Syntax", string.Empty);
-                    header += ":" + terminatorType;
-                }
-                header += " #" + block.Ordinal;
-                writer.WriteNode(block.Ordinal.ToString(), header, block.Operations.SelectMany(Serialize).Concat(SerializeBranchValue(block.BranchValue)).ToArray());
+                var header = block.Kind.ToString().ToUpperInvariant() + " #" + BlockId(block);
+                writer.WriteNode(BlockId(block), header, block.Operations.SelectMany(Serialize).Concat(SerializeBranchValue(block.BranchValue)).ToArray());
             }
 
             private IEnumerable<string> SerializeBranchValue(IOperation operation) =>
@@ -146,9 +153,12 @@ namespace SonarAnalyzer.Rules.CSharp
                             ? predecessor.Source.ConditionKind.ToString()
                             : "Else";
                     }
-                    writer.WriteEdge(predecessor.Source.Ordinal.ToString(), block.Ordinal.ToString(), label);
+                    writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), label);
                 }
             }
+
+            private string BlockId(BasicBlock block) =>
+                "R" + block.Ordinal; // To prevent colision with CfgSerializer in common subgraph
         }
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,9 +33,9 @@ namespace SonarAnalyzer.Helpers.UnitTest
         public void WriteGraphStart_Should_Write_Name()
         {
             var stringBuilder = new StringBuilder();
-            var writer = new DotWriter(new StringWriter(stringBuilder));
+            var writer = new DotWriter(stringBuilder);
 
-            writer.WriteGraphStart("test");
+            writer.WriteGraphStart("test", false);
 
             stringBuilder.ToString().Should().BeIgnoringLineEndings("digraph \"test\" {\r\n");
         }
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Helpers.UnitTest
         public void WriteGraphEnd_Test()
         {
             var stringBuilder = new StringBuilder();
-            var writer = new DotWriter(new StringWriter(stringBuilder));
+            var writer = new DotWriter(stringBuilder);
 
             writer.WriteGraphEnd();
 
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Helpers.UnitTest
         public void WriteNode_With_Items()
         {
             var stringBuilder = new StringBuilder();
-            var writer = new DotWriter(new StringWriter(stringBuilder));
+            var writer = new DotWriter(stringBuilder);
 
             writer.WriteNode("1", "header", "a", "b", "c");
 
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Helpers.UnitTest
         public void WriteNode_With_Encoding()
         {
             var stringBuilder = new StringBuilder();
-            var writer = new DotWriter(new StringWriter(stringBuilder));
+            var writer = new DotWriter(stringBuilder);
 
             writer.WriteNode("1", "header", "\r", "\n", "{", "}", "<", ">", "|", "\"");
 
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Helpers.UnitTest
         public void WriteNode_No_Items()
         {
             var stringBuilder = new StringBuilder();
-            var writer = new DotWriter(new StringWriter(stringBuilder));
+            var writer = new DotWriter(stringBuilder);
 
             writer.WriteNode("1", "header");
 

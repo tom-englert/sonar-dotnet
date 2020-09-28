@@ -33,16 +33,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public static string Serialize(string methodName, IControlFlowGraph cfg)
         {
             var stringBuilder = new StringBuilder();
-            using (var writer = new StringWriter(stringBuilder))
-            {
-                Serialize(methodName, cfg, writer);
-            }
+            Serialize(methodName, cfg, stringBuilder, false);
             return stringBuilder.ToString();
         }
 
-        public static void Serialize(string methodName, IControlFlowGraph cfg, TextWriter writer)
+        public static void Serialize(string methodName, IControlFlowGraph cfg, StringBuilder stringBuilder, bool subgraph)
         {
-            new CfgWalker(new DotWriter(writer)).Visit(methodName, cfg);
+            new CfgWalker(new DotWriter(stringBuilder)).Visit(methodName, cfg, subgraph);
         }
 
         private class CfgWalker
@@ -55,9 +52,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 this.writer = writer;
             }
 
-            public void Visit(string methodName, IControlFlowGraph cfg)
+            public void Visit(string methodName, IControlFlowGraph cfg, bool subgraph)
             {
-                this.writer.WriteGraphStart(methodName);
+                this.writer.WriteGraphStart(methodName, subgraph);
 
                 foreach (var block in cfg.Blocks)
                 {

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2020 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,28 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace SonarAnalyzer.Helpers
 {
     internal class DotWriter
     {
-        private readonly TextWriter writer;
+        private readonly StringBuilder stringBuilder;
 
-        public DotWriter(TextWriter writer)
+        public DotWriter(StringBuilder stringBuilder)
         {
-            this.writer = writer;
+            this.stringBuilder = stringBuilder;
         }
 
-        public void WriteGraphStart(string graphName)
+        public void WriteGraphStart(string graphName, bool subgraph)
         {
-            this.writer.WriteLine($"digraph \"{Encode(graphName)}\" {{");
+            stringBuilder.AppendLine(subgraph ? $"subgraph \"cluster_{Encode(graphName)}\" {{\nlabel = \"{Encode(graphName)}\"" : $"digraph \"{Encode(graphName)}\" {{");
         }
 
         public void WriteGraphEnd()
         {
-            this.writer.WriteLine("}");
+            stringBuilder.AppendLine("}");
         }
 
         public void WriteNode(string id, string header, params string[] items)
@@ -48,25 +48,25 @@ namespace SonarAnalyzer.Helpers
             // Columns/rows are created with pipe
             // New lines are inserted with \n; \r\n does not work well.
             // ID [shape=record label="{<header>|<line1>\n<line2>\n...}"]
-            this.writer.Write(id);
-            this.writer.Write(" [shape=record label=\"{" + header);
+            stringBuilder.Append(id);
+            stringBuilder.Append(" [shape=record label=\"{" + header);
             if (items.Length > 0)
             {
-                this.writer.Write("|");
-                this.writer.Write(string.Join("|", items.Select(Encode)));
+                stringBuilder.Append("|");
+                stringBuilder.Append(string.Join("|", items.Select(Encode)));
             }
-            this.writer.Write("}\"");
-            this.writer.WriteLine("]");
+            stringBuilder.Append("}\"");
+            stringBuilder.AppendLine("]");
         }
 
-        internal void WriteEdge(string startId, string endId, string label)
+        public void WriteEdge(string startId, string endId, string label)
         {
-            this.writer.Write($"{startId} -> {endId}");
+            stringBuilder.Append($"{startId} -> {endId}");
             if (!string.IsNullOrEmpty(label))
             {
-                this.writer.Write($" [label=\"{label}\"]");
+                stringBuilder.Append($" [label=\"{label}\"]");
             }
-            this.writer.WriteLine();
+            stringBuilder.AppendLine();
         }
 
         private static string Encode(string s) =>
