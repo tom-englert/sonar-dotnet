@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void Visit(RoslynCFG cfg, ControlFlowRegion region)
             {
-                writer.WriteGraphStart(region.Kind + " region", true);
+                writer.WriteGraphStart(region.Kind + " region" + (region.ExceptionType == null ? null : " " + region.ExceptionType), true);
                 foreach (var nested in region.NestedRegions)
                 {
                     Visit(cfg, nested);
