@@ -39,12 +39,13 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class RoslynCFGComparer : SonarDiagnosticAnalyzer
+    public sealed class RoslynCfgComparer : SonarDiagnosticAnalyzer
     {
         private const string DiagnosticId = "S-COMPARE";
         private const string MessageFormat = "CFG Comparer";
 
-        private static readonly DiagnosticDescriptor rule = new DiagnosticDescriptor(DiagnosticId, DiagnosticId, MessageFormat, "Debug", DiagnosticSeverity.Warning, true, null, null, DiagnosticDescriptorBuilder.MainSourceScopeTag);
+        private static readonly DiagnosticDescriptor rule = new DiagnosticDescriptor(DiagnosticId, DiagnosticId, MessageFormat, "Debug", DiagnosticSeverity.Warning, true, null, null,
+            DiagnosticDescriptorBuilder.MainSourceScopeTag);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -53,7 +54,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 ProcessBaseMethod,
                 SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration);
-            //FIXME: Expressions a dalsi syntaxe, ktere muzeme generovat
         }
 
         private void ProcessBaseMethod(SyntaxNodeAnalysisContext c)
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodName = (method as MethodDeclarationSyntax)?.Identifier.ValueText ?? c.Node.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText + ".ctor";
             var sourceFileName = Path.GetFileNameWithoutExtension(c.Node.GetLocation().GetLineSpan().Path);
             var languageVersion = c.Compilation.GetLanguageVersion().ToString();
-            var root = Path.GetFullPath(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @$"\..\..\..\..\RoslynData\{sourceFileName}\");
+            var root = Path.GetFullPath(Path.GetDirectoryName(GetType().Assembly.Location) + @$"\..\..\..\..\RoslynData\{sourceFileName}\");
             Directory.CreateDirectory(root);
             var graph = Serialize(CSharpControlFlowGraph.Create((CSharpSyntaxNode)method.Body ?? method.ExpressionBody, c.SemanticModel), RoslynCFG.Create(c.Node, c.SemanticModel), methodName);
             File.WriteAllText(root + $"CFG.{languageVersion}.{methodName}.txt",
@@ -76,12 +76,12 @@ namespace SonarAnalyzer.Rules.CSharp
 {graph}");
         }
 
-        private string Serialize(IControlFlowGraph sonarCfg, RoslynCFG roslynCfg, string methodName)
+        private static string Serialize(IControlFlowGraph sonarCfg, RoslynCFG roslynCfg, string methodName)
         {
             var sb = new StringBuilder();
             var writer = new DotWriter(sb);
             writer.WriteGraphStart(methodName, false);
-            if(sonarCfg == null)
+            if (sonarCfg == null)
             {
                 writer.WriteGraphStart("Sonar." + methodName, true);
                 writer.WriteNode("0", "N/A");
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public void Visit(string methodName, RoslynCFG cfg, bool subgraph)
             {
                 writer.WriteGraphStart(methodName, subgraph);
-                foreach(var region in cfg.Root.NestedRegions)
+                foreach (var region in cfg.Root.NestedRegions)
                 {
                     Visit(cfg, region);
                 }
@@ -144,20 +144,20 @@ namespace SonarAnalyzer.Rules.CSharp
             private void WriteNode(BasicBlock block)
             {
                 var header = block.Kind.ToString().ToUpperInvariant() + " #" + BlockId(block);
-                writer.WriteNode(BlockId(block), header, block.Operations.SelectMany(Serialize).Concat(SerializeBranchValue(block.BranchValue)).ToArray());
+                writer.WriteNode(BlockId(block), header, block.Operations.SelectMany(SerializeOperation).Concat(SerializeBranchValue(block.BranchValue)).ToArray());
             }
 
-            private IEnumerable<string> SerializeBranchValue(IOperation operation) =>
+            private static IEnumerable<string> SerializeBranchValue(IOperation operation) =>
                 operation == null
                     ? Enumerable.Empty<string>()
-                    : new[] { "## BranchValue ##" }.Concat(Serialize(operation));
+                    : new[] { "## BranchValue ##" }.Concat(SerializeOperation(operation));
 
-            private IEnumerable<string> Serialize(IOperation operation) => Serialize(0, operation).Concat(new[] { new string('#', 10) });
+            private static IEnumerable<string> SerializeOperation(IOperation operation) => SerializeOperation(0, operation).Concat(new[] { new string('#', 10) });
 
-            private IEnumerable<string> Serialize(int level, IOperation operation)
+            private static IEnumerable<string> SerializeOperation(int level, IOperation operation)
             {
                 var ret = new List<string>();
-                ret.AddRange(operation.Children.SelectMany(x => Serialize(level + 1, x)));
+                ret.AddRange(operation.Children.SelectMany(x => SerializeOperation(level + 1, x)));
                 ret.Add($"{level}# {operation.GetType().Name} / {operation.Syntax.GetType().Name}: {operation.Syntax}");
                 return ret;
             }
@@ -166,18 +166,23 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var predecessor in block.Predecessors)
                 {
-                    var label = "";
+                    var condition = "";
                     if (predecessor.Source.ConditionKind != ControlFlowConditionKind.None)
                     {
-                        label = predecessor == predecessor.Source.ConditionalSuccessor
+                        condition = predecessor == predecessor.Source.ConditionalSuccessor
                             ? predecessor.Source.ConditionKind.ToString()
                             : "Else";
                     }
-                    writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), label);
+                    var semantics = predecessor.Semantics == ControlFlowBranchSemantics.Regular ? null : predecessor.Semantics.ToString();
+                    writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), $"{semantics} {condition}".Trim());
+                }
+                if (block.FallThroughSuccessor != null && block.FallThroughSuccessor.Destination == null)
+                {
+                    writer.WriteEdge(BlockId(block), "NoDestination" + BlockId(block), block.FallThroughSuccessor.Semantics.ToString());
                 }
             }
 
-            private string BlockId(BasicBlock block) =>
+            private static string BlockId(BasicBlock block) =>
                 "R" + block.Ordinal; // To prevent colision with CfgSerializer in common subgraph
         }
     }
