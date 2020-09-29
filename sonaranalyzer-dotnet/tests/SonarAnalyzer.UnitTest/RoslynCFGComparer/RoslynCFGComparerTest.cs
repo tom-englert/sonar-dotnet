@@ -26,7 +26,7 @@ using SonarAnalyzer.UnitTest.TestFramework;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class RoslynCFGComparerTest
+    public class RoslynCfgComparerTest
     {
         [TestMethod]
         [DataRow("Branching")]
@@ -35,6 +35,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("PatternMatching")]
         [DataRow("Simple")]
         [DataRow("TryCatch")]
-        public void RoslynCFGComparer_RenderCFGs(string filename) => Verifier.VerifyAnalyzer(@$"TestCases\RoslynCFGComparer\{filename}.cs", new RoslynCFGComparer());
+        public void RoslynCfgComparer_RenderCfgs(string filename) => Verifier.VerifyAnalyzer(@$"TestCases\RoslynCFGComparer\{filename}.cs", new RoslynCfgComparer());
     }
 }
