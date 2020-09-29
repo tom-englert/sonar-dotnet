@@ -29,6 +29,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.FlowAnalysis;
+using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
@@ -158,9 +159,16 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var ret = new List<string>();
                 ret.AddRange(operation.Children.SelectMany(x => SerializeOperation(level + 1, x)));
-                ret.Add($"{level}# {operation.GetType().Name} / {operation.Syntax.GetType().Name}: {operation.Syntax}");
+                ret.Add($"{level}# {operation.GetType().Name}{OperationSuffix(operation)} / {operation.Syntax.GetType().Name}: {operation.Syntax}");
                 return ret;
             }
+
+            private static string OperationSuffix(IOperation op) =>
+                op switch
+                {
+                    IInvocationOperation invocation => "." + invocation.TargetMethod.Name,
+                    _ => null
+                };
 
             private void WriteEdges(BasicBlock block)
             {

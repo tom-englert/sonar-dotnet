@@ -1,11 +1,12 @@
 // http://viz-js.com/
-// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22VoidReturnBeforeExit%22+%7B%0D%0Asubgraph+%22cluster_Sonar.VoidReturnBeforeExit%22+%7B%0Alabel+%3D+%22Sonar.VoidReturnBeforeExit%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BJUMP%3AReturnStatement%7CLiteralExpressionSyntax%3A+%5C%22aaa%5C%22%7CVariableDeclaratorSyntax%3A+a+%3D+%5C%22aaa%5C%22%7D%22%5D%0D%0A0+-%3E+1%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.VoidReturnBeforeExit%22+%7B%0Alabel+%3D+%22Roslyn.VoidReturnBeforeExit%22%0D%0Asubgraph+%22cluster_LocalLifetime+region%22+%7B%0Alabel+%3D+%22LocalLifetime+region%22%0D%0AR1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R1%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+a+%3D+%5C%22aaa%5C%22%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+%5C%22aaa%5C%22%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+a+%3D+%5C%22aaa%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0+-%3E+R1%0D%0A%7D%0D%0AR0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23R0%7D%22%5D%0D%0AR2+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23R2%7D%22%5D%0D%0AR1+-%3E+R2%0D%0A%7D%0D%0A%7D%0D%0A
+// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22VoidReturnBeforeExit%22+%7B%0D%0Asubgraph+%22cluster_Sonar.VoidReturnBeforeExit%22+%7B%0Alabel+%3D+%22Sonar.VoidReturnBeforeExit%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BJUMP%3AReturnStatement%7CLiteralExpressionSyntax%3A+%5C%22aaa%5C%22%7CVariableDeclaratorSyntax%3A+a+%3D+%5C%22aaa%5C%22%7D%22%5D%0D%0A0+-%3E+1%0D%0A2+%5Bshape%3Drecord+label%3D%22%7BSIMPLE%7CLiteralExpressionSyntax%3A+%5C%22bbb%5C%22%7CVariableDeclaratorSyntax%3A+unreachable+%3D+%5C%22bbb%5C%22%7D%22%5D%0D%0A2+-%3E+1%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.VoidReturnBeforeExit%22+%7B%0Alabel+%3D+%22Roslyn.VoidReturnBeforeExit%22%0D%0Asubgraph+%22cluster_LocalLifetime+region%22+%7B%0Alabel+%3D+%22LocalLifetime+region%22%0D%0AR1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R1%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+a+%3D+%5C%22aaa%5C%22%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+%5C%22aaa%5C%22%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+a+%3D+%5C%22aaa%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0+-%3E+R1%0D%0AR2+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R2%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+unreachable+%3D+%5C%22bbb%5C%22%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+%5C%22bbb%5C%22%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+unreachable+%3D+%5C%22bbb%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0AR0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23R0%7D%22%5D%0D%0AR3+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23R3%7D%22%5D%0D%0AR1+-%3E+R3%0D%0AR2+-%3E+R3%0D%0A%7D%0D%0A%7D%0D%0A
 
 /*
 public void VoidReturnBeforeExit()
     {
         var a = "aaa";
         return;
+        var unreachable = "bbb";
     }
 */
 
@@ -14,6 +15,8 @@ subgraph "cluster_Sonar.VoidReturnBeforeExit" {
 label = "Sonar.VoidReturnBeforeExit"
 0 [shape=record label="{JUMP:ReturnStatement|LiteralExpressionSyntax: \"aaa\"|VariableDeclaratorSyntax: a = \"aaa\"}"]
 0 -> 1
+2 [shape=record label="{SIMPLE|LiteralExpressionSyntax: \"bbb\"|VariableDeclaratorSyntax: unreachable = \"bbb\"}"]
+2 -> 1
 1 [shape=record label="{EXIT}"]
 }
 subgraph "cluster_Roslyn.VoidReturnBeforeExit" {
@@ -22,9 +25,11 @@ subgraph "cluster_LocalLifetime region" {
 label = "LocalLifetime region"
 R1 [shape=record label="{BLOCK #R1|1# LocalReferenceOperation / VariableDeclaratorSyntax: a = \"aaa\"|1# LiteralOperation / LiteralExpressionSyntax: \"aaa\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: a = \"aaa\"|##########}"]
 R0 -> R1
+R2 [shape=record label="{BLOCK #R2|1# LocalReferenceOperation / VariableDeclaratorSyntax: unreachable = \"bbb\"|1# LiteralOperation / LiteralExpressionSyntax: \"bbb\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: unreachable = \"bbb\"|##########}"]
 }
 R0 [shape=record label="{ENTRY #R0}"]
-R2 [shape=record label="{EXIT #R2}"]
-R1 -> R2
+R3 [shape=record label="{EXIT #R3}"]
+R1 -> R3
+R2 -> R3
 }
 }

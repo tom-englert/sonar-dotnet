@@ -37,6 +37,7 @@ public class Sample
     {
         var a = "aaa";
         return;
+        var unreachable = "bbb";
     }
 
     public void Index(string[] arr)
