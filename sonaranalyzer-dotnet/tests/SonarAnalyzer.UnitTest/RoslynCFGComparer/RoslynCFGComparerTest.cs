@@ -29,6 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RoslynCfgComparerTest
     {
         [TestMethod]
+        [DataRow("AnonymousFunctions")]
         [DataRow("LocalFunctions")]
         [DataRow("Branching")]
         [DataRow("Loop")]

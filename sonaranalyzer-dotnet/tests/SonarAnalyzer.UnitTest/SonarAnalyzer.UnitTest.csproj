@@ -50,6 +50,7 @@
 
   <ItemGroup>
     <Compile Remove="TestCases\**\*" />
+    <Compile Include="TestCases\RoslynCFGComparer\AnonymousFunctions.cs" />
     <Compile Include="TestCases\RoslynCFGComparer\LocalFunctions.cs" />
     <None Include="TestCases\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

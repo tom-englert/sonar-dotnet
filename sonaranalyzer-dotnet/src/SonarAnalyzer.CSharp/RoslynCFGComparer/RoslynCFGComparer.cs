@@ -135,6 +135,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     new RoslynCfgWalker(writer, nestingLevel + 1).Visit($"{methodName}.{localFunction.Name}", localFunctionCfg, true);
                 }
 
+                foreach (var anonymousFunction in GetAnonymousFunctions(cfg))
+                {
+                    var anonymousFunctionCfg = cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunction);
+
+                    new RoslynCfgWalker(writer, nestingLevel + 1).Visit($"{methodName}.anonymous", anonymousFunctionCfg, true);
+                }
+
                 writer.WriteGraphEnd();
             }
 
@@ -212,6 +219,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 blockPrefix == '@'
                     ? "Root" + block.Ordinal
                     : blockPrefix.ToString() + block.Ordinal;
+
+            private static IEnumerable<IFlowAnonymousFunctionOperation> GetAnonymousFunctions(RoslynCFG cfg) =>
+                cfg.Blocks
+                   .SelectMany(block => block.Operations)
+                   .Concat(cfg.Blocks.Select(block => block.BranchValue).Where(op => op != null))
+                   .SelectMany(operation => operation.DescendantsAndSelf())
+                   .OfType<IFlowAnonymousFunctionOperation>();
         }
     }
 }
