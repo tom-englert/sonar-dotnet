@@ -1,0 +1,41 @@
+// http://viz-js.com/
+// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22LocalFunctionCapturesLocalVariables%22+%7B%0D%0Asubgraph+%22cluster_Sonar.LocalFunctionCapturesLocalVariables%22+%7B%0Alabel+%3D+%22Sonar.LocalFunctionCapturesLocalVariables%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BSIMPLE%7CLiteralExpressionSyntax%3A+1%7CVariableDeclaratorSyntax%3A+a+%3D+1%7CLiteralExpressionSyntax%3A+2%7CVariableDeclaratorSyntax%3A+b+%3D+2%7CIdentifierNameSyntax%3A+a%7CIdentifierNameSyntax%3A+b%7CBinaryExpressionSyntax%3A+a+%2B+b%7CVariableDeclaratorSyntax%3A+result+%3D+a+%2B+b%7D%22%5D%0D%0A0+-%3E+1%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.LocalFunctionCapturesLocalVariables%22+%7B%0Alabel+%3D+%22Roslyn.LocalFunctionCapturesLocalVariables%22%0D%0Asubgraph+%22cluster_LocalLifetime+region%22+%7B%0Alabel+%3D+%22LocalLifetime+region%22%0D%0ARoot1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23Root1%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+a+%3D+1%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+1%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+a+%3D+1%7C%23%23%23%23%23%23%23%23%23%23%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+b+%3D+2%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+2%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+b+%3D+2%7C%23%23%23%23%23%23%23%23%23%23%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+result+%3D+a+%2B+b%7C2%23+LocalReferenceOperation+%2F+IdentifierNameSyntax%3A+a%7C2%23+LocalReferenceOperation+%2F+IdentifierNameSyntax%3A+b%7C1%23+BinaryOperation+%2F+BinaryExpressionSyntax%3A+a+%2B+b%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+result+%3D+a+%2B+b%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot0+-%3E+Root1%0D%0A%7D%0D%0ARoot0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23Root0%7D%22%5D%0D%0ARoot2+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23Root2%7D%22%5D%0D%0ARoot1+-%3E+Root2%0D%0Asubgraph+%22cluster_Roslyn.LocalFunctionCapturesLocalVariables.Compute%22+%7B%0Alabel+%3D+%22Roslyn.LocalFunctionCapturesLocalVariables.Compute%22%0D%0AA0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23A0%7D%22%5D%0D%0AA1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23A1%7C%23%23+BranchValue+%23%23%7C1%23+LocalReferenceOperation+%2F+IdentifierNameSyntax%3A+a%7C1%23+LocalReferenceOperation+%2F+IdentifierNameSyntax%3A+b%7C0%23+BinaryOperation+%2F+BinaryExpressionSyntax%3A+a+%2B+b%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AA0+-%3E+A1%0D%0AA2+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23A2%7D%22%5D%0D%0AA1+-%3E+A2+%5Blabel%3D%22Return%22%5D%0D%0A%7D%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void LocalFunctionCapturesLocalVariables()
+        {
+            int a = 1, b = 2;
+
+            var result = a + b;
+
+            int Compute() => a + b;
+        }
+*/
+
+digraph "LocalFunctionCapturesLocalVariables" {
+subgraph "cluster_Sonar.LocalFunctionCapturesLocalVariables" {
+label = "Sonar.LocalFunctionCapturesLocalVariables"
+0 [shape=record label="{SIMPLE|LiteralExpressionSyntax: 1|VariableDeclaratorSyntax: a = 1|LiteralExpressionSyntax: 2|VariableDeclaratorSyntax: b = 2|IdentifierNameSyntax: a|IdentifierNameSyntax: b|BinaryExpressionSyntax: a + b|VariableDeclaratorSyntax: result = a + b}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.LocalFunctionCapturesLocalVariables" {
+label = "Roslyn.LocalFunctionCapturesLocalVariables"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+Root1 [shape=record label="{BLOCK #Root1|1# LocalReferenceOperation / VariableDeclaratorSyntax: a = 1|1# LiteralOperation / LiteralExpressionSyntax: 1|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: a = 1|##########|1# LocalReferenceOperation / VariableDeclaratorSyntax: b = 2|1# LiteralOperation / LiteralExpressionSyntax: 2|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: b = 2|##########|1# LocalReferenceOperation / VariableDeclaratorSyntax: result = a + b|2# LocalReferenceOperation / IdentifierNameSyntax: a|2# LocalReferenceOperation / IdentifierNameSyntax: b|1# BinaryOperation / BinaryExpressionSyntax: a + b|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: result = a + b|##########}"]
+Root0 -> Root1
+}
+Root0 [shape=record label="{ENTRY #Root0}"]
+Root2 [shape=record label="{EXIT #Root2}"]
+Root1 -> Root2
+subgraph "cluster_Roslyn.LocalFunctionCapturesLocalVariables.Compute" {
+label = "Roslyn.LocalFunctionCapturesLocalVariables.Compute"
+A0 [shape=record label="{ENTRY #A0}"]
+A1 [shape=record label="{BLOCK #A1|## BranchValue ##|1# LocalReferenceOperation / IdentifierNameSyntax: a|1# LocalReferenceOperation / IdentifierNameSyntax: b|0# BinaryOperation / BinaryExpressionSyntax: a + b|##########}"]
+A0 -> A1
+A2 [shape=record label="{EXIT #A2}"]
+A1 -> A2 [label="Return"]
+}
+}
+}

@@ -92,7 +92,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 CfgSerializer.Serialize("Sonar." + methodName, sonarCfg, sb, true);
             }
+
             new RoslynCfgWalker(writer).Visit("Roslyn." + methodName, roslynCfg, true);
+
             writer.WriteGraphEnd();
             return sb.ToString();
         }
@@ -101,23 +103,38 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly DotWriter writer;
             private readonly HashSet<BasicBlock> visited = new HashSet<BasicBlock>();
+            private readonly char blockPrefix= '@';
+            private readonly int nestingLevel;
 
-            public RoslynCfgWalker(DotWriter writer)
+            public RoslynCfgWalker(DotWriter writer, int nestingLevel = 0)
             {
                 this.writer = writer;
+                this.nestingLevel = nestingLevel;
+
+                blockPrefix = (char)(blockPrefix + nestingLevel);
             }
 
             public void Visit(string methodName, RoslynCFG cfg, bool subgraph)
             {
                 writer.WriteGraphStart(methodName, subgraph);
+
                 foreach (var region in cfg.Root.NestedRegions)
                 {
                     Visit(cfg, region);
                 }
+
                 foreach (var block in cfg.Blocks.Where(x => !visited.Contains(x)).ToArray())
                 {
                     Visit(block);
                 }
+
+                foreach (var localFunction in cfg.LocalFunctions)
+                {
+                    var localFunctionCfg = cfg.GetLocalFunctionControlFlowGraph(localFunction);
+
+                    new RoslynCfgWalker(writer, nestingLevel + 1).Visit($"{methodName}.{localFunction.Name}", localFunctionCfg, true);
+                }
+
                 writer.WriteGraphEnd();
             }
 
@@ -190,8 +207,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private static string BlockId(BasicBlock block) =>
-                "R" + block.Ordinal; // To prevent colision with CfgSerializer in common subgraph
+            private string BlockId(BasicBlock block) =>
+                // To prevent collision with CfgSerializer in common subgraph
+                blockPrefix == '@'
+                    ? "Root" + block.Ordinal
+                    : blockPrefix.ToString() + block.Ordinal;
         }
     }
 }

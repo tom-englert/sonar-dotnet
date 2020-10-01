@@ -1,5 +1,5 @@
 // http://viz-js.com/
-// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22F%22+%7B%0D%0Asubgraph+%22cluster_Sonar.F%22+%7B%0Alabel+%3D+%22Sonar.F%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.F%22+%7B%0Alabel+%3D+%22Roslyn.F%22%0D%0AR0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23R0%7D%22%5D%0D%0AR1+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23R1%7D%22%5D%0D%0AR0+-%3E+R1%0D%0A%7D%0D%0A%7D%0D%0A
+// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22F%22+%7B%0D%0Asubgraph+%22cluster_Sonar.F%22+%7B%0Alabel+%3D+%22Sonar.F%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.F%22+%7B%0Alabel+%3D+%22Roslyn.F%22%0D%0ARoot0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23Root0%7D%22%5D%0D%0ARoot1+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23Root1%7D%22%5D%0D%0ARoot0+-%3E+Root1%0D%0A%7D%0D%0A%7D%0D%0A
 
 /*
 private void F() { }
@@ -12,8 +12,8 @@ label = "Sonar.F"
 }
 subgraph "cluster_Roslyn.F" {
 label = "Roslyn.F"
-R0 [shape=record label="{ENTRY #R0}"]
-R1 [shape=record label="{EXIT #R1}"]
-R0 -> R1
+Root0 [shape=record label="{ENTRY #Root0}"]
+Root1 [shape=record label="{EXIT #Root1}"]
+Root0 -> Root1
 }
 }

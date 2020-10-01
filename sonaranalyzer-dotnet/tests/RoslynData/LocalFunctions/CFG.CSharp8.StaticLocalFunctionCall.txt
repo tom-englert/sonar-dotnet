@@ -1,0 +1,39 @@
+// http://viz-js.com/
+// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22StaticLocalFunctionCall%22+%7B%0D%0Asubgraph+%22cluster_Sonar.StaticLocalFunctionCall%22+%7B%0Alabel+%3D+%22Sonar.StaticLocalFunctionCall%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A+Compute%7CLiteralExpressionSyntax%3A+1%7CLiteralExpressionSyntax%3A+2%7CInvocationExpressionSyntax%3A+Compute(1%2C+2)%7CVariableDeclaratorSyntax%3A+result+%3D+Compute(1%2C+2)%7D%22%5D%0D%0A0+-%3E+1%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.StaticLocalFunctionCall%22+%7B%0Alabel+%3D+%22Roslyn.StaticLocalFunctionCall%22%0D%0Asubgraph+%22cluster_LocalLifetime+region%22+%7B%0Alabel+%3D+%22LocalLifetime+region%22%0D%0ARoot1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23Root1%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+result+%3D+Compute(1%2C+2)%7C3%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+1%7C2%23+ArgumentOperation+%2F+ArgumentSyntax%3A+1%7C3%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+2%7C2%23+ArgumentOperation+%2F+ArgumentSyntax%3A+2%7C1%23+InvocationOperation.Compute+%2F+InvocationExpressionSyntax%3A+Compute(1%2C+2)%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+result+%3D+Compute(1%2C+2)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot0+-%3E+Root1%0D%0A%7D%0D%0ARoot0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23Root0%7D%22%5D%0D%0ARoot2+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23Root2%7D%22%5D%0D%0ARoot1+-%3E+Root2%0D%0Asubgraph+%22cluster_Roslyn.StaticLocalFunctionCall.Compute%22+%7B%0Alabel+%3D+%22Roslyn.StaticLocalFunctionCall.Compute%22%0D%0AA0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23A0%7D%22%5D%0D%0AA1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23A1%7C%23%23+BranchValue+%23%23%7C1%23+ParameterReferenceOperation+%2F+IdentifierNameSyntax%3A+a%7C1%23+ParameterReferenceOperation+%2F+IdentifierNameSyntax%3A+b%7C0%23+BinaryOperation+%2F+BinaryExpressionSyntax%3A+a+%2B+b%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AA0+-%3E+A1%0D%0AA2+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23A2%7D%22%5D%0D%0AA1+-%3E+A2+%5Blabel%3D%22Return%22%5D%0D%0A%7D%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void StaticLocalFunctionCall()
+        {
+            var result = Compute(1, 2);
+
+            static int Compute(int a, int b) => a + b;
+        }
+*/
+
+digraph "StaticLocalFunctionCall" {
+subgraph "cluster_Sonar.StaticLocalFunctionCall" {
+label = "Sonar.StaticLocalFunctionCall"
+0 [shape=record label="{SIMPLE|IdentifierNameSyntax: Compute|LiteralExpressionSyntax: 1|LiteralExpressionSyntax: 2|InvocationExpressionSyntax: Compute(1, 2)|VariableDeclaratorSyntax: result = Compute(1, 2)}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.StaticLocalFunctionCall" {
+label = "Roslyn.StaticLocalFunctionCall"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+Root1 [shape=record label="{BLOCK #Root1|1# LocalReferenceOperation / VariableDeclaratorSyntax: result = Compute(1, 2)|3# LiteralOperation / LiteralExpressionSyntax: 1|2# ArgumentOperation / ArgumentSyntax: 1|3# LiteralOperation / LiteralExpressionSyntax: 2|2# ArgumentOperation / ArgumentSyntax: 2|1# InvocationOperation.Compute / InvocationExpressionSyntax: Compute(1, 2)|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: result = Compute(1, 2)|##########}"]
+Root0 -> Root1
+}
+Root0 [shape=record label="{ENTRY #Root0}"]
+Root2 [shape=record label="{EXIT #Root2}"]
+Root1 -> Root2
+subgraph "cluster_Roslyn.StaticLocalFunctionCall.Compute" {
+label = "Roslyn.StaticLocalFunctionCall.Compute"
+A0 [shape=record label="{ENTRY #A0}"]
+A1 [shape=record label="{BLOCK #A1|## BranchValue ##|1# ParameterReferenceOperation / IdentifierNameSyntax: a|1# ParameterReferenceOperation / IdentifierNameSyntax: b|0# BinaryOperation / BinaryExpressionSyntax: a + b|##########}"]
+A0 -> A1
+A2 [shape=record label="{EXIT #A2}"]
+A1 -> A2 [label="Return"]
+}
+}
+}

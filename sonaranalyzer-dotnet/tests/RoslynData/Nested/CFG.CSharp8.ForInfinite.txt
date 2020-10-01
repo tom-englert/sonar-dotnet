@@ -1,5 +1,5 @@
 // http://viz-js.com/
-// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22ForInfinite%22+%7B%0D%0Asubgraph+%22cluster_Sonar.ForInfinite%22+%7B%0Alabel+%3D+%22Sonar.ForInfinite%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BFOR%3AForStatement%7D%22%5D%0D%0A0+-%3E+1%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BBINARY%3AForStatement%7D%22%5D%0D%0A1+-%3E+2+%5Blabel%3D%22True%22%5D%0D%0A1+-%3E+3+%5Blabel%3D%22False%22%5D%0D%0A2+%5Bshape%3Drecord+label%3D%22%7BJUMP%3ABreakStatement%7CLiteralExpressionSyntax%3A+%5C%22Value%5C%22%7CVariableDeclaratorSyntax%3A+value+%3D+%5C%22Value%5C%22%7D%22%5D%0D%0A2+-%3E+3%0D%0A3+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.ForInfinite%22+%7B%0Alabel+%3D+%22Roslyn.ForInfinite%22%0D%0Asubgraph+%22cluster_LocalLifetime+region%22+%7B%0Alabel+%3D+%22LocalLifetime+region%22%0D%0AR1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R1%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+value+%3D+%5C%22Value%5C%22%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+%5C%22Value%5C%22%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+value+%3D+%5C%22Value%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0+-%3E+R1%0D%0A%7D%0D%0AR0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23R0%7D%22%5D%0D%0AR2+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23R2%7D%22%5D%0D%0AR1+-%3E+R2%0D%0A%7D%0D%0A%7D%0D%0A
+// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22ForInfinite%22+%7B%0D%0Asubgraph+%22cluster_Sonar.ForInfinite%22+%7B%0Alabel+%3D+%22Sonar.ForInfinite%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BFOR%3AForStatement%7D%22%5D%0D%0A0+-%3E+1%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BBINARY%3AForStatement%7D%22%5D%0D%0A1+-%3E+2+%5Blabel%3D%22True%22%5D%0D%0A1+-%3E+3+%5Blabel%3D%22False%22%5D%0D%0A2+%5Bshape%3Drecord+label%3D%22%7BJUMP%3ABreakStatement%7CLiteralExpressionSyntax%3A+%5C%22Value%5C%22%7CVariableDeclaratorSyntax%3A+value+%3D+%5C%22Value%5C%22%7D%22%5D%0D%0A2+-%3E+3%0D%0A3+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.ForInfinite%22+%7B%0Alabel+%3D+%22Roslyn.ForInfinite%22%0D%0Asubgraph+%22cluster_LocalLifetime+region%22+%7B%0Alabel+%3D+%22LocalLifetime+region%22%0D%0ARoot1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23Root1%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+value+%3D+%5C%22Value%5C%22%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+%5C%22Value%5C%22%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+value+%3D+%5C%22Value%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot0+-%3E+Root1%0D%0A%7D%0D%0ARoot0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23Root0%7D%22%5D%0D%0ARoot2+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23Root2%7D%22%5D%0D%0ARoot1+-%3E+Root2%0D%0A%7D%0D%0A%7D%0D%0A
 
 /*
 public void ForInfinite()
@@ -28,11 +28,11 @@ subgraph "cluster_Roslyn.ForInfinite" {
 label = "Roslyn.ForInfinite"
 subgraph "cluster_LocalLifetime region" {
 label = "LocalLifetime region"
-R1 [shape=record label="{BLOCK #R1|1# LocalReferenceOperation / VariableDeclaratorSyntax: value = \"Value\"|1# LiteralOperation / LiteralExpressionSyntax: \"Value\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: value = \"Value\"|##########}"]
-R0 -> R1
+Root1 [shape=record label="{BLOCK #Root1|1# LocalReferenceOperation / VariableDeclaratorSyntax: value = \"Value\"|1# LiteralOperation / LiteralExpressionSyntax: \"Value\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: value = \"Value\"|##########}"]
+Root0 -> Root1
 }
-R0 [shape=record label="{ENTRY #R0}"]
-R2 [shape=record label="{EXIT #R2}"]
-R1 -> R2
+Root0 [shape=record label="{ENTRY #Root0}"]
+Root2 [shape=record label="{EXIT #Root2}"]
+Root1 -> Root2
 }
 }

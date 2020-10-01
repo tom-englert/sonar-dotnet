@@ -1,5 +1,5 @@
 // http://viz-js.com/
-// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22WhileTrueBreak%22+%7B%0D%0Asubgraph+%22cluster_Sonar.WhileTrueBreak%22+%7B%0Alabel+%3D+%22Sonar.WhileTrueBreak%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BBINARY%3ATrueLiteralExpression%7CLiteralExpressionSyntax%3A+true%7D%22%5D%0D%0A0+-%3E+1+%5Blabel%3D%22True%22%5D%0D%0A0+-%3E+2+%5Blabel%3D%22False%22%5D%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BJUMP%3ABreakStatement%7CLiteralExpressionSyntax%3A+%5C%22BeforeBreak%5C%22%7CVariableDeclaratorSyntax%3A+beforeBreak+%3D+%5C%22BeforeBreak%5C%22%7D%22%5D%0D%0A1+-%3E+2%0D%0A3+%5Bshape%3Drecord+label%3D%22%7BSIMPLE%7CLiteralExpressionSyntax%3A+%5C%22AfterBreak%5C%22%7CVariableDeclaratorSyntax%3A+afterBreak+%3D+%5C%22AfterBreak%5C%22%7D%22%5D%0D%0A3+-%3E+0%0D%0A2+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.WhileTrueBreak%22+%7B%0Alabel+%3D+%22Roslyn.WhileTrueBreak%22%0D%0Asubgraph+%22cluster_LocalLifetime+region%22+%7B%0Alabel+%3D+%22LocalLifetime+region%22%0D%0AR2+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R2%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+beforeBreak+%3D+%5C%22BeforeBreak%5C%22%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+%5C%22BeforeBreak%5C%22%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+beforeBreak+%3D+%5C%22BeforeBreak%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR1+-%3E+R2+%5Blabel%3D%22Else%22%5D%0D%0AR3+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R3%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+afterBreak+%3D+%5C%22AfterBreak%5C%22%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+%5C%22AfterBreak%5C%22%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+afterBreak+%3D+%5C%22AfterBreak%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0AR0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23R0%7D%22%5D%0D%0AR1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23R1%7C%23%23+BranchValue+%23%23%7C0%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+true%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0AR0+-%3E+R1%0D%0AR3+-%3E+R1%0D%0AR4+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23R4%7D%22%5D%0D%0AR1+-%3E+R4+%5Blabel%3D%22WhenFalse%22%5D%0D%0AR2+-%3E+R4%0D%0A%7D%0D%0A%7D%0D%0A
+// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22WhileTrueBreak%22+%7B%0D%0Asubgraph+%22cluster_Sonar.WhileTrueBreak%22+%7B%0Alabel+%3D+%22Sonar.WhileTrueBreak%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BBINARY%3ATrueLiteralExpression%7CLiteralExpressionSyntax%3A+true%7D%22%5D%0D%0A0+-%3E+1+%5Blabel%3D%22True%22%5D%0D%0A0+-%3E+2+%5Blabel%3D%22False%22%5D%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BJUMP%3ABreakStatement%7CLiteralExpressionSyntax%3A+%5C%22BeforeBreak%5C%22%7CVariableDeclaratorSyntax%3A+beforeBreak+%3D+%5C%22BeforeBreak%5C%22%7D%22%5D%0D%0A1+-%3E+2%0D%0A3+%5Bshape%3Drecord+label%3D%22%7BSIMPLE%7CLiteralExpressionSyntax%3A+%5C%22AfterBreak%5C%22%7CVariableDeclaratorSyntax%3A+afterBreak+%3D+%5C%22AfterBreak%5C%22%7D%22%5D%0D%0A3+-%3E+0%0D%0A2+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.WhileTrueBreak%22+%7B%0Alabel+%3D+%22Roslyn.WhileTrueBreak%22%0D%0Asubgraph+%22cluster_LocalLifetime+region%22+%7B%0Alabel+%3D+%22LocalLifetime+region%22%0D%0ARoot2+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23Root2%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+beforeBreak+%3D+%5C%22BeforeBreak%5C%22%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+%5C%22BeforeBreak%5C%22%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+beforeBreak+%3D+%5C%22BeforeBreak%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot1+-%3E+Root2+%5Blabel%3D%22Else%22%5D%0D%0ARoot3+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23Root3%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+afterBreak+%3D+%5C%22AfterBreak%5C%22%7C1%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+%5C%22AfterBreak%5C%22%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+afterBreak+%3D+%5C%22AfterBreak%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0A%7D%0D%0ARoot0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23Root0%7D%22%5D%0D%0ARoot1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23Root1%7C%23%23+BranchValue+%23%23%7C0%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+true%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot0+-%3E+Root1%0D%0ARoot3+-%3E+Root1%0D%0ARoot4+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23Root4%7D%22%5D%0D%0ARoot1+-%3E+Root4+%5Blabel%3D%22WhenFalse%22%5D%0D%0ARoot2+-%3E+Root4%0D%0A%7D%0D%0A%7D%0D%0A
 
 /*
 public void WhileTrueBreak()
@@ -29,16 +29,16 @@ subgraph "cluster_Roslyn.WhileTrueBreak" {
 label = "Roslyn.WhileTrueBreak"
 subgraph "cluster_LocalLifetime region" {
 label = "LocalLifetime region"
-R2 [shape=record label="{BLOCK #R2|1# LocalReferenceOperation / VariableDeclaratorSyntax: beforeBreak = \"BeforeBreak\"|1# LiteralOperation / LiteralExpressionSyntax: \"BeforeBreak\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: beforeBreak = \"BeforeBreak\"|##########}"]
-R1 -> R2 [label="Else"]
-R3 [shape=record label="{BLOCK #R3|1# LocalReferenceOperation / VariableDeclaratorSyntax: afterBreak = \"AfterBreak\"|1# LiteralOperation / LiteralExpressionSyntax: \"AfterBreak\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: afterBreak = \"AfterBreak\"|##########}"]
+Root2 [shape=record label="{BLOCK #Root2|1# LocalReferenceOperation / VariableDeclaratorSyntax: beforeBreak = \"BeforeBreak\"|1# LiteralOperation / LiteralExpressionSyntax: \"BeforeBreak\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: beforeBreak = \"BeforeBreak\"|##########}"]
+Root1 -> Root2 [label="Else"]
+Root3 [shape=record label="{BLOCK #Root3|1# LocalReferenceOperation / VariableDeclaratorSyntax: afterBreak = \"AfterBreak\"|1# LiteralOperation / LiteralExpressionSyntax: \"AfterBreak\"|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: afterBreak = \"AfterBreak\"|##########}"]
 }
-R0 [shape=record label="{ENTRY #R0}"]
-R1 [shape=record label="{BLOCK #R1|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: true|##########}"]
-R0 -> R1
-R3 -> R1
-R4 [shape=record label="{EXIT #R4}"]
-R1 -> R4 [label="WhenFalse"]
-R2 -> R4
+Root0 [shape=record label="{ENTRY #Root0}"]
+Root1 [shape=record label="{BLOCK #Root1|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: true|##########}"]
+Root0 -> Root1
+Root3 -> Root1
+Root4 [shape=record label="{EXIT #Root4}"]
+Root1 -> Root4 [label="WhenFalse"]
+Root2 -> Root4
 }
 }

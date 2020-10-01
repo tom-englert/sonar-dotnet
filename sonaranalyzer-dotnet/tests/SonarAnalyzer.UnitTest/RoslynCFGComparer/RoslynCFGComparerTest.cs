@@ -29,12 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class RoslynCfgComparerTest
     {
         [TestMethod]
+        [DataRow("LocalFunctions")]
         [DataRow("Branching")]
         [DataRow("Loop")]
         [DataRow("Nested")]
         [DataRow("PatternMatching")]
         [DataRow("Simple")]
         [DataRow("TryCatch")]
-        public void RoslynCfgComparer_RenderCfgs(string filename) => Verifier.VerifyAnalyzer(@$"TestCases\RoslynCFGComparer\{filename}.cs", new RoslynCfgComparer());
+        public void RoslynCfgComparer_RenderCfgs(string filename) =>
+            Verifier.VerifyAnalyzer(@$"TestCases\RoslynCFGComparer\{filename}.cs", new RoslynCfgComparer());
     }
 }
