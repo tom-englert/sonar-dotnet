@@ -20,16 +20,15 @@
 
 using System.Text;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class RoslynCfgComparer : RoslynCfgComparerBase
     {
@@ -38,30 +37,18 @@ namespace SonarAnalyzer.Rules.CSharp
             // Output is rendered to Solution/Tests/RoslynData project
             context.RegisterSyntaxNodeActionInNonGenerated(
                 ProcessBaseMethod,
-                SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration);
+                SyntaxKind.FunctionBlock, SyntaxKind.SubBlock);
         }
 
         internal override string LanguageVersion(Compilation c) =>
-            c.GetLanguageVersion().ToString();
+            ((VisualBasicCompilation)c).LanguageVersion.ToString();
 
         internal override string MethodName(SyntaxNodeAnalysisContext c) =>
-            (c.Node as MethodDeclarationSyntax)?.Identifier.ValueText ?? c.Node.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText + ".ctor";
+            (c.Node as MethodBlockSyntax)?.SubOrFunctionStatement.Identifier.ValueText ?? c.Node.FirstAncestorOrSelf<ClassBlockSyntax>().BlockStatement.Identifier.ValueText + ".ctor";
 
         internal override void SerializeSonarCfg(SyntaxNodeAnalysisContext c, DotWriter writer, StringBuilder sb)
         {
-            var method = (BaseMethodDeclarationSyntax)c.Node;
-            var sonarCfg = CSharpControlFlowGraph.Create((CSharpSyntaxNode)method.Body ?? method.ExpressionBody, c.SemanticModel);
-            var methodName = MethodName(c);
-            if (sonarCfg == null)
-            {
-                writer.WriteGraphStart("Sonar." + methodName, true);
-                writer.WriteNode("0", "N/A");
-                writer.WriteGraphEnd();
-            }
-            else
-            {
-                CfgSerializer.Serialize("Sonar." + methodName, sonarCfg, sb, true);
-            }
+            // Nothing to see here
         }
     }
 }

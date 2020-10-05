@@ -1,0 +1,54 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22ConditionConditionalAccessAndTernary%22%20%7B%0D%0Asubgraph%20%22cluster_Roslyn.ConditionConditionalAccessAndTernary%22%20%7B%0Alabel%20%3D%20%22Roslyn.ConditionConditionalAccessAndTernary%22%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0ARoot1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root1%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C1%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C0%23%20IsNullOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot0%20-%3E%20Root1%0D%0ARoot2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root2%7C2%23%20FlowCaptureReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C1%23%20InvocationOperation.ToString%20%2F%20MemberAccessExpressionSyntax%3A%20.ToString%7C0%23%20FlowCaptureOperation%20%2F%20MemberAccessExpressionSyntax%3A%20.ToString%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot1%20-%3E%20Root2%20%5Blabel%3D%22Else%22%5D%0D%0A%7D%0D%0ARoot3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root3%7C1%23%20DefaultValueOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot1%20-%3E%20Root3%20%5Blabel%3D%22WhenTrue%22%5D%0D%0ARoot4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root4%7C%23%23%20BranchValue%20%23%23%7C2%23%20FlowCaptureReferenceOperation%20%2F%20ConditionalAccessExpressionSyntax%3A%20A%3F.ToString%7C1%23%20ArgumentOperation%20%2F%20SimpleArgumentSyntax%3A%20A%3F.ToString%7C0%23%20InvocationOperation.IsNullOrEmpty%20%2F%20InvocationExpressionSyntax%3A%20String.IsNullOrEmpty(A%3F.ToString)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot2%20-%3E%20Root4%0D%0ARoot3%20-%3E%20Root4%0D%0A%7D%0D%0Asubgraph%20%22cluster_LocalLifetime%20region%22%20%7B%0Alabel%20%3D%20%22LocalLifetime%20region%22%0D%0ARoot5%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root5%7C%23%23%20BranchValue%20%23%23%7C0%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20Condition%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot4%20-%3E%20Root5%20%5Blabel%3D%22Else%22%5D%0D%0ARoot6%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root6%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot5%20-%3E%20Root6%20%5Blabel%3D%22Else%22%5D%0D%0ARoot7%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root7%7C1%23%20ParameterReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20B%7C0%23%20FlowCaptureOperation%20%2F%20IdentifierNameSyntax%3A%20B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot5%20-%3E%20Root7%20%5Blabel%3D%22WhenFalse%22%5D%0D%0ARoot8%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root8%7C%23%23%20BranchValue%20%23%23%7C0%23%20FlowCaptureReferenceOperation%20%2F%20TernaryConditionalExpressionSyntax%3A%20If(Condition%2C%20A%2C%20B)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot6%20-%3E%20Root8%0D%0ARoot7%20-%3E%20Root8%0D%0A%7D%0D%0ARoot9%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root9%7C%23%23%20BranchValue%20%23%23%7C0%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22Lorem%20Ipsum%5C%22%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot4%20-%3E%20Root9%20%5Blabel%3D%22WhenFalse%22%5D%0D%0A%7D%0D%0ARoot0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23Root0%7D%22%5D%0D%0ARoot10%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23Root10%7D%22%5D%0D%0ARoot8%20-%3E%20Root10%20%5Blabel%3D%22Return%22%5D%0D%0ARoot9%20-%3E%20Root10%20%5Blabel%3D%22Return%22%5D%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+Public Function ConditionConditionalAccessAndTernary(Condition As Boolean, A As String, B As String) As String
+        If String.IsNullOrEmpty(A?.ToString) Then
+            Return If(Condition, A, B)
+        Else
+            Return "Lorem Ipsum"
+        End If
+    End Function
+*/
+
+digraph "ConditionConditionalAccessAndTernary" {
+subgraph "cluster_Roslyn.ConditionConditionalAccessAndTernary" {
+label = "Roslyn.ConditionConditionalAccessAndTernary"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+Root1 [shape=record label="{BLOCK #Root1|1# ParameterReferenceOperation / IdentifierNameSyntax: A|0# FlowCaptureOperation / IdentifierNameSyntax: A|##########|## BranchValue ##|1# FlowCaptureReferenceOperation / IdentifierNameSyntax: A|0# IsNullOperation / IdentifierNameSyntax: A|##########}"]
+Root0 -> Root1
+Root2 [shape=record label="{BLOCK #Root2|2# FlowCaptureReferenceOperation / IdentifierNameSyntax: A|1# InvocationOperation.ToString / MemberAccessExpressionSyntax: .ToString|0# FlowCaptureOperation / MemberAccessExpressionSyntax: .ToString|##########}"]
+Root1 -> Root2 [label="Else"]
+}
+Root3 [shape=record label="{BLOCK #Root3|1# DefaultValueOperation / IdentifierNameSyntax: A|0# FlowCaptureOperation / IdentifierNameSyntax: A|##########}"]
+Root1 -> Root3 [label="WhenTrue"]
+Root4 [shape=record label="{BLOCK #Root4|## BranchValue ##|2# FlowCaptureReferenceOperation / ConditionalAccessExpressionSyntax: A?.ToString|1# ArgumentOperation / SimpleArgumentSyntax: A?.ToString|0# InvocationOperation.IsNullOrEmpty / InvocationExpressionSyntax: String.IsNullOrEmpty(A?.ToString)|##########}"]
+Root2 -> Root4
+Root3 -> Root4
+}
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+Root5 [shape=record label="{BLOCK #Root5|## BranchValue ##|0# ParameterReferenceOperation / IdentifierNameSyntax: Condition|##########}"]
+Root4 -> Root5 [label="Else"]
+Root6 [shape=record label="{BLOCK #Root6|1# ParameterReferenceOperation / IdentifierNameSyntax: A|0# FlowCaptureOperation / IdentifierNameSyntax: A|##########}"]
+Root5 -> Root6 [label="Else"]
+Root7 [shape=record label="{BLOCK #Root7|1# ParameterReferenceOperation / IdentifierNameSyntax: B|0# FlowCaptureOperation / IdentifierNameSyntax: B|##########}"]
+Root5 -> Root7 [label="WhenFalse"]
+Root8 [shape=record label="{BLOCK #Root8|## BranchValue ##|0# FlowCaptureReferenceOperation / TernaryConditionalExpressionSyntax: If(Condition, A, B)|##########}"]
+Root6 -> Root8
+Root7 -> Root8
+}
+Root9 [shape=record label="{BLOCK #Root9|## BranchValue ##|0# LiteralOperation / LiteralExpressionSyntax: \"Lorem Ipsum\"|##########}"]
+Root4 -> Root9 [label="WhenFalse"]
+}
+Root0 [shape=record label="{ENTRY #Root0}"]
+Root10 [shape=record label="{EXIT #Root10}"]
+Root8 -> Root10 [label="Return"]
+Root9 -> Root10 [label="Return"]
+}
+}

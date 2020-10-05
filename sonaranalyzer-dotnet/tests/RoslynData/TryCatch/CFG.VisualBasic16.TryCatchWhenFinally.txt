@@ -1,0 +1,58 @@
+// http://viz-js.com/
+// https://edotor.net/?engine=dot#digraph%20%22TryCatchWhenFinally%22%20%7B%0D%0Asubgraph%20%22cluster_Roslyn.TryCatchWhenFinally%22%20%7B%0Alabel%20%3D%20%22Roslyn.TryCatchWhenFinally%22%0D%0Asubgraph%20%22cluster_TryAndFinally%20region%22%20%7B%0Alabel%20%3D%20%22TryAndFinally%20region%22%0D%0Asubgraph%20%22cluster_Try%20region%22%20%7B%0Alabel%20%3D%20%22Try%20region%22%0D%0Asubgraph%20%22cluster_TryAndCatch%20region%22%20%7B%0Alabel%20%3D%20%22TryAndCatch%20region%22%0D%0Asubgraph%20%22cluster_Try%20region%22%20%7B%0Alabel%20%3D%20%22Try%20region%22%0D%0ARoot1%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root1%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20A%7C1%23%20InvocationOperation.A%20%2F%20InvocationExpressionSyntax%3A%20A()%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20A()%7C%23%23%23%23%23%23%23%23%23%23%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20B%7C1%23%20InvocationOperation.B%20%2F%20InvocationExpressionSyntax%3A%20B()%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20B()%7C%23%23%23%23%23%23%23%23%23%23%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20C%7C1%23%20InvocationOperation.C%20%2F%20InvocationExpressionSyntax%3A%20C()%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20C()%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot0%20-%3E%20Root1%0D%0A%7D%0D%0Asubgraph%20%22cluster_FilterAndHandler%20region%20System.Exception%22%20%7B%0Alabel%20%3D%20%22FilterAndHandler%20region%20System.Exception%22%0D%0Asubgraph%20%22cluster_Filter%20region%20System.Exception%22%20%7B%0Alabel%20%3D%20%22Filter%20region%20System.Exception%22%0D%0ARoot2%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root2%7C1%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20Ex%7C1%23%20CaughtExceptionOperation%20%2F%20IdentifierNameSyntax%3A%20Ex%7C0%23%20SimpleAssignmentOperation%20%2F%20IdentifierNameSyntax%3A%20Ex%7C%23%23%23%23%23%23%23%23%23%23%7C%23%23%20BranchValue%20%23%23%7C2%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20Ex%7C1%23%20PropertyReferenceOperation%20%2F%20MemberAccessExpressionSyntax%3A%20Ex.Message%7C2%23%20LiteralOperation%20%2F%20LiteralExpressionSyntax%3A%20%5C%22memory%5C%22%7C1%23%20ArgumentOperation%20%2F%20SimpleArgumentSyntax%3A%20%5C%22memory%5C%22%7C0%23%20InvocationOperation.Contains%20%2F%20InvocationExpressionSyntax%3A%20Ex.Message.Contains(%5C%22memory%5C%22)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot2%20-%3E%20NoDestinationRoot2%20%5Blabel%3D%22StructuredExceptionHandling%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Catch%20region%20System.Exception%22%20%7B%0Alabel%20%3D%20%22Catch%20region%20System.Exception%22%0D%0ARoot3%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root3%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20Handle%7C3%23%20LocalReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20Ex%7C2%23%20ArgumentOperation%20%2F%20SimpleArgumentSyntax%3A%20Ex%7C1%23%20InvocationOperation.Handle%20%2F%20InvocationExpressionSyntax%3A%20Handle(Ex)%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20Handle(Ex)%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot2%20-%3E%20Root3%20%5Blabel%3D%22WhenTrue%22%5D%0D%0A%7D%0D%0A%7D%0D%0A%7D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Finally%20region%22%20%7B%0Alabel%20%3D%20%22Finally%20region%22%0D%0ARoot4%20%5Bshape%3Drecord%20label%3D%22%7BBLOCK%20%23Root4%7C2%23%20InstanceReferenceOperation%20%2F%20IdentifierNameSyntax%3A%20F%7C1%23%20InvocationOperation.F%20%2F%20InvocationExpressionSyntax%3A%20F()%7C0%23%20ExpressionStatementOperation%20%2F%20ExpressionStatementSyntax%3A%20F()%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot4%20-%3E%20NoDestinationRoot4%20%5Blabel%3D%22StructuredExceptionHandling%22%5D%0D%0A%7D%0D%0A%7D%0D%0ARoot0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23Root0%7D%22%5D%0D%0ARoot5%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23Root5%7D%22%5D%0D%0ARoot1%20-%3E%20Root5%0D%0ARoot3%20-%3E%20Root5%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+Public Sub TryCatchWhenFinally()
+        Try
+            A()
+            B()
+            C()
+        Catch Ex As Exception When Ex.Message.Contains("memory")
+            Handle(Ex)
+        Finally
+            F()
+        End Try
+    End Sub
+*/
+
+digraph "TryCatchWhenFinally" {
+subgraph "cluster_Roslyn.TryCatchWhenFinally" {
+label = "Roslyn.TryCatchWhenFinally"
+subgraph "cluster_TryAndFinally region" {
+label = "TryAndFinally region"
+subgraph "cluster_Try region" {
+label = "Try region"
+subgraph "cluster_TryAndCatch region" {
+label = "TryAndCatch region"
+subgraph "cluster_Try region" {
+label = "Try region"
+Root1 [shape=record label="{BLOCK #Root1|2# InstanceReferenceOperation / IdentifierNameSyntax: A|1# InvocationOperation.A / InvocationExpressionSyntax: A()|0# ExpressionStatementOperation / ExpressionStatementSyntax: A()|##########|2# InstanceReferenceOperation / IdentifierNameSyntax: B|1# InvocationOperation.B / InvocationExpressionSyntax: B()|0# ExpressionStatementOperation / ExpressionStatementSyntax: B()|##########|2# InstanceReferenceOperation / IdentifierNameSyntax: C|1# InvocationOperation.C / InvocationExpressionSyntax: C()|0# ExpressionStatementOperation / ExpressionStatementSyntax: C()|##########}"]
+Root0 -> Root1
+}
+subgraph "cluster_FilterAndHandler region System.Exception" {
+label = "FilterAndHandler region System.Exception"
+subgraph "cluster_Filter region System.Exception" {
+label = "Filter region System.Exception"
+Root2 [shape=record label="{BLOCK #Root2|1# LocalReferenceOperation / IdentifierNameSyntax: Ex|1# CaughtExceptionOperation / IdentifierNameSyntax: Ex|0# SimpleAssignmentOperation / IdentifierNameSyntax: Ex|##########|## BranchValue ##|2# LocalReferenceOperation / IdentifierNameSyntax: Ex|1# PropertyReferenceOperation / MemberAccessExpressionSyntax: Ex.Message|2# LiteralOperation / LiteralExpressionSyntax: \"memory\"|1# ArgumentOperation / SimpleArgumentSyntax: \"memory\"|0# InvocationOperation.Contains / InvocationExpressionSyntax: Ex.Message.Contains(\"memory\")|##########}"]
+Root2 -> NoDestinationRoot2 [label="StructuredExceptionHandling"]
+}
+subgraph "cluster_Catch region System.Exception" {
+label = "Catch region System.Exception"
+Root3 [shape=record label="{BLOCK #Root3|2# InstanceReferenceOperation / IdentifierNameSyntax: Handle|3# LocalReferenceOperation / IdentifierNameSyntax: Ex|2# ArgumentOperation / SimpleArgumentSyntax: Ex|1# InvocationOperation.Handle / InvocationExpressionSyntax: Handle(Ex)|0# ExpressionStatementOperation / ExpressionStatementSyntax: Handle(Ex)|##########}"]
+Root2 -> Root3 [label="WhenTrue"]
+}
+}
+}
+}
+subgraph "cluster_Finally region" {
+label = "Finally region"
+Root4 [shape=record label="{BLOCK #Root4|2# InstanceReferenceOperation / IdentifierNameSyntax: F|1# InvocationOperation.F / InvocationExpressionSyntax: F()|0# ExpressionStatementOperation / ExpressionStatementSyntax: F()|##########}"]
+Root4 -> NoDestinationRoot4 [label="StructuredExceptionHandling"]
+}
+}
+Root0 [shape=record label="{ENTRY #Root0}"]
+Root5 [shape=record label="{EXIT #Root5}"]
+Root1 -> Root5
+Root3 -> Root5
+}
+}

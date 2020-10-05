@@ -1,4 +1,6 @@
 ﻿extern alias csharp;
+
+using System.Linq;
 /*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2020 SonarSource SA
@@ -37,7 +39,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow("PatternMatching")]
         [DataRow("Simple")]
         [DataRow("TryCatch")]
-        public void RoslynCfgComparer_RenderCfgs(string filename) =>
+        public void RoslynCfgComparer_RenderCfgs_CS(string filename) =>
             Verifier.VerifyAnalyzer(@$"TestCases\RoslynCFGComparer\{filename}.cs", new RoslynCfgComparer());
+
+        [TestMethod]
+        [DataRow("Branching")]
+        [DataRow("TryCatch")]
+        public void RoslynCfgComparer_RenderCfgs_VB(string filename) =>
+            Verifier.VerifyAnalyzer(@$"TestCases\RoslynCFGComparer\{filename}.vb", new SonarAnalyzer.Rules.VisualBasic.RoslynCfgComparer());
     }
 }
