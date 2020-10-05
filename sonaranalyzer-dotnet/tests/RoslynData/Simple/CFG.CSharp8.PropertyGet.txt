@@ -1,0 +1,29 @@
+// http://viz-js.com/
+// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22PropertyGet%22+%7B%0D%0Asubgraph+%22cluster_Sonar.PropertyGet%22+%7B%0Alabel+%3D+%22Sonar.PropertyGet%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A+b%7CMemberAccessExpressionSyntax%3A+b.Property%7CVariableDeclaratorSyntax%3A+a+%3D+b.Property%7D%22%5D%0D%0A0+-%3E+1%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.PropertyGet%22+%7B%0Alabel+%3D+%22Roslyn.PropertyGet%22%0D%0Asubgraph+%22cluster_LocalLifetime+region%22+%7B%0Alabel+%3D+%22LocalLifetime+region%22%0D%0ARoot1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23Root1%7C1%23+LocalReferenceOperation+%2F+VariableDeclaratorSyntax%3A+a+%3D+b.Property%7C2%23+ParameterReferenceOperation+%2F+IdentifierNameSyntax%3A+b%7C1%23+PropertyReferenceOperation+%2F+MemberAccessExpressionSyntax%3A+b.Property%7C0%23+SimpleAssignmentOperation+%2F+VariableDeclaratorSyntax%3A+a+%3D+b.Property%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot0+-%3E+Root1%0D%0A%7D%0D%0ARoot0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23Root0%7D%22%5D%0D%0ARoot2+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23Root2%7D%22%5D%0D%0ARoot1+-%3E+Root2%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void PropertyGet(EmptyBase b)
+    {
+        var a = b.Property;
+    }
+*/
+
+digraph "PropertyGet" {
+subgraph "cluster_Sonar.PropertyGet" {
+label = "Sonar.PropertyGet"
+0 [shape=record label="{SIMPLE|IdentifierNameSyntax: b|MemberAccessExpressionSyntax: b.Property|VariableDeclaratorSyntax: a = b.Property}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.PropertyGet" {
+label = "Roslyn.PropertyGet"
+subgraph "cluster_LocalLifetime region" {
+label = "LocalLifetime region"
+Root1 [shape=record label="{BLOCK #Root1|1# LocalReferenceOperation / VariableDeclaratorSyntax: a = b.Property|2# ParameterReferenceOperation / IdentifierNameSyntax: b|1# PropertyReferenceOperation / MemberAccessExpressionSyntax: b.Property|0# SimpleAssignmentOperation / VariableDeclaratorSyntax: a = b.Property|##########}"]
+Root0 -> Root1
+}
+Root0 [shape=record label="{ENTRY #Root0}"]
+Root2 [shape=record label="{EXIT #Root2}"]
+Root1 -> Root2
+}
+}

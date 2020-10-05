@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Sample
 {
@@ -49,6 +50,22 @@ public class Sample
     {
         var value = arr[1..4];
     }
+
+    public void DictionaryInitializer()
+    {
+        var dict = new Dictionary<string, int>() { { "a", 1 }, { "b", 2 } };
+        dict["a"] = 42;
+    }
+
+    public void PropertyGet(EmptyBase b)
+    {
+        var a = b.Property;
+    }
+
+    public void PropertySet(EmptyBase b)
+    {
+        b.Property = "Value";
+    }
 }
 
 public class CallingBase : EmptyBase
@@ -61,5 +78,17 @@ public class CallingBase : EmptyBase
 
 public class EmptyBase
 {
+    public string Property { get; set; } = "Default";
+
     public EmptyBase(int arg) { }
+}
+
+public class ImplicitConstructor : ImplicitBase
+{
+    // There's hidden implicit constructor calling implicit constructor of the base class
+}
+
+public class ImplicitBase
+{
+    public string Property { get; set; } = "Default";
 }

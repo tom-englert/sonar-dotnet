@@ -1,0 +1,26 @@
+// http://viz-js.com/
+// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22PropertySet%22+%7B%0D%0Asubgraph+%22cluster_Sonar.PropertySet%22+%7B%0Alabel+%3D+%22Sonar.PropertySet%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BSIMPLE%7CIdentifierNameSyntax%3A+b%7CMemberAccessExpressionSyntax%3A+b.Property%7CLiteralExpressionSyntax%3A+%5C%22Value%5C%22%7CAssignmentExpressionSyntax%3A+b.Property+%3D+%5C%22Value%5C%22%7D%22%5D%0D%0A0+-%3E+1%0D%0A1+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.PropertySet%22+%7B%0Alabel+%3D+%22Roslyn.PropertySet%22%0D%0ARoot0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23Root0%7D%22%5D%0D%0ARoot1+%5Bshape%3Drecord+label%3D%22%7BBLOCK+%23Root1%7C3%23+ParameterReferenceOperation+%2F+IdentifierNameSyntax%3A+b%7C2%23+PropertyReferenceOperation+%2F+MemberAccessExpressionSyntax%3A+b.Property%7C2%23+LiteralOperation+%2F+LiteralExpressionSyntax%3A+%5C%22Value%5C%22%7C1%23+SimpleAssignmentOperation+%2F+AssignmentExpressionSyntax%3A+b.Property+%3D+%5C%22Value%5C%22%7C0%23+ExpressionStatementOperation+%2F+ExpressionStatementSyntax%3A+b.Property+%3D+%5C%22Value%5C%22%3B%7C%23%23%23%23%23%23%23%23%23%23%7D%22%5D%0D%0ARoot0+-%3E+Root1%0D%0ARoot2+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23Root2%7D%22%5D%0D%0ARoot1+-%3E+Root2%0D%0A%7D%0D%0A%7D%0D%0A
+
+/*
+public void PropertySet(EmptyBase b)
+    {
+        b.Property = "Value";
+    }
+*/
+
+digraph "PropertySet" {
+subgraph "cluster_Sonar.PropertySet" {
+label = "Sonar.PropertySet"
+0 [shape=record label="{SIMPLE|IdentifierNameSyntax: b|MemberAccessExpressionSyntax: b.Property|LiteralExpressionSyntax: \"Value\"|AssignmentExpressionSyntax: b.Property = \"Value\"}"]
+0 -> 1
+1 [shape=record label="{EXIT}"]
+}
+subgraph "cluster_Roslyn.PropertySet" {
+label = "Roslyn.PropertySet"
+Root0 [shape=record label="{ENTRY #Root0}"]
+Root1 [shape=record label="{BLOCK #Root1|3# ParameterReferenceOperation / IdentifierNameSyntax: b|2# PropertyReferenceOperation / MemberAccessExpressionSyntax: b.Property|2# LiteralOperation / LiteralExpressionSyntax: \"Value\"|1# SimpleAssignmentOperation / AssignmentExpressionSyntax: b.Property = \"Value\"|0# ExpressionStatementOperation / ExpressionStatementSyntax: b.Property = \"Value\";|##########}"]
+Root0 -> Root1
+Root2 [shape=record label="{EXIT #Root2}"]
+Root1 -> Root2
+}
+}
