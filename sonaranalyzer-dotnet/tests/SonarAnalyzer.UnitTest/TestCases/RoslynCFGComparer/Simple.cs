@@ -66,6 +66,18 @@ public class Sample
     {
         b.Property = "Value";
     }
+
+    public void Dynamic(dynamic arg)
+    {
+        arg.Field = 42;
+        var invocation = arg.Value();
+        var field = arg.Field;
+    }
+
+    public void NamedArguments()
+    {
+        ArrowAdd(b: 1, a: 100);
+    }
 }
 
 public class CallingBase : EmptyBase
