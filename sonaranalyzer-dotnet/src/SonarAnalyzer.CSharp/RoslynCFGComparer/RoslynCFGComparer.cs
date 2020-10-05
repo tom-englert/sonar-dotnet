@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var graph = Serialize(CSharpControlFlowGraph.Create((CSharpSyntaxNode)method.Body ?? method.ExpressionBody, c.SemanticModel), RoslynCFG.Create(c.Node, c.SemanticModel), methodName);
             File.WriteAllText(root + $"CFG.{languageVersion}.{methodName}.txt",
                 $@"// http://viz-js.com/
-// http://magjac.com/graphviz-visual-editor/?dot={System.Net.WebUtility.UrlEncode(graph)}
+// https://edotor.net/?engine=dot#{System.Net.WebUtility.UrlEncode(graph).Replace("+", "%20")}
 
 /*
 {method}

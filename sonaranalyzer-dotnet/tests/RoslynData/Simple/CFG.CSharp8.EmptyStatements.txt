@@ -1,5 +1,5 @@
 // http://viz-js.com/
-// http://magjac.com/graphviz-visual-editor/?dot=digraph+%22EmptyStatements%22+%7B%0D%0Asubgraph+%22cluster_Sonar.EmptyStatements%22+%7B%0Alabel+%3D+%22Sonar.EmptyStatements%22%0D%0A0+%5Bshape%3Drecord+label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph+%22cluster_Roslyn.EmptyStatements%22+%7B%0Alabel+%3D+%22Roslyn.EmptyStatements%22%0D%0ARoot0+%5Bshape%3Drecord+label%3D%22%7BENTRY+%23Root0%7D%22%5D%0D%0ARoot1+%5Bshape%3Drecord+label%3D%22%7BEXIT+%23Root1%7D%22%5D%0D%0ARoot0+-%3E+Root1%0D%0A%7D%0D%0A%7D%0D%0A
+// https://edotor.net/?engine=dot#digraph%20%22EmptyStatements%22%20%7B%0D%0Asubgraph%20%22cluster_Sonar.EmptyStatements%22%20%7B%0Alabel%20%3D%20%22Sonar.EmptyStatements%22%0D%0A0%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%7D%22%5D%0D%0A%7D%0D%0Asubgraph%20%22cluster_Roslyn.EmptyStatements%22%20%7B%0Alabel%20%3D%20%22Roslyn.EmptyStatements%22%0D%0ARoot0%20%5Bshape%3Drecord%20label%3D%22%7BENTRY%20%23Root0%7D%22%5D%0D%0ARoot1%20%5Bshape%3Drecord%20label%3D%22%7BEXIT%20%23Root1%7D%22%5D%0D%0ARoot0%20-%3E%20Root1%0D%0A%7D%0D%0A%7D%0D%0A
 
 /*
 public void EmptyStatements()
