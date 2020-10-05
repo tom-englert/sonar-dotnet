@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Sample
 {
@@ -105,5 +106,10 @@ public class Sample
             3 => "Three",
             _ => null
         };
+    }
+
+    public void NullCoalesceAssignmentToElementAccess(List<string> list, string arg)
+    {
+        var result = list[42] ??= arg;
     }
 }
