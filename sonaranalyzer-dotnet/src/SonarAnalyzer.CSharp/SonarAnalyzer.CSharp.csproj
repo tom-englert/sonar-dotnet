@@ -21,6 +21,7 @@
       <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
       <NoWarn>NU1701</NoWarn>
     </PackageReference>
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,14 +34,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="$(dotnet_symbolic_execution_windows)"  />
+    <EmbeddedResource Include="$(dotnet_symbolic_execution_windows)" />
     
-    <Content Include="$(dotnet_symbolic_execution_windows)" >
+    <Content Include="$(dotnet_symbolic_execution_windows)">
       <Link>CBDE\windows\dotnet-symbolic-execution.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     
-    <Content Include="$(cbde_dialect_checker_windows)" >
+    <Content Include="$(cbde_dialect_checker_windows)">
       <Link>CBDE\windows\cbde-dialect-checker.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
