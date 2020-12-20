@@ -167,7 +167,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     OnMemberAccessing(identifier, symbol, programState);
 
-                    if (symbol.HasConstraint(ObjectConstraint.Null, programState))
+                    // TOM-ENGLERT: Make the analysis more defensive, we only need to catch cases where we REALLY know it's not null
+                    // if (symbol.HasConstraint(ObjectConstraint.Null, programState))
+                    if (!symbol.HasConstraint(ObjectConstraint.NotNull, programState))
                     {
                         OnMemberAccessed(identifier);
                         return null;
