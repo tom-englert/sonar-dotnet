@@ -30,7 +30,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public static bool TryGet(CSharpSyntaxNode node, SemanticModel semanticModel, out IControlFlowGraph cfg)
         {
             cfg = null;
-            try
+            // NRT_EXTENSIONS => fail with exception if anything can't be parsed properly, so we 
+            // do not suppress any diagnostic upon wrong assumptions.
+            // try
             {
                 if (node != null)
                 {
@@ -41,18 +43,18 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return false;
                 }
             }
-            catch (Exception exc) when (exc is InvalidOperationException ||
-                                        exc is ArgumentException ||
-                                        exc is NotSupportedException)
-            {
-                // historically, these have been considered as expected
-                // but we should be aware of what syntax we do not yet support (ToDo)
-                // https://github.com/SonarSource/sonar-dotnet/issues/2541
-            }
-            catch (Exception exc) when (exc is NotImplementedException)
-            {
-                Debug.Fail(exc.ToString());
-            }
+            //catch (Exception exc) when (exc is InvalidOperationException ||
+            //                            exc is ArgumentException ||
+            //                            exc is NotSupportedException)
+            //{
+            //    // historically, these have been considered as expected
+            //    // but we should be aware of what syntax we do not yet support (ToDo)
+            //    // https://github.com/SonarSource/sonar-dotnet/issues/2541
+            //}
+            //catch (Exception exc) when (exc is NotImplementedException)
+            //{
+            //    Debug.Fail(exc.ToString());
+            //}
 
             return cfg != null;
         }

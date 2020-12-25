@@ -433,6 +433,10 @@ namespace SonarAnalyzer.SymbolicExecution
         protected static ProgramState SetNonNullConstraintIfValueType(ITypeSymbol typeSymbol,
             SymbolicValue symbolicValue, ProgramState programState)
         {
+            // NRT_EXTENSIONS => Don't make any extra assumptions about value types here, just treat them as NULL.
+            return programState;
+
+/*
             var isDefinitelyNotNull = !programState.HasConstraint(symbolicValue, ObjectConstraint.NotNull) &&
                 IsNonNullableValueType(typeSymbol) &&
                 !IsValueTypeWithOverloadedNullCompatibleOpEquals(typeSymbol) &&
@@ -441,6 +445,7 @@ namespace SonarAnalyzer.SymbolicExecution
             return isDefinitelyNotNull
                 ? programState.SetConstraint(symbolicValue, ObjectConstraint.NotNull)
                 : programState;
+*/
         }
 
         protected static ProgramState SetNonNullConstraintIfValueType(ISymbol symbol, SymbolicValue symbolicValue, ProgramState programState)

@@ -49,8 +49,9 @@ namespace SonarAnalyzer.SymbolicExecution
 
             // Add mandatory checks
             AddExplodedGraphCheck(NullPointerCheck);
-            AddExplodedGraphCheck(NullableValueAccessedCheck);
-            AddExplodedGraphCheck(new InvalidCastToInterfaceSymbolicExecution.NullableCastCheck(this));
+            // NRT_EXTENSIONS => Only need to do the NullPointerCheck
+            //AddExplodedGraphCheck(NullableValueAccessedCheck);
+            //AddExplodedGraphCheck(new InvalidCastToInterfaceSymbolicExecution.NullableCastCheck(this));
         }
 
         /// <summary>
@@ -216,6 +217,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
                 case SyntaxKind.PostIncrementExpression:
                 case SyntaxKind.PostDecrementExpression:
+                case SyntaxKind.SuppressNullableWarningExpression:
                     newProgramState = VisitPostfixIncrement((PostfixUnaryExpressionSyntax)instruction, newProgramState);
                     break;
 
@@ -837,7 +839,9 @@ namespace SonarAnalyzer.SymbolicExecution
             var ps = node.ProgramState;
             if (!ps.HasValue)
             {
-                return;
+                // NRT_EXTENSIONS => Stop here, state would be ambiguous
+                throw new NotSupportedException("BinaryBranch without state");
+                // return;
             }
 
             SymbolicValue sv;

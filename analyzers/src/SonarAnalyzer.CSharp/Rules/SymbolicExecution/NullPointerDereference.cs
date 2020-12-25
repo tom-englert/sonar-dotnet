@@ -172,11 +172,19 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (!symbol.HasConstraint(ObjectConstraint.NotNull, programState))
                     {
                         OnMemberAccessed(identifier);
-                        return null;
+                        // NRT_EXTENSIONS => don't stop analysis here, we need the full story.
+                        // return null;
                     }
                 }
+                else
+                {
+                    // NRT_EXTENSIONS => Treat non-tracked symbols as NULL-
+                    OnMemberAccessed(identifier);
+                }
 
-                return SetNotNullConstraintOnSymbol(symbol, programState);
+                // NRT_EXTENSIONS => Do not add extra null constrains on non-tracked symboly, treat them as NULL-
+                return programState;
+                // return SetNotNullConstraintOnSymbol(symbol, programState);
             }
 
             private static ProgramState SetNotNullConstraintOnSymbol(ISymbol symbol, ProgramState programState) =>

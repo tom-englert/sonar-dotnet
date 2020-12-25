@@ -281,6 +281,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                         return BuildSimpleNestedExpression(parent, currentBlock, parent.Operand);
                     }
 
+                // NRT_EXTENSIONS => just parse this correctly
+                case SyntaxKind.SuppressNullableWarningExpression:
                 case SyntaxKind.PostIncrementExpression:
                 case SyntaxKind.PostDecrementExpression:
                     {

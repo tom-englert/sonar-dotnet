@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -48,6 +49,12 @@ namespace SonarAnalyzer.CFG.Helpers
         {
             if (semanticModel.GetSymbolOrCandidateSymbol(expression) is IMethodSymbol calledSymbol)
             {
+                // NRT_EXTENSIONS => if any "ref" method is called, terminate and suppress nothing; this scenario is not properly handled.
+                if (calledSymbol.ReturnsByRef || calledSymbol.ReturnsByRefReadonly)
+                {
+                    throw new NotSupportedException();
+                }
+
                 return false;
             }
 
