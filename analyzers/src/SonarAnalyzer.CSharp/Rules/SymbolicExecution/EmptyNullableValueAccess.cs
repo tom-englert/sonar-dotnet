@@ -58,8 +58,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph)
             {
-                nullableValueCheck = explodedGraph.NullableValueAccessedCheck;
-                nullableValueCheck.ValuePropertyAccessed += AddIdentifier;
+                //nullableValueCheck = explodedGraph.NullableValueAccessedCheck;
+                //nullableValueCheck.ValuePropertyAccessed += AddIdentifier;
             }
 
             public bool SupportsPartialResults => true;
