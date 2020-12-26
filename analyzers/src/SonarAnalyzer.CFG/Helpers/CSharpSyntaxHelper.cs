@@ -52,7 +52,7 @@ namespace SonarAnalyzer.CFG.Helpers
                 // NRT_EXTENSIONS => if any "ref" method is called, terminate and suppress nothing; this scenario is not properly handled.
                 if (calledSymbol.ReturnsByRef || calledSymbol.ReturnsByRefReadonly)
                 {
-                    throw new NotSupportedException();
+                    throw new NotSupportedException("ref Methods are not supported");
                 }
 
                 return false;

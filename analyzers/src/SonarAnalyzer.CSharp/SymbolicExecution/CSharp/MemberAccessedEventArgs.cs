@@ -25,11 +25,14 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     internal class MemberAccessedEventArgs : EventArgs
     {
-        public MemberAccessedEventArgs(IdentifierNameSyntax identifier)
+        public MemberAccessedEventArgs(IdentifierNameSyntax identifier, bool maybeNull = true)
         {
             Identifier = identifier;
+            MaybeNull = maybeNull;
         }
 
         public IdentifierNameSyntax Identifier { get; }
+
+        public bool MaybeNull { get; }
     }
 }

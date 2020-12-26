@@ -36,13 +36,13 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     internal sealed class NullPointerDereference : ISymbolicExecutionAnalyzer
     {
-        internal const string DiagnosticId = "S2259";
-        private const string MessageFormat = "'{0}' is null on at least one execution path.";
+        internal const string NullDiagnosticId = "Null";
+        internal const string NotNullDiagnosticId = "NotNull";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor NullRule = new DiagnosticDescriptor(NullDiagnosticId, string.Empty, string.Empty, string.Empty, DiagnosticSeverity.Error, true);
+        private static readonly DiagnosticDescriptor NotNullRule = new DiagnosticDescriptor(NotNullDiagnosticId, string.Empty, string.Empty, string.Empty, DiagnosticSeverity.Error, true);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(NullRule, NotNullRule);
 
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
@@ -57,8 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
             private void OnMemberAccessing(IdentifierNameSyntax identifier, ISymbol symbol, ProgramState programState) =>
                 MemberAccessing?.Invoke(this, new MemberAccessingEventArgs(identifier, symbol, programState));
 
-            private void OnMemberAccessed(IdentifierNameSyntax identifier) =>
-                MemberAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier));
+            private void OnMemberAccessed(IdentifierNameSyntax identifier, bool maybeNull) =>
+                MemberAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier, maybeNull));
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
@@ -167,19 +167,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     OnMemberAccessing(identifier, symbol, programState);
 
-                    // TOM-ENGLERT: Make the analysis more defensive, we only need to catch cases where we REALLY know it's not null
+                    // NRT_EXTENSIONS: Make the analysis more defensive, we only need to catch cases where we REALLY know it's not null
                     // if (symbol.HasConstraint(ObjectConstraint.Null, programState))
-                    if (!symbol.HasConstraint(ObjectConstraint.NotNull, programState))
-                    {
-                        OnMemberAccessed(identifier);
-                        // NRT_EXTENSIONS => don't stop analysis here, we need the full story.
-                        // return null;
-                    }
+                    var maybeNull = !symbol.HasConstraint(ObjectConstraint.NotNull, programState);
+
+                    OnMemberAccessed(identifier, maybeNull);
+
+                    // NRT_EXTENSIONS => don't stop analysis here, we need the full story.
+                    // return null;
                 }
                 else
                 {
                     // NRT_EXTENSIONS => Treat non-tracked symbols as NULL-
-                    OnMemberAccessed(identifier);
+                    OnMemberAccessed(identifier, true);
                 }
 
                 // NRT_EXTENSIONS => Do not add extra null constrains on non-tracked symboly, treat them as NULL-
@@ -221,7 +221,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
             private readonly SyntaxNodeAnalysisContext context;
-            private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
+            private readonly Dictionary<IdentifierNameSyntax, bool> identifyers = new Dictionary<IdentifierNameSyntax, bool>();
             private readonly NullPointerCheck nullPointerCheck;
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
@@ -235,18 +235,25 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(rule, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText));
+                identifyers.Select(item => Diagnostic.Create(
+                    item.Value ? NullRule : NotNullRule,
+                    item.Key.GetLocation(),
+                    item.Key.Identifier.ValueText));
 
             public void Dispose() => nullPointerCheck.MemberAccessed -= MemberAccessedHandler;
 
             private void MemberAccessedHandler(object sender, MemberAccessedEventArgs args) =>
-                CollectMemberAccesses(args, nullIdentifiers, context.SemanticModel);
+                CollectMemberAccesses(args, context.SemanticModel);
 
-            private static void CollectMemberAccesses(MemberAccessedEventArgs args, ISet<IdentifierNameSyntax> nullIdentifiers, SemanticModel semanticModel)
+            private void CollectMemberAccesses(MemberAccessedEventArgs args, SemanticModel semanticModel)
             {
                 if (!semanticModel.IsExtensionMethod(args.Identifier.Parent))
                 {
-                    nullIdentifiers.Add(args.Identifier);
+                    var existing = identifyers.TryGetValue(args.Identifier, out var maybeNull);
+                    if (!existing || !maybeNull)
+                    {
+                        identifyers[args.Identifier] = args.MaybeNull;
+                    }
                 }
             }
         }
