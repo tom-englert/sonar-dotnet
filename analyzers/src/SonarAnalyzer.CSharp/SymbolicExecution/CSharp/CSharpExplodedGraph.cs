@@ -1017,8 +1017,9 @@ namespace SonarAnalyzer.SymbolicExecution
             var sv = new SymbolicValue();
             var typeSymbol = SemanticModel.GetTypeInfo(instruction).Type;
 
-            var isReferenceOrNullable = typeSymbol.IsReferenceType ||
-                typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T);
+            var isReferenceOrNullable = typeSymbol == null
+                                        || typeSymbol.IsReferenceType
+                                        || typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T);
 
             var newProgramState = isReferenceOrNullable
                 ? programState.SetConstraint(sv, ObjectConstraint.Null)
