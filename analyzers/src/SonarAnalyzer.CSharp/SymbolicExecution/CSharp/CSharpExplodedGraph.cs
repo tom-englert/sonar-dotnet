@@ -45,7 +45,8 @@ namespace SonarAnalyzer.SymbolicExecution
             : base(cfg, declaration, semanticModel, lva)
         {
             NullPointerCheck = new NullPointerDereference.NullPointerCheck(this);
-            NullableValueAccessedCheck = new EmptyNullableValueAccess.NullableValueAccessedCheck(this);
+            // NRT_EXTENSIONS => Only need to do the NullPointerCheck
+            // NullableValueAccessedCheck = new EmptyNullableValueAccess.NullableValueAccessedCheck(this);
 
             // Add mandatory checks
             AddExplodedGraphCheck(NullPointerCheck);
@@ -63,7 +64,8 @@ namespace SonarAnalyzer.SymbolicExecution
         /// and NullPointerDereference).
         /// </summary>
         internal NullPointerDereference.NullPointerCheck NullPointerCheck { get; }
-        internal EmptyNullableValueAccess.NullableValueAccessedCheck NullableValueAccessedCheck { get; }
+        // NRT_EXTENSIONS => Only need to do the NullPointerCheck
+        // internal EmptyNullableValueAccess.NullableValueAccessedCheck NullableValueAccessedCheck { get; }
 
         protected override void VisitSimpleBlock(SimpleBlock block, ExplodedGraphNode node)
         {
@@ -309,8 +311,9 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.SimpleMemberAccessExpression:
                     {
                         var memberAccess = (MemberAccessExpressionSyntax)instruction;
-                        var check = this.explodedGraphChecks.OfType<EmptyNullableValueAccess.NullableValueAccessedCheck>().FirstOrDefault();
-                        if (check == null || !check.TryProcessInstruction(memberAccess, newProgramState, out newProgramState))
+                        // NRT_EXTENSIONS => Only need to do the NullPointerCheck
+                        // var check = this.explodedGraphChecks.OfType<EmptyNullableValueAccess.NullableValueAccessedCheck>().FirstOrDefault();
+                        // if (check == null || !check.TryProcessInstruction(memberAccess, newProgramState, out newProgramState))
                         {
                             // Default behavior
                             newProgramState = VisitMemberAccess(memberAccess, newProgramState);
