@@ -222,16 +222,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
+            private readonly CSharpExplodedGraph explodedGraph;
             private readonly SyntaxNodeAnalysisContext context;
             private readonly Dictionary<IdentifierNameSyntax, bool> identifyers = new Dictionary<IdentifierNameSyntax, bool>();
             private readonly NullPointerCheck nullPointerCheck;
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
             {
+                this.explodedGraph = explodedGraph;
                 this.context = context;
 
                 nullPointerCheck = explodedGraph.NullPointerCheck;
                 nullPointerCheck.MemberAccessed += MemberAccessedHandler;
+                explodedGraph.ArgumentAccessed += MemberAccessedHandler;
             }
 
             public bool SupportsPartialResults => true;
@@ -242,7 +245,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     item.Key.GetLocation(),
                     item.Key.Identifier.ValueText));
 
-            public void Dispose() => nullPointerCheck.MemberAccessed -= MemberAccessedHandler;
+            public void Dispose()
+            {
+                nullPointerCheck.MemberAccessed -= MemberAccessedHandler;
+                explodedGraph.ArgumentAccessed -= MemberAccessedHandler;
+            }
 
             private void MemberAccessedHandler(object sender, MemberAccessedEventArgs args) =>
                 CollectMemberAccesses(args, context.SemanticModel);

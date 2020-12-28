@@ -55,6 +55,13 @@ namespace SonarAnalyzer.SymbolicExecution
             //AddExplodedGraphCheck(new InvalidCastToInterfaceSymbolicExecution.NullableCastCheck(this));
         }
 
+        public event EventHandler<MemberAccessedEventArgs> ArgumentAccessed;
+
+        internal void OnArgumentAccessed(MemberAccessedEventArgs args)
+        {
+            ArgumentAccessed?.Invoke(this, args);
+        }
+
         /// <summary>
         /// NullPointerCheck is added by default by the CSharpExplodedGraph to allow an early stop of the visit
         /// when a null pointer dereference is found.
@@ -481,7 +488,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.InvocationExpression:
                     {
                         var invocation = (InvocationExpressionSyntax)instruction;
-                        var invocationVisitor = new InvocationVisitor(invocation, SemanticModel, newProgramState);
+                        var invocationVisitor = new InvocationVisitor(invocation, SemanticModel, newProgramState, this);
                         newProgramState = invocationVisitor.ProcessInvocation();
 
                         if (!invocation.IsNameof(SemanticModel))

@@ -37,13 +37,15 @@ namespace SonarAnalyzer.SymbolicExecution
         private readonly InvocationExpressionSyntax invocation;
         private readonly SemanticModel semanticModel;
         private readonly ProgramState programState;
+        private readonly CSharpExplodedGraph explodedGraph;
 
         public InvocationVisitor(InvocationExpressionSyntax invocation, SemanticModel semanticModel,
-            ProgramState programState)
+            ProgramState programState, CSharpExplodedGraph explodedGraph)
         {
             this.invocation = invocation;
             this.semanticModel = semanticModel;
             this.programState = programState;
+            this.explodedGraph = explodedGraph;
         }
 
         internal ProgramState ProcessInvocation()
@@ -88,6 +90,30 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 return HandleNameofExpression();
             }
+
+            if (invocationArgsCount > 0)
+            {
+                foreach (var argumentSyntax in this.invocation.ArgumentList.Arguments)
+                {
+                    var expressionWithoutParentheses = argumentSyntax.Expression.RemoveParentheses();
+
+                    if (expressionWithoutParentheses is IdentifierNameSyntax identifier)
+                    {
+                        var argumentSymbol = semanticModel.GetSymbolInfo(identifier).Symbol;
+
+                        if (explodedGraph.IsSymbolTracked(argumentSymbol))
+                        {
+                            var maybeNull = !argumentSymbol.HasConstraint(ObjectConstraint.NotNull, programState);
+                            explodedGraph.OnArgumentAccessed(new MemberAccessedEventArgs(identifier, maybeNull));
+                        }
+                        else
+                        {
+                            explodedGraph.OnArgumentAccessed(new MemberAccessedEventArgs(identifier));
+                        }
+                    }
+                }
+            }
+
 
             return this.programState
                 .PopValues(invocationArgsCount + 1)
