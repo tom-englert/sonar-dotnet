@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool SupportsPartialResults => true;
 
             private readonly HashSet<IdentifierNameSyntax> identifiers = new HashSet<IdentifierNameSyntax>();
-            private readonly NullPointerDereference.NullPointerCheck nullPointerCheck;
+            // private readonly NullPointerDereference.NullPointerCheck nullPointerCheck;
             private readonly SyntaxNodeAnalysisContext syntaxNodeAnalysisContext;
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
@@ -73,8 +73,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 syntaxNodeAnalysisContext = context;
-                nullPointerCheck = explodedGraph.NullPointerCheck;
-                nullPointerCheck.MemberAccessing += MemberAccessingHandler;
+                // nullPointerCheck = explodedGraph.NullPointerCheck;
+                // nullPointerCheck.MemberAccessing += MemberAccessingHandler;
             }
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
@@ -82,10 +82,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public void Dispose()
             {
-                if (nullPointerCheck != null)
-                {
-                    nullPointerCheck.MemberAccessing -= MemberAccessingHandler;
-                }
+                //if (nullPointerCheck != null)
+                //{
+                //    nullPointerCheck.MemberAccessing -= MemberAccessingHandler;
+                //}
             }
 
             private void MemberAccessingHandler(object sender, MemberAccessingEventArgs args) =>

@@ -44,12 +44,12 @@ namespace SonarAnalyzer.SymbolicExecution
         public CSharpExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
             : base(cfg, declaration, semanticModel, lva)
         {
-            NullPointerCheck = new NullPointerDereference.NullPointerCheck(this);
+            // NullPointerCheck = new NullPointerDereference.NullPointerCheck(this);
             // NRT_EXTENSIONS => Only need to do the NullPointerCheck
             // NullableValueAccessedCheck = new EmptyNullableValueAccess.NullableValueAccessedCheck(this);
 
             // Add mandatory checks
-            AddExplodedGraphCheck(NullPointerCheck);
+            // AddExplodedGraphCheck(NullPointerCheck);
             // NRT_EXTENSIONS => Only need to do the NullPointerCheck
             //AddExplodedGraphCheck(NullableValueAccessedCheck);
             //AddExplodedGraphCheck(new InvalidCastToInterfaceSymbolicExecution.NullableCastCheck(this));
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.SymbolicExecution
         /// instead of replace, this check in dependent analyzers (e.g. PublicMethodArgumentsShouldBeCheckedForNull
         /// and NullPointerDereference).
         /// </summary>
-        internal NullPointerDereference.NullPointerCheck NullPointerCheck { get; }
+        // internal NullPointerDereference.NullPointerCheck NullPointerCheck { get; }
         // NRT_EXTENSIONS => Only need to do the NullPointerCheck
         // internal EmptyNullableValueAccess.NullableValueAccessedCheck NullableValueAccessedCheck { get; }
 
@@ -981,6 +981,12 @@ namespace SonarAnalyzer.SymbolicExecution
         private ProgramState VisitMemberAccess(MemberAccessExpressionSyntax memberAccess, ProgramState programState)
         {
             var newProgramState = programState.PopValue(out var memberExpression);
+
+            if (memberAccess.Expression is IdentifierNameSyntax expressionIdentifier)
+            {
+                var maybeNull = !newProgramState.HasConstraint(memberExpression, ObjectConstraint.NotNull);
+                OnMemberAccessed(new MemberAccessedEventArgs(expressionIdentifier, maybeNull));
+            }
 
             SymbolicValue sv = null;
             if (memberAccess.Name is IdentifierNameSyntax identifier)
