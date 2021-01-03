@@ -55,12 +55,9 @@ namespace SonarAnalyzer.SymbolicExecution
             //AddExplodedGraphCheck(new InvalidCastToInterfaceSymbolicExecution.NullableCastCheck(this));
         }
 
-        public event EventHandler<MemberAccessedEventArgs> ArgumentAccessed;
+        public event EventHandler<MemberAccessedEventArgs> MemberAccessed;
 
-        internal void OnArgumentAccessed(MemberAccessedEventArgs args)
-        {
-            ArgumentAccessed?.Invoke(this, args);
-        }
+        internal void OnMemberAccessed(MemberAccessedEventArgs args) => MemberAccessed?.Invoke(this, args);
 
         /// <summary>
         /// NullPointerCheck is added by default by the CSharpExplodedGraph to allow an early stop of the visit
@@ -984,6 +981,7 @@ namespace SonarAnalyzer.SymbolicExecution
         private ProgramState VisitMemberAccess(MemberAccessExpressionSyntax memberAccess, ProgramState programState)
         {
             var newProgramState = programState.PopValue(out var memberExpression);
+
             SymbolicValue sv = null;
             if (memberAccess.Name is IdentifierNameSyntax identifier)
             {

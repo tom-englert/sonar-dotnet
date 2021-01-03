@@ -224,7 +224,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly CSharpExplodedGraph explodedGraph;
             private readonly SyntaxNodeAnalysisContext context;
-            private readonly Dictionary<IdentifierNameSyntax, bool> identifyers = new Dictionary<IdentifierNameSyntax, bool>();
+            private readonly Dictionary<ExpressionSyntax, bool> identifiers = new Dictionary<ExpressionSyntax, bool>();
             private readonly NullPointerCheck nullPointerCheck;
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
@@ -234,21 +234,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 nullPointerCheck = explodedGraph.NullPointerCheck;
                 nullPointerCheck.MemberAccessed += MemberAccessedHandler;
-                explodedGraph.ArgumentAccessed += MemberAccessedHandler;
+                explodedGraph.MemberAccessed += MemberAccessedHandler;
             }
 
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                identifyers.Select(item => Diagnostic.Create(
+                identifiers.Select(item => Diagnostic.Create(
                     item.Value ? NullRule : NotNullRule,
                     item.Key.GetLocation(),
-                    item.Key.Identifier.ValueText));
+                    item.Key.ToString()));
 
             public void Dispose()
             {
                 nullPointerCheck.MemberAccessed -= MemberAccessedHandler;
-                explodedGraph.ArgumentAccessed -= MemberAccessedHandler;
+                explodedGraph.MemberAccessed -= MemberAccessedHandler;
             }
 
             private void MemberAccessedHandler(object sender, MemberAccessedEventArgs args) =>
@@ -258,10 +258,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (!semanticModel.IsExtensionMethod(args.Identifier.Parent))
                 {
-                    var existing = identifyers.TryGetValue(args.Identifier, out var maybeNull);
+                    var existing = identifiers.TryGetValue(args.Identifier, out var maybeNull);
                     if (!existing || !maybeNull)
                     {
-                        identifyers[args.Identifier] = args.MaybeNull;
+                        identifiers[args.Identifier] = args.MaybeNull;
                     }
                 }
             }

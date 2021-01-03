@@ -91,32 +91,24 @@ namespace SonarAnalyzer.SymbolicExecution
                 return HandleNameofExpression();
             }
 
+            var programState = this.programState;
+
             if (invocationArgsCount > 0)
             {
                 foreach (var argumentSyntax in this.invocation.ArgumentList.Arguments)
                 {
-                    var expressionWithoutParentheses = argumentSyntax.Expression.RemoveParentheses();
+                    programState = programState.PopValue(out var symbolicValue);
 
-                    if (expressionWithoutParentheses is IdentifierNameSyntax identifier)
-                    {
-                        var argumentSymbol = semanticModel.GetSymbolInfo(identifier).Symbol;
+                    var maybeNull = !programState.HasConstraint(symbolicValue, ObjectConstraint.NotNull);
+                    var identifier = argumentSyntax.Expression.RemoveParentheses();
 
-                        if (explodedGraph.IsSymbolTracked(argumentSymbol))
-                        {
-                            var maybeNull = !argumentSymbol.HasConstraint(ObjectConstraint.NotNull, programState);
-                            explodedGraph.OnArgumentAccessed(new MemberAccessedEventArgs(identifier, maybeNull));
-                        }
-                        else
-                        {
-                            explodedGraph.OnArgumentAccessed(new MemberAccessedEventArgs(identifier));
-                        }
-                    }
-                }
+                    explodedGraph.OnMemberAccessed(new MemberAccessedEventArgs(identifier, maybeNull));
+               }
             }
 
 
-            return this.programState
-                .PopValues(invocationArgsCount + 1)
+            return programState
+                .PopValues(1)
                 .PushValue(new SymbolicValue());
         }
 

@@ -64,7 +64,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public bool SupportsPartialResults => true;
 
-            private void AddIdentifier(object sender, MemberAccessedEventArgs args) => nullIdentifiers.Add(args.Identifier);
+            private void AddIdentifier(object sender, MemberAccessedEventArgs args)
+            {
+                // nullIdentifiers.Add(args.Identifier);
+            }
 
             public void Dispose() => nullableValueCheck.ValuePropertyAccessed -= AddIdentifier;
         }
