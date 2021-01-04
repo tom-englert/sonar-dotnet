@@ -36,58 +36,207 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     internal sealed class NullPointerDereference : ISymbolicExecutionAnalyzer
     {
-        internal const string NullDiagnosticId = "Null";
-        internal const string NotNullDiagnosticId = "NotNull";
+        internal const string DiagnosticId = "S2259";
+        private const string MessageFormat = "'{0}' is null on at least one execution path.";
 
-        private static readonly DiagnosticDescriptor NullRule = new DiagnosticDescriptor(NullDiagnosticId, string.Empty, string.Empty, string.Empty, DiagnosticSeverity.Error, true);
-        private static readonly DiagnosticDescriptor NotNullRule = new DiagnosticDescriptor(NotNullDiagnosticId, string.Empty, string.Empty, string.Empty, DiagnosticSeverity.Error, true);
+        private static readonly DiagnosticDescriptor rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(NullRule, NotNullRule);
-
-        internal const string DiagnosticId = "Dummy";
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
 
         public ISymbolicExecutionAnalysisContext AddChecks(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context) =>
             new AnalysisContext(explodedGraph, context);
 
+        internal sealed class NullPointerCheck : ExplodedGraphCheck
+        {
+            public event EventHandler<MemberAccessingEventArgs> MemberAccessing;
+            public event EventHandler<MemberAccessedEventArgs> MemberAccessed;
+
+            public NullPointerCheck(CSharpExplodedGraph explodedGraph) : base(explodedGraph) { }
+
+            private void OnMemberAccessing(IdentifierNameSyntax identifier, ISymbol symbol, ProgramState programState) =>
+                MemberAccessing?.Invoke(this, new MemberAccessingEventArgs(identifier, symbol, programState));
+
+            private void OnMemberAccessed(IdentifierNameSyntax identifier) =>
+                MemberAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier));
+
+            public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
+            {
+                var instruction = programPoint.CurrentInstruction;
+
+                switch (instruction.Kind())
+                {
+                    case SyntaxKind.IdentifierName:
+                        return ProcessIdentifier(programPoint, programState, (IdentifierNameSyntax)instruction);
+
+                    case SyntaxKind.AwaitExpression:
+                        return ProcessAwait(programState, (AwaitExpressionSyntax)instruction);
+
+                    case SyntaxKind.SimpleMemberAccessExpression:
+                    case SyntaxKind.PointerMemberAccessExpression:
+                        return ProcessMemberAccess(programState, (MemberAccessExpressionSyntax)instruction);
+
+                    case SyntaxKind.ElementAccessExpression:
+                        return ProcessElementAccess(programState, (ElementAccessExpressionSyntax)instruction);
+
+                    default:
+                        return programState;
+                }
+            }
+
+            private ProgramState ProcessAwait(ProgramState programState, AwaitExpressionSyntax awaitExpression) =>
+                awaitExpression.Expression is IdentifierNameSyntax identifier
+                    ? ProcessIdentifier(programState, identifier, semanticModel.GetSymbolInfo(identifier).Symbol)
+                    : programState;
+
+            private ProgramState ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax elementAccess) =>
+                elementAccess.Expression is IdentifierNameSyntax identifier
+                && semanticModel.GetSymbolInfo(identifier).Symbol is { } symbol
+                    ? ProcessIdentifier(programState, identifier, symbol)
+                    : programState;
+
+            private static MemberAccessIdentifierScope GetIdentifierFromMemberAccess(MemberAccessExpressionSyntax memberAccess)
+            {
+                var expressionWithoutParentheses = memberAccess.Expression.RemoveParentheses();
+
+                if (expressionWithoutParentheses is IdentifierNameSyntax identifier)
+                {
+                    return new MemberAccessIdentifierScope(identifier, true);
+                }
+
+                if (expressionWithoutParentheses is MemberBindingExpressionSyntax subMemberBinding)
+                {
+                    return new MemberAccessIdentifierScope(subMemberBinding.Name as IdentifierNameSyntax, true);
+                }
+
+                if (expressionWithoutParentheses is MemberAccessExpressionSyntax subMemberAccess && subMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                {
+                    var isThisAccess = subMemberAccess.Expression.RemoveParentheses() is ThisExpressionSyntax;
+                    return new MemberAccessIdentifierScope(subMemberAccess.Name as IdentifierNameSyntax, isThisAccess);
+                }
+
+                return new MemberAccessIdentifierScope(null, false);
+            }
+
+            private ProgramState ProcessMemberAccess(ProgramState programState, MemberAccessExpressionSyntax memberAccess)
+            {
+                var memberAccessIdentifierScope = GetIdentifierFromMemberAccess(memberAccess);
+                if (memberAccessIdentifierScope.Identifier == null)
+                {
+                    return programState;
+                }
+
+                var symbol = semanticModel.GetSymbolInfo(memberAccessIdentifierScope.Identifier).Symbol;
+                if (symbol == null)
+                {
+                    return programState;
+                }
+
+                if (symbol is IFieldSymbol fieldSymbol && !fieldSymbol.IsConst && !memberAccessIdentifierScope.IsOnCurrentInstance)
+                {
+                    return programState;
+                }
+
+                if ((IsNullableValueType(symbol) && !IsGetTypeCall(memberAccess))
+                    || semanticModel.IsExtensionMethod(memberAccess))
+                {
+                    return programState;
+                }
+
+                return ProcessIdentifier(programState, memberAccessIdentifierScope.Identifier, symbol);
+            }
+
+            private static bool IsGetTypeCall(MemberAccessExpressionSyntax memberAccess) =>
+                memberAccess.Name.Identifier.ValueText == "GetType";
+
+            private ProgramState ProcessIdentifier(ProgramPoint programPoint, ProgramState programState, IdentifierNameSyntax identifier)
+            {
+                if (programPoint.Block.Instructions.Last() == identifier
+                    && programPoint.Block.SuccessorBlocks.Count == 1
+                    && (IsSuccessorForeachBranch(programPoint) || IsExceptionThrow(identifier)))
+                {
+                    return ProcessIdentifier(programState, identifier, semanticModel.GetSymbolInfo(identifier).Symbol);
+                }
+
+                return programState;
+            }
+
+            private ProgramState ProcessIdentifier(ProgramState programState, IdentifierNameSyntax identifier, ISymbol symbol)
+            {
+                if (explodedGraph.IsSymbolTracked(symbol))
+                {
+                    OnMemberAccessing(identifier, symbol, programState);
+
+                    if (symbol.HasConstraint(ObjectConstraint.Null, programState))
+                    {
+                        OnMemberAccessed(identifier);
+                        return null;
+                    }
+                }
+
+                return SetNotNullConstraintOnSymbol(symbol, programState);
+            }
+
+            private static ProgramState SetNotNullConstraintOnSymbol(ISymbol symbol, ProgramState programState) =>
+                programState == null || symbol == null || IsNullableValueType(symbol)
+                    ? programState
+                    : symbol.SetConstraint(ObjectConstraint.NotNull, programState);
+
+            private static bool IsNullableValueType(ISymbol symbol)
+            {
+                var type = symbol.GetSymbolType();
+                return type.IsStruct() && type.OriginalDefinition.Is(KnownType.System_Nullable_T);
+            }
+
+            private static bool IsExceptionThrow(SyntaxNode syntaxNode) =>
+                syntaxNode.GetFirstNonParenthesizedParent().IsKind(SyntaxKind.ThrowStatement);
+
+            private static bool IsSuccessorForeachBranch(ProgramPoint programPoint) =>
+                programPoint.Block.SuccessorBlocks.First() is BinaryBranchBlock successorBlock
+                && successorBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement);
+
+            private class MemberAccessIdentifierScope
+            {
+                public IdentifierNameSyntax Identifier { get; }
+                public bool IsOnCurrentInstance { get; }
+
+                public MemberAccessIdentifierScope(IdentifierNameSyntax identifier, bool isOnCurrentInstance)
+                {
+                    Identifier = identifier;
+                    IsOnCurrentInstance = isOnCurrentInstance;
+                }
+            }
+        }
+
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
-            private readonly CSharpExplodedGraph explodedGraph;
             private readonly SyntaxNodeAnalysisContext context;
-            private readonly Dictionary<ExpressionSyntax, bool> identifiers = new Dictionary<ExpressionSyntax, bool>();
+            private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
+            private readonly NullPointerCheck nullPointerCheck;
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
             {
-                this.explodedGraph = explodedGraph;
                 this.context = context;
 
-                explodedGraph.MemberAccessed += MemberAccessedHandler;
+                // nullPointerCheck = explodedGraph.NullPointerCheck;
+                nullPointerCheck.MemberAccessed += MemberAccessedHandler;
             }
 
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
-                identifiers.Select(item => Diagnostic.Create(
-                    item.Value ? NullRule : NotNullRule,
-                    item.Key.GetLocation(),
-                    item.Key.ToString()));
+                nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(rule, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText));
 
-            public void Dispose()
-            {
-                explodedGraph.MemberAccessed -= MemberAccessedHandler;
-            }
+            public void Dispose() => nullPointerCheck.MemberAccessed -= MemberAccessedHandler;
 
             private void MemberAccessedHandler(object sender, MemberAccessedEventArgs args) =>
-                CollectMemberAccesses(args, context.SemanticModel);
+                CollectMemberAccesses(args, nullIdentifiers, context.SemanticModel);
 
-            private void CollectMemberAccesses(MemberAccessedEventArgs args, SemanticModel semanticModel)
+            private static void CollectMemberAccesses(MemberAccessedEventArgs args, ISet<IdentifierNameSyntax> nullIdentifiers, SemanticModel semanticModel)
             {
                 if (!semanticModel.IsExtensionMethod(args.Identifier.Parent))
                 {
-                    var existing = identifiers.TryGetValue(args.Identifier, out var maybeNull);
-                    if (!existing || !maybeNull)
-                    {
-                        identifiers[args.Identifier] = args.MaybeNull;
-                    }
+                    // nullIdentifiers.Add(args.Identifier);
                 }
             }
         }
