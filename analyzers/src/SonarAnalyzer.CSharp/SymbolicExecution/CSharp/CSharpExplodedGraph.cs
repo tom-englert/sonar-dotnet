@@ -115,6 +115,21 @@ namespace SonarAnalyzer.SymbolicExecution
                 return;
             }
 
+            if (block is JumpBlock jumpBlock && jumpBlock.JumpNode is ReturnStatementSyntax returnStatement)
+            {
+                if (returnStatement.Expression != null)
+                {
+                    newProgramState = newProgramState.PopValue(out var symbolicValue);
+
+                    var maybeNull = !newProgramState.HasConstraint(symbolicValue, ObjectConstraint.NotNull);
+                    var identifier = returnStatement.Expression.RemoveParentheses();
+                    OnMemberAccessed(new MemberAccessedEventArgs(identifier, maybeNull));
+                }
+
+                EnqueueAllSuccessors(block, newProgramState);
+                return;
+            }
+
             base.VisitSimpleBlock(block, node);
         }
 
