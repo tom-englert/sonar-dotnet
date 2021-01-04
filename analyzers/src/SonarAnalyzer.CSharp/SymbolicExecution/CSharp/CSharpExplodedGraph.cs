@@ -44,13 +44,12 @@ namespace SonarAnalyzer.SymbolicExecution
         public CSharpExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
             : base(cfg, declaration, semanticModel, lva)
         {
+            // NRT_EXTENSIONS => Only need the full graph walk
             // NullPointerCheck = new NullPointerDereference.NullPointerCheck(this);
-            // NRT_EXTENSIONS => Only need to do the NullPointerCheck
             // NullableValueAccessedCheck = new EmptyNullableValueAccess.NullableValueAccessedCheck(this);
 
             // Add mandatory checks
             // AddExplodedGraphCheck(NullPointerCheck);
-            // NRT_EXTENSIONS => Only need to do the NullPointerCheck
             //AddExplodedGraphCheck(NullableValueAccessedCheck);
             //AddExplodedGraphCheck(new InvalidCastToInterfaceSymbolicExecution.NullableCastCheck(this));
         }
@@ -59,16 +58,16 @@ namespace SonarAnalyzer.SymbolicExecution
 
         internal void OnMemberAccessed(MemberAccessedEventArgs args) => MemberAccessed?.Invoke(this, args);
 
-        /// <summary>
-        /// NullPointerCheck is added by default by the CSharpExplodedGraph to allow an early stop of the visit
-        /// when a null pointer dereference is found.
-        ///
-        /// In order to be able to run all the rules within one single symbolic execution pass, we have to reuse,
-        /// instead of replace, this check in dependent analyzers (e.g. PublicMethodArgumentsShouldBeCheckedForNull
-        /// and NullPointerDereference).
-        /// </summary>
+        // NRT_EXTENSIONS => Only need the full graph walk
+        ///// <summary>
+        ///// NullPointerCheck is added by default by the CSharpExplodedGraph to allow an early stop of the visit
+        ///// when a null pointer dereference is found.
+        /////
+        ///// In order to be able to run all the rules within one single symbolic execution pass, we have to reuse,
+        ///// instead of replace, this check in dependent analyzers (e.g. PublicMethodArgumentsShouldBeCheckedForNull
+        ///// and NullPointerDereference).
+        ///// </summary>
         // internal NullPointerDereference.NullPointerCheck NullPointerCheck { get; }
-        // NRT_EXTENSIONS => Only need to do the NullPointerCheck
         // internal EmptyNullableValueAccess.NullableValueAccessedCheck NullableValueAccessedCheck { get; }
 
         protected override void VisitSimpleBlock(SimpleBlock block, ExplodedGraphNode node)
@@ -980,13 +979,12 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState VisitMemberAccess(MemberAccessExpressionSyntax memberAccess, ProgramState programState)
         {
-            var newProgramState = programState.PopValue(out var memberExpression);
+            var newProgramState = programState.PopValue(out var expressionValue);
 
-            if (memberAccess.Expression is IdentifierNameSyntax expressionIdentifier)
-            {
-                var maybeNull = !newProgramState.HasConstraint(memberExpression, ObjectConstraint.NotNull);
-                OnMemberAccessed(new MemberAccessedEventArgs(expressionIdentifier, maybeNull));
-            }
+            var maybeNull = !newProgramState.HasConstraint(expressionValue, ObjectConstraint.NotNull);
+            var memberAccessExpression = memberAccess.Expression;
+
+            OnMemberAccessed(new MemberAccessedEventArgs(memberAccessExpression.RemoveParentheses(), maybeNull));
 
             SymbolicValue sv = null;
             if (memberAccess.Name is IdentifierNameSyntax identifier)
@@ -1004,7 +1002,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
             if (sv == null)
             {
-                sv = new MemberAccessSymbolicValue(memberExpression, memberAccess.Name.Identifier.ValueText);
+                sv = new MemberAccessSymbolicValue(expressionValue, memberAccess.Name.Identifier.ValueText);
             }
 
             newProgramState = SetNonNullConstraintIfValueType(memberAccess, sv, newProgramState);
