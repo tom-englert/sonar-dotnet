@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private sealed class AnalysisContext : ISymbolicExecutionAnalysisContext
         {
             private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
-            private readonly NullableValueAccessedCheck nullableValueCheck;
+            // private readonly NullableValueAccessedCheck nullableValueCheck;
 
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(rule, nullIdentifier.Parent.GetLocation(), nullIdentifier.Identifier.ValueText));
@@ -69,7 +69,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 // nullIdentifiers.Add(args.Identifier);
             }
 
-            public void Dispose() => nullableValueCheck.ValuePropertyAccessed -= AddIdentifier;
+            public void Dispose()
+            {
+                // nullableValueCheck.ValuePropertyAccessed -= AddIdentifier;
+            }
         }
 
         internal sealed class NullableValueAccessedCheck : ExplodedGraphCheck

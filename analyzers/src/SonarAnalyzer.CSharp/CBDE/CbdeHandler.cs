@@ -432,8 +432,10 @@ Stack trace: {e.StackTrace}";
                 // we need the physical thread id to get the cpu time.
                 // contrary to what the deprecation warning says, in this case,
                 // it cannot be replaced with the ManagedThreadId property on Thread
+#pragma warning disable CS0618 // Type or member is obsolete
                 var currentId = AppDomain.GetCurrentThreadId();
-                // this is not a generic collection, so there is no linq way of doing that
+#pragma warning restore CS0618 // Type or member is obsolete
+                              // this is not a generic collection, so there is no linq way of doing that
                 foreach (ProcessThread p in Process.GetCurrentProcess().Threads)
                 {
                     if (p.Id == currentId)

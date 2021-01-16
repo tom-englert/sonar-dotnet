@@ -212,14 +212,14 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly SyntaxNodeAnalysisContext context;
             private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
-            private readonly NullPointerCheck nullPointerCheck;
+            // private readonly NullPointerCheck nullPointerCheck;
 
             public AnalysisContext(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
             {
                 this.context = context;
 
                 // nullPointerCheck = explodedGraph.NullPointerCheck;
-                nullPointerCheck.MemberAccessed += MemberAccessedHandler;
+                // nullPointerCheck.MemberAccessed += MemberAccessedHandler;
             }
 
             public bool SupportsPartialResults => true;
@@ -227,7 +227,10 @@ namespace SonarAnalyzer.Rules.CSharp
             public IEnumerable<Diagnostic> GetDiagnostics() =>
                 nullIdentifiers.Select(nullIdentifier => Diagnostic.Create(rule, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText));
 
-            public void Dispose() => nullPointerCheck.MemberAccessed -= MemberAccessedHandler;
+            public void Dispose()
+            {
+                // nullPointerCheck.MemberAccessed -= MemberAccessedHandler;
+            }
 
             private void MemberAccessedHandler(object sender, MemberAccessedEventArgs args) =>
                 CollectMemberAccesses(args, nullIdentifiers, context.SemanticModel);

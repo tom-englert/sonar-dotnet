@@ -38,7 +38,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             get
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 return ImmutableArray.Create(TernaryOperatorPointless.DiagnosticId);
+#pragma warning restore CS0618 // Type or member is obsolete
             }
         }
 
