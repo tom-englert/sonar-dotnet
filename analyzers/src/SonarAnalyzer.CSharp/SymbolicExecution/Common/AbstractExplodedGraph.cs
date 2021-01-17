@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     internal abstract class AbstractExplodedGraph
     {
-        internal const int MaxStepCount = 1500;
+        // internal const int MaxStepCount = 1500;
         internal const int MaxInternalStateCount = 10000;
         private const int MaxProgramPointExecutionCount = 2;
 
@@ -77,7 +78,7 @@ namespace SonarAnalyzer.SymbolicExecution
             this.nonInDeclarationParameters = this.declarationParameters.Where(p => p.RefKind != RefKind.None);
         }
 
-        public void Walk()
+        public int Walk(int maxStepCount, CancellationToken cancellationToken)
         {
             var steps = 0;
 
@@ -85,10 +86,11 @@ namespace SonarAnalyzer.SymbolicExecution
 
             while (this.workList.Any())
             {
-                if (steps >= MaxStepCount)
+                cancellationToken.ThrowIfCancellationRequested();
+
+                if (steps >= maxStepCount)
                 {
-                    OnMaxStepCountReached();
-                    return;
+                    throw new NotSupportedException("Maximum number of steps exceeded: " + maxStepCount);
                 }
 
                 steps++;
@@ -138,12 +140,13 @@ namespace SonarAnalyzer.SymbolicExecution
                 }
                 catch (TooManyInternalStatesException)
                 {
-                    OnMaxInternalStateCountReached();
-                    return;
+                    throw new NotSupportedException("Too many internal states: " + MaxInternalStateCount);
                 }
             }
 
             OnExplorationEnded();
+
+            return steps;
         }
 
         internal void AddExplodedGraphCheck<T>(T check)

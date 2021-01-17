@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.SymbolicExecution
             {
                 explodedGraph.ExplorationEnded += ExplorationEndedHandler;
 
-                explodedGraph.Walk();
+                // explodedGraph.Walk();
             }
             finally
             {
