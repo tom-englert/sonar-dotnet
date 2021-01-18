@@ -84,9 +84,14 @@ namespace SonarAnalyzer.SymbolicExecution
 
             newProgramState = CleanStateAfterBlock(newProgramState, block);
 
-            if (block is ForeachCollectionProducerBlock)
+            if (block is ForeachCollectionProducerBlock forEachBlock)
             {
-                newProgramState = newProgramState.PopValue();
+                newProgramState = newProgramState.PopValue(out var symbolicValue);
+
+                var maybeNull = !newProgramState.HasConstraint(symbolicValue, ObjectConstraint.NotNull);
+                var identifier = ((ForEachStatementSyntax)forEachBlock.ForeachNode).Expression;
+                OnMemberAccessed(new MemberAccessedEventArgs(identifier, maybeNull));
+
                 EnqueueAllSuccessors(block, newProgramState);
                 return;
             }
