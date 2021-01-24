@@ -103,7 +103,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     var identifier = argumentSyntax.Expression.RemoveParentheses();
 
                     explodedGraph.OnMemberAccessed(new MemberAccessedEventArgs(identifier, maybeNull));
-               }
+                }
             }
 
 

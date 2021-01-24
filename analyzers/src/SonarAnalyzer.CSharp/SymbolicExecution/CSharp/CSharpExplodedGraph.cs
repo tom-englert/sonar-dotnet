@@ -89,7 +89,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 newProgramState = newProgramState.PopValue(out var symbolicValue);
 
                 var maybeNull = !newProgramState.HasConstraint(symbolicValue, ObjectConstraint.NotNull);
-                var identifier = ((ForEachStatementSyntax)forEachBlock.ForeachNode).Expression;
+                var identifier = ((ForEachStatementSyntax)forEachBlock.ForeachNode).Expression.RemoveParentheses();
                 OnMemberAccessed(new MemberAccessedEventArgs(identifier, maybeNull));
 
                 EnqueueAllSuccessors(block, newProgramState);
@@ -1002,9 +1002,9 @@ namespace SonarAnalyzer.SymbolicExecution
             var newProgramState = programState.PopValue(out var expressionValue);
 
             var maybeNull = !newProgramState.HasConstraint(expressionValue, ObjectConstraint.NotNull);
-            var memberAccessExpression = memberAccess.Expression;
+            var memberAccessExpression = memberAccess.Expression.RemoveParentheses();
 
-            OnMemberAccessed(new MemberAccessedEventArgs(memberAccessExpression.RemoveParentheses(), maybeNull));
+            OnMemberAccessed(new MemberAccessedEventArgs(memberAccessExpression, maybeNull));
 
             SymbolicValue sv = null;
             if (memberAccess.Name is IdentifierNameSyntax identifier)
