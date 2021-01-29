@@ -475,7 +475,14 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKind.ElementAccessExpression:
-                    newProgramState = newProgramState.PopValues((((ElementAccessExpressionSyntax)instruction).ArgumentList?.Arguments.Count ?? 0) + 1);
+                    var elementAccessExpressionSyntax = (ElementAccessExpressionSyntax)instruction;
+                    newProgramState = newProgramState.PopValues((elementAccessExpressionSyntax.ArgumentList.Arguments.Count));
+                    newProgramState = newProgramState.PopValue(out var symbolicValue);
+
+                    var maybeNull = !newProgramState.HasConstraint(symbolicValue, ObjectConstraint.NotNull);
+                    var identifier = elementAccessExpressionSyntax.Expression.RemoveParentheses();
+                    OnMemberAccessed(new MemberAccessedEventArgs(identifier, maybeNull));
+
                     newProgramState = newProgramState.PushValue(new SymbolicValue());
                     break;
 
